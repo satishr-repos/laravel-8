@@ -3,5 +3,5 @@
 @section('title', 'Employees Page')
 
 @section('content')
-@include('partials.employee')
+@include('partials.employee.index')
 @endsection

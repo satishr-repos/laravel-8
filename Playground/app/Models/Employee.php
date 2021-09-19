@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+    public $table = 'Employees';
+    protected $primaryKey = 'Id';
+
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }

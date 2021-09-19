@@ -9,12 +9,13 @@ class EmployeeController extends Controller
 {
     public function index() {
 
-        $employees = Employee::all();
+        // $employees = Employee::all();
+         $employees = Employee::paginate(5);
 
         $emp = new Employee();
         $columns = $emp->GetTableColumns();
         
-        return view('employee', [
+        return view('employee.index', [
             'employees' => $employees,
             'columns' => $columns
         ]);
