@@ -15,6 +15,8 @@ use App\Http\Controllers\EmployeeController;
 */
 
 Route::view('/laravel', 'welcome');
-Route::view('/home', 'home');
+Route::view('/', 'home');
 
-Route::get('/employee', [EmployeeController::class, 'index']);
+Route::get('/employees', [EmployeeController::class, 'index']);
+Route::get('/employees/create', [EmployeeController::class, 'create']);
+Route::post('/employees', [EmployeeController::class, 'store']);

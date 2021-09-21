@@ -12,6 +12,8 @@ class Employee extends Model
     public $table = 'Employees';
     protected $primaryKey = 'Id';
 
+    protected $fillable = ['first_name', 'last_name', 'age'];
+
     public function getTableColumns() {
         return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
     }
