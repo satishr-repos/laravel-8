@@ -25,3 +25,6 @@ Route::get('/employees/{employee}', [EmployeeController::class, 'show']);
 Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit']);
 Route::patch('/employees/{employee}', [EmployeeController::class, 'update']);
 Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
