@@ -1,6 +1,6 @@
 <template>
-  <div class="container is-fluid">
-    
+  <div class="container">
+
     <div v-if="errors" class="notification is-primary is-light">
       <button class="delete" @click="errors = null"></button>
       <div v-for="(v, k) in errors" :key="k">
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <form v-on:submit.prevent="addUser">
+    <form v-on:submit.prevent="addUser" class="box">
       <slot>
         <!-- CSRF gets injected into this slot -->
       </slot>
@@ -35,7 +35,7 @@
             class="input"
             type="text"
             placeholder="Text input"
-            name="last-name"
+            name="last_name"
             v-model="formData.last_name"
           />
         </div>
@@ -66,6 +66,8 @@
 <script>
 export default {
 
+  props: ['page_total', 'per_page'],
+
   data() {
     return {
 
@@ -83,8 +85,10 @@ export default {
       
       axios.post('/employees', this.formData)
           .then(response => {
-            console.log(response.data);
-            location.href = '/employees';
+            // console.log(response.data);
+            let total = this.page_total + 1;
+            let index = Math.ceil(total / this.per_page);
+            window.location.href = '/employees?page=' + index;
           })
           .catch(error =>{
             if (error.response.status == 422) {
@@ -97,6 +101,7 @@ export default {
 
   mounted() {
     console.log("Add employee component mounted");
+    console.log("FROM BLADE::", this.page_total, this.per_page);
   },
 
 };

@@ -5,7 +5,11 @@
 @section('content')
 
     <div id="app">
-        <add-employee> {{ csrf_field() }} </add-employee>
+        <add-employee 
+            v-bind:page_total="{{ $pageData['total'] }}"
+            v-bind:per_page="{{ $pageData['per_page'] }}"> 
+                {{ csrf_field() }} 
+        </add-employee>
     </div>
 
 @endsection

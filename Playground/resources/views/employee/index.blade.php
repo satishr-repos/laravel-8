@@ -12,20 +12,20 @@
                 @foreach ($columns as $col)
                     <th> {{ $col }} </th>
                 @endforeach
-                <th> Select </th>
+                <th> Operation </th>
             </thead>
             <tfoot>
             </tfoot>
             <tbody>
-                @foreach ($employees as $emp)
+                @foreach ($employees as $index => $emp)
                     <tr>
-                        <th>{{ $emp['id'] }}</th>
+                        <th>{{ $index + $employees->firstItem() }}</th>
                         <td>{{ $emp['first_name'] }}</td>
                         <td>{{ $emp['last_name'] }}</td>
                         <td>{{ $emp['age'] }}</td>
                         <td>{{ $emp['created_at'] }}</td>
                         <td>{{ $emp['updated_at'] }}</td>
-                        <td><label class="checkbox"><input type="checkbox"></label></td>
+                        <td><a href="/employees/{{ $emp->id }}" class="button is-link is-small is-light">View</a></td>
                     </tr>
                 @endforeach
             </tbody>
