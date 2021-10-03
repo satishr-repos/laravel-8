@@ -15,6 +15,7 @@
       </table-list>
     </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>
+    <customer-edit ref="customerEditDialogue" :customer="customer"></customer-edit>
   </div>
 </template>
 
@@ -22,12 +23,14 @@
 import TableList from '../Utils/TableListComponent'
 import Pagination from '../Utils/PaginationComponent'
 import RoundButton from '../Utils/RoundButton.vue'
-import SimpleSpinner from '../Utils/SimpleSpinner.vue';
-import SimpleCard from '../Utils/SimpleCard.vue';
+import SimpleSpinner from '../Utils/SimpleSpinner.vue'
+import SimpleCard from '../Utils/SimpleCard.vue'
+import CustomerEdit from './CustomerEditComponent.vue'
+
 
 export default {
 
-  components: { TableList, Pagination, RoundButton, SimpleSpinner, SimpleCard },
+  components: { TableList, Pagination, RoundButton, SimpleSpinner, SimpleCard, CustomerEdit },
 
   props: {
     baseRoute: String,
@@ -36,11 +39,17 @@ export default {
     return {
       customers: {},
       cols: [],
+      customer: {
+        fist_name: '',
+        last_name: '',
+        active: 0
+      },
       currentPage: 0,
       lastPage: 0,
       pageSize: 10,
       startIndex: 0,
       spinner: false,
+      showCustomerEdit: false,
     };
   },
   created() {
@@ -98,10 +107,21 @@ export default {
           })
           .catch((error) => console.log(error));
 
-        },
+      },
 
-        editCustomer({id, index}) {
+      async editCustomer({id, index}) {
 
+          this.customer = this.customers.find(customer => customer.id === id);
+          this.showCustomerEdit = true;
+          const ok = await this.$refs.customerEditDialogue.show();
+                
+          if (ok) 
+          {
+            
+          } 
+          else 
+          {
+          }
       },
   },
 
