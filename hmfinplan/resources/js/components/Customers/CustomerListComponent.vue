@@ -1,17 +1,33 @@
 <template>
-  <div class="container pt-4">
-    <table-list v-bind:cols="cols" v-bind:rows="customers" v-bind:start-index="startIndex"></table-list>
+  <div class="container mt-4">
+
+    <simple-spinner :show="spinner"></simple-spinner>
+
+    <simple-card title="Customer List"> 
+      <round-button slot="title" class="pr-2"></round-button>
+      <table-list 
+          slot="content"
+          v-bind:cols="cols" 
+          v-bind:rows="customers" 
+          v-bind:start-index="startIndex"
+          v-on:deleteRow="deleteCustomer"
+          v-on:editRow="editCustomer">
+      </table-list>
+    </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>
   </div>
 </template>
 
 <script>
-import TableList from '../Utils/TableListComponent';
-import Pagination from '../Utils/PaginationComponent';
+import TableList from '../Utils/TableListComponent'
+import Pagination from '../Utils/PaginationComponent'
+import RoundButton from '../Utils/RoundButton.vue'
+import SimpleSpinner from '../Utils/SimpleSpinner.vue';
+import SimpleCard from '../Utils/SimpleCard.vue';
 
 export default {
 
-  components: { TableList, Pagination },
+  components: { TableList, Pagination, RoundButton, SimpleSpinner, SimpleCard },
 
   props: {
     baseRoute: String,
@@ -24,6 +40,7 @@ export default {
       lastPage: 0,
       pageSize: 10,
       startIndex: 0,
+      spinner: false,
     };
   },
   created() {
@@ -34,6 +51,7 @@ export default {
 
       getCustomers(page){
 
+        this.spinner = true;
         axios.get(this.baseRoute, {
           params: {
             page: page,
@@ -50,6 +68,7 @@ export default {
           //   delete element.active;
           // });
 
+          this.spinner = false;
           this.startIndex = response.data.from;
           this.cols = Object.keys(customers[0]);
           this.customers = customers;
@@ -59,13 +78,31 @@ export default {
 
           // console.log(response);
         })
-        .catch((error) => console.log(error));
-      
+        .catch((error) => {
+          this.spinner = false;
+          console.log(error);
+        });
       },
 
       changePage(pagenum){
         this.getCustomers(pagenum);
-      }
+      },
+
+      deleteCustomer({id, index}) {
+
+        let route = this.baseRoute + '/' + id;
+
+        axios.delete(route)
+          .then((response) => {
+            this.customers.splice(index, 1);
+          })
+          .catch((error) => console.log(error));
+
+        },
+
+        editCustomer({id, index}) {
+
+      },
   },
 
   mounted() {

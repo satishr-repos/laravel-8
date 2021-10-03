@@ -1,4 +1,4 @@
-<nav class="py-1 bg-gray-50 flex justify-evenly items-center">
+<nav class="py-1 bg-white border-b border-gray-100 flex justify-evenly items-center">
 
     {{-- Navbar brand --}}
     <div class="ml-5 uppercase font-noto">

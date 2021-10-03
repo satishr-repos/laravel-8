@@ -1,8 +1,9 @@
 <template>
-<div class="container flex justify-center mx-auto">
+<div class="container flex justify-center">
     <div class="flex flex-col">
         <div class="w-full">
-            <div class="border-b border-gray-200 shadow">
+            <!-- <div class="border border-gray-200 shadow"> -->
+            <div class="">
                 <table class="divide-y divide-gray-300 ">
                     <thead class="bg-gray-50">
                         <tr>
@@ -21,14 +22,14 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-300">
                         <tr class="whitespace-nowrap hover:bg-green-50" v-for="(row, i) in rows" :key="i">
-                            <td class="px-6 py-2 text-xs text-gray-500" v-for="(col, j) in cols" :key="j">
-                                <span v-if="j === 0">{{ startIndex + i }}</span>
+                            <td class="px-6 py-2 text-xm text-gray-500" v-for="(col, j) in cols" :key="j">
+                                <span v-if="col === 'id'">{{ startIndex + i }}</span>
                                 <span v-else>{{ row[col] }}</span>
                                 <!-- {{ j }} - {{ row[col] }} -->
                             </td>
 
                             <td class="px-6 py-4">
-                                <a href="#">
+                                <a href="#" @click.prevent="doEdit(row['id'], i)">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -38,7 +39,7 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                <a href="#" @click.prevent="doDelete">
+                                <a href="#" @click.prevent="doDelete(row['id'], i)"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -73,23 +74,35 @@ export default {
 
         data() {
             return {
-
+                dataId : 0,
             };
         },
 
+        mounted() {
+        },
+
         methods: {
-            async doDelete() {
+            async doDelete(id, index) {
                 const ok = await this.$refs.confirmDialogue.show({
-                    title: 'Delete Page',
-                    message: 'Are you sure you want to delete this page? It cannot be undone.',
-                    okButton: 'Delete Forever',
+                    title: 'Delete this row',
+                    message: 'Are you sure you want to delete this row? It cannot be undone.',
+                    okButton: 'Delete',
                 })
+                
+                // this.rows.forEach(row => {
+                //     if(row['id'] == id)
+                //         console.log(row['display_name']);
+                // });
+
                 // If you throw an error, the method will terminate here unless you surround it wil try/catch
                 if (ok) {
-                    alert('You have successfully delete this page.')
+                    this.$emit('deleteRow', {id: id, index: index});
                 } else {
-                    alert('You chose not to delete this page. Doing nothing now.')
                 }
+            },
+
+            doEdit(id, index) {
+                this.$emit('editRow', {id: id, index: index});
             },
         }
     }

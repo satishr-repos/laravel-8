@@ -1,10 +1,10 @@
 <template>
     <popup-modal ref="popup">
-        <h2 style="margin-top: 0">{{ title }}</h2>
-        <p>{{ message }}</p>
-        <div class="btns">
-            <button class="cancel-btn" @click="_cancel">{{ cancelButton }}</button>
-            <span class="ok-btn" @click="_confirm">{{ okButton }}</span>
+        <h2 class="text-gray-800 text-3xl font-semibold">{{ title }}</h2>
+        <p class="mt-2 text-gray-600">{{ message }}</p>
+        <div class="mt-2 flex justify-between w-1/2">
+            <button class="p-2 pl-5 pr-5 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-4 border-green-300" @click="_cancel">{{ cancelButton }}</button>
+            <button class="p-2 pl-5 pr-5 bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-red-300" @click="_confirm">{{ okButton }}</button>
         </div>
     </popup-modal>
 </template>
@@ -62,28 +62,5 @@ export default {
 </script>
 
 <style scoped>
-.btns {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 
-.ok-btn {
-    color: red;
-    text-decoration: underline;
-    line-height: 2.5rem;
-    cursor: pointer;
-}
-
-.cancel-btn {
-    padding: 0.5em 1em;
-    background-color: #d5eae7;
-    color: #35907f;
-    border: 2px solid #0ec5a4;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
 </style>
