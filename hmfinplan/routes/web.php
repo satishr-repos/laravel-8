@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use app\Http\Controllers\CustomerController;
+// use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +26,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // customer controller
 Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers');
 Route::delete('/customers/{customer}', [App\Http\Controllers\CustomerController::class, 'destroy']);
+Route::patch('/customers/{customer}', [App\Http\Controllers\CustomerController::class, 'update']);

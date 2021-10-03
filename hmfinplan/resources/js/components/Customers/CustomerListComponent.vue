@@ -15,7 +15,7 @@
       </table-list>
     </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>
-    <customer-edit ref="customerEditDialogue" :customer="customer"></customer-edit>
+    <customer-update ref="customerEditDialogue" :customer="customer"></customer-update>
   </div>
 </template>
 
@@ -25,12 +25,12 @@ import Pagination from '../Utils/PaginationComponent'
 import RoundButton from '../Utils/RoundButton.vue'
 import SimpleSpinner from '../Utils/SimpleSpinner.vue'
 import SimpleCard from '../Utils/SimpleCard.vue'
-import CustomerEdit from './CustomerEditComponent.vue'
+import CustomerUpdate from './CustomerUpdate.vue'
 
 
 export default {
 
-  components: { TableList, Pagination, RoundButton, SimpleSpinner, SimpleCard, CustomerEdit },
+  components: { TableList, Pagination, RoundButton, SimpleSpinner, SimpleCard, CustomerUpdate },
 
   props: {
     baseRoute: String,
@@ -49,7 +49,6 @@ export default {
       pageSize: 10,
       startIndex: 0,
       spinner: false,
-      showCustomerEdit: false,
     };
   },
   created() {
@@ -109,19 +108,25 @@ export default {
 
       },
 
-      async editCustomer({id, index}) {
+      // async editCustomer({id, index}) {
 
-          this.customer = this.customers.find(customer => customer.id === id);
-          this.showCustomerEdit = true;
-          const ok = await this.$refs.customerEditDialogue.show();
+      //     this.customer = this.customers.find(customer => customer.id === id);
+      //     const ok = await this.$refs.customerEditDialogue.show();
                 
-          if (ok) 
-          {
+      //     if (ok) 
+      //     {
             
-          } 
-          else 
-          {
-          }
+      //     } 
+      //     else 
+      //     {
+      //     }
+      // },
+
+      editCustomer({id, index}) {
+
+          let route = this.baseRoute + '/' + id;
+          this.customer = this.customers.find(customer => customer.id === id);
+          this.$refs.customerEditDialogue.update(route);
       },
   },
 

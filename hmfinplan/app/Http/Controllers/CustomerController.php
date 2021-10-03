@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $pageSize = request()->query('pageSize', 10); 
@@ -26,6 +31,24 @@ class CustomerController extends Controller
         }
 
         return View('customer.index');
+    }
+
+    public function update(Customer $customer)
+    {
+        $data = request()->validate([
+             'first_name' => 'required|alpha',
+             'last_name' => 'required|alpha',
+             'active' => 'boolean'
+            ]);
+      
+        // return response()->json([
+        //     'formdata' => $data,
+        //     'message' => 'Success'
+        //   ], 200);
+          
+        $customer->update($data);
+
+        return $customer;
     }
 
     public function destroy(Customer $customer)

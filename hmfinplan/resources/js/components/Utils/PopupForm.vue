@@ -1,29 +1,14 @@
 <template>
     <popup-modal ref="popup">
 
-        <simple-card title="Edit Customer Information"> 
+        <simple-card :title="title"> 
             <div slot="content">
+
+                <slot name="alerts"></slot>
+
                 <form action="#" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
-                            First Name
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstname" name="firstname" type="text" placeholder="FirstName" v-model="customer.first_name">
-                    </div>
 
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
-                            Last Name
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" name="lastname" type="text" placeholder="LastName" v-model="customer.last_name">
-                    </div>
-
-                    <div>
-                        <label class="inline-flex items-center mt-3">
-                            <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" v-model="customer.active">
-                            <span class="ml-2 text-gray-700">Is Active</span>
-                        </label>
-                    </div>
+                    <slot name="form_fields"></slot>
 
                     <div class="flex items-center justify-between mt-2">
                         <button class="p-2 pl-5 pr-5 bg-gray-500 text-white text-lg rounded-lg focus:border-4 border-gray-300" @click.prevent="_cancel">{{ cancelButton }}</button>
@@ -37,19 +22,19 @@
 </template>
 
 <script>
-import PopupModal from '../Utils/PopupModal.vue'
-import SimpleCard from '../Utils/SimpleCard.vue'
+import PopupModal from './PopupModal.vue'
+import SimpleCard from './SimpleCard.vue'
 
 export default {
-    name: 'CustomerEdit',
+    name: 'PopupForm',
 
     components: { PopupModal, SimpleCard },
 
     props: {
-        customer: {
-            first_name: String,
-            last_name: String,
-            active: Number
+        title: String,
+        closeForm: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -76,8 +61,9 @@ export default {
         },
 
         _confirm() {
-            this.$refs.popup.close()
-            this.resolvePromise(true)
+            this.$emit('popupFormSubmitted')
+            // this.$refs.popup.close()
+            // this.resolvePromise(true)
         },
 
         _cancel() {
@@ -86,6 +72,17 @@ export default {
             // Or you can throw an error
             // this.rejectPromise(new Error('User cancelled the dialogue'))
         },
+    },
+
+    watch: { 
+      	closeForm: function(newVal, oldVal) { // watch it
+        //   console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+            if(newVal === true)
+            {
+                this.$refs.popup.close()
+                this.resolvePromise(true)
+            }
+        }
     },
 }
 </script>
