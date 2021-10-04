@@ -22,7 +22,7 @@ class CustomerController extends Controller
         //                 ->orderBy('first_name')
         //                 ->paginate($pageSize);
 
-        $customers = Customer::select('id', 'first_name', 'last_name', 'active')
+        $customers = customer::select('id', 'first_name', 'last_name', 'active')
                             ->orderBy('first_name')
                             ->paginate($pageSize);
         
@@ -33,7 +33,25 @@ class CustomerController extends Controller
         return View('customer.index');
     }
 
-    public function update(Customer $customer)
+    public function store()
+    {
+        $data = request()->validate([
+             'first_name' => 'required|alpha',
+             'last_name' => 'required|alpha',
+             'active' => 'boolean'
+            ]);
+      
+        // return response()->json([
+        //     'formdata' => $data,
+        //     'message' => 'Success'
+        //   ], 200);
+        
+        customer::create($data);
+        
+        return $data;
+    }
+
+    public function update(customer $customer)
     {
         $data = request()->validate([
              'first_name' => 'required|alpha',
@@ -51,7 +69,7 @@ class CustomerController extends Controller
         return $customer;
     }
 
-    public function destroy(Customer $customer)
+    public function destroy(customer $customer)
     {
         $customer->delete();
     }

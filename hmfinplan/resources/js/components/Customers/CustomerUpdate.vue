@@ -1,20 +1,9 @@
 <template>
 
     <popup-form ref="PopupForm" title="Edit Customer Details" v-on:popupFormSubmitted="formSubmitted" :closeForm="close">
-        <div slot="alerts" v-if="errors" class="flex justify-center mt-2">
-            <div class="flex flex-col justify-between mx-2 py-2 text-red-600 bg-red-100 rounded">
-                <div v-for="(v, k) in errors" :key="k">
-                    <p v-for="error in v" :key="error" class="text-sm">
-                        {{ error }}
-                        <span @click="errors = null">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 inline-block" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </span>
-                    </p>
-                </div>
-            </div>
+
+        <div slot="alerts">
+            <simple-alert :errors="errors"></simple-alert>
         </div>
 
         <div slot="form_fields">
@@ -46,49 +35,86 @@
 </template>
 
 <script>
+import SimpleAlert from '../Utils/SimpleAlert.vue';
 import PopupForm from '../Utils/PopupForm.vue'
 
 export default {
-  components: { PopupForm },
+  components: { PopupForm, SimpleAlert },
 
     name: 'CustomerUpdate',
     
     props: {
-        customer: {
-            first_name: String,
-            last_name: String,
-            active: Number
-        }
     },
 
     data: () => ({
         close: false,
         route: '',
-        errors: null,
+        errors: {},
+        customer: {
+            first_name: String,
+            last_name: String,
+            active: Number
+        },
+        customerRef: Object,
+        opAdd: false
     }),
 
     methods: {
-        async update(route) {
+
+        async add(route, customers) {
             this.close = false;
             this.route = route;
+            this.customer =  { first_name:'', last_name:'', active:false };
+            this.customerRef = customers;
+            this.opAdd = true;
+            const ok = await this.$refs.PopupForm.show();
+        },
+
+        async update(route, customer) {
+            this.close = false;
+            this.route = route;
+            this.customer =  { ...customer };
+            this.customerRef = customer;
+            this.opAdd = false;
             const ok = await this.$refs.PopupForm.show();
         },
 
         formSubmitted() {
 
-            axios.patch(this.route, this.customer)
-                .then(response => {
-                    
-                    console.log("form submitted", response);
-                    this.close = true;
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    }
-                    
-                    console.log("ERROR:: ", error);
-                });
+            if(this.opAdd)
+            {
+                axios.post(this.route, this.customer)
+                    .then(response => {
+                        
+                        // console.log("form submitted", response);
+                        this.customerRef.unshift(this.customer);
+                        this.close = true;
+                    })
+                    .catch(error => {
+                        if (error.response.status == 422) {
+                            this.errors = error.response.data.errors;
+                        }
+                        
+                        console.log("ERROR:: ", error);
+                    });
+            } 
+            else 
+            {
+                axios.patch(this.route, this.customer)
+                    .then(response => {
+                        
+                        // console.log("form submitted", response);
+                        Object.assign(this.customerRef, this.customer);
+                        this.close = true;
+                    })
+                    .catch(error => {
+                        if (error.response.status == 422) {
+                            this.errors = error.response.data.errors;
+                        }
+                        
+                        console.log("ERROR:: ", error);
+                    });
+            }
         }
     },
 }

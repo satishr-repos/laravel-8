@@ -4,7 +4,7 @@
     <simple-spinner :show="spinner"></simple-spinner>
 
     <simple-card title="Customer List"> 
-      <round-button slot="title" class="pr-2"></round-button>
+      <round-button slot="title" class="pr-2" @click.native="addCustomer"></round-button>
       <table-list 
           slot="content"
           v-bind:cols="cols" 
@@ -15,7 +15,7 @@
       </table-list>
     </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>
-    <customer-update ref="customerEditDialogue" :customer="customer"></customer-update>
+    <customer-update ref="customerEditDialogue"></customer-update>
   </div>
 </template>
 
@@ -39,11 +39,6 @@ export default {
     return {
       customers: {},
       cols: [],
-      customer: {
-        fist_name: '',
-        last_name: '',
-        active: 0
-      },
       currentPage: 0,
       lastPage: 0,
       pageSize: 10,
@@ -108,25 +103,18 @@ export default {
 
       },
 
-      // async editCustomer({id, index}) {
+      addCustomer() {
 
-      //     this.customer = this.customers.find(customer => customer.id === id);
-      //     const ok = await this.$refs.customerEditDialogue.show();
-                
-      //     if (ok) 
-      //     {
-            
-      //     } 
-      //     else 
-      //     {
-      //     }
-      // },
+          let route = this.baseRoute;
+          let customers = this.customers;
+          this.$refs.customerEditDialogue.add(route, customers);
+      },
 
       editCustomer({id, index}) {
 
           let route = this.baseRoute + '/' + id;
-          this.customer = this.customers.find(customer => customer.id === id);
-          this.$refs.customerEditDialogue.update(route);
+          let customer = this.customers.find(customer => customer.id === id);
+          this.$refs.customerEditDialogue.update(route, customer);
       },
   },
 
