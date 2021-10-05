@@ -11,7 +11,8 @@
           v-bind:rows="customers" 
           v-bind:start-index="startIndex"
           v-on:deleteRow="deleteCustomer"
-          v-on:editRow="editCustomer">
+          v-on:editRow="editCustomer"
+          v-on:selectRow="selectCustomer">
       </table-list>
     </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>
@@ -116,6 +117,12 @@ export default {
           let customer = this.customers.find(customer => customer.id === id);
           this.$refs.customerEditDialogue.update(route, customer);
       },
+      
+      selectCustomer({id, index}) {
+          let route = this.baseRoute + '/' + id + '/dashboard';
+
+          window.location.href = route;
+      }
   },
 
   mounted() {

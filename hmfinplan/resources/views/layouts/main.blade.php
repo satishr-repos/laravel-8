@@ -22,26 +22,24 @@
 
 </head>
 <body>
-    <div class="text-gray-400">    
-        <header>
-            @hasSection ('header')
-                @yield('header')
-            @else
-                
-            @endif        
-        </header>
-        
-        <main>
-            @yield('content')
-        </main>
+    <header>
+        @hasSection ('header')
+            @yield('header')
+        @else
+            
+        @endif        
+    </header>
+    
+    <main>
+        @yield('content')
+    </main>
 
-        <footer>
-            @hasSection ('footer')
-                @yield('footer')
-            @else
-                
-            @endif
-        </footer>
-    </div>
+    <footer>
+        @hasSection ('footer')
+            @yield('footer')
+        @else
+            
+        @endif
+    </footer>
 </body>
 </html>

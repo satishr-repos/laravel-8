@@ -22,7 +22,7 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-300">
                         <tr class="whitespace-nowrap hover:bg-green-50" v-for="(row, i) in rows" :key="i">
-                            <td class="px-6 py-2 text-xm text-gray-500" v-for="(col, j) in cols" :key="j">
+                            <td @click="doSelect(row['id'], i)" class="px-6 py-2 text-xm text-gray-500" v-for="(col, j) in cols" :key="j">
                                 <span v-if="col === 'id'">{{ startIndex + i }}</span>
                                 <span v-else>{{ row[col] }}</span>
                                 <!-- {{ j }} - {{ row[col] }} -->
@@ -104,6 +104,10 @@ export default {
             doEdit(id, index) {
                 this.$emit('editRow', {id: id, index: index});
             },
+
+            doSelect(id, index) {
+                this.$emit('selectRow', {id: id, index: index});
+            }
         }
     }
 </script>

@@ -51,6 +51,16 @@ class CustomerController extends Controller
         return $data;
     }
 
+    public function show(customer $customer)
+    {
+        // return response()->json([
+        //     'formdata' => $data,
+        //     'message' => 'Success'
+        //   ], 200);
+        
+        return View('customer.show');
+    }
+
     public function update(customer $customer)
     {
         $data = request()->validate([

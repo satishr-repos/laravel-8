@@ -25,6 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // customer controller
 Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers');
+Route::get('/customers/{customer}/dashboard', [App\Http\Controllers\CustomerController::class, 'show']);
 Route::delete('/customers/{customer}', [App\Http\Controllers\CustomerController::class, 'destroy']);
 Route::patch('/customers/{customer}', [App\Http\Controllers\CustomerController::class, 'update']);
 Route::post('/customers', [App\Http\Controllers\CustomerController::class, 'store']);
