@@ -4,27 +4,27 @@
         <div class="w-full">
             <!-- <div class="border border-gray-200 shadow"> -->
             <div class="">
-                <table class="divide-y divide-gray-300 ">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-2 text-xs text-gray-500" v-for="col in cols" v-bind:key="col">
+                <table class="bg-white divide-y divide-gray-300 ">
+                    <thead class="capitalize">
+                        <tr class="divide-x-2 divide-gray-100">
+                            <th class="px-6 py-2 text-xs text-gray-600 " v-for="col in cols" v-bind:key="col">
                                 {{ col }}
                             </th>
                             
-                            <th class="px-6 py-2 text-xs text-gray-500">
+                            <th class="px-6 py-2 text-xs text-gray-600 ">
                                 Edit
                             </th>
                             
-                            <th class="px-6 py-2 text-xs text-gray-500">
+                            <th class="px-6 py-2 text-xs text-gray-600">
                                 Delete
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-300">
-                        <tr class="whitespace-nowrap hover:bg-green-50" v-for="(row, i) in rows" :key="i">
-                            <td @click="doSelect(row['id'], i)" class="px-6 py-2 text-xm text-gray-500" v-for="(col, j) in cols" :key="j">
-                                <span v-if="col === 'id'">{{ startIndex + i }}</span>
-                                <span v-else>{{ row[col] }}</span>
+                    <tbody class="divide-y divide-gray-300">
+                        <tr class="whitespace-nowrap hover:bg-green-50 hover:cursor-pointer hover:shadow-lg" v-for="(row, i) in rows" :key="i">
+                            <td @click="doSelect(row['id'], i)" class="px-6 py-2 text-xm text-gray-500" v-for="(value, name) in cols" :key="name">
+                                <span v-if="name === 'id'">{{ startIndex + i }}</span>
+                                <span v-else>{{ row[name] }}</span>
                                 <!-- {{ j }} - {{ row[col] }} -->
                             </td>
 
@@ -62,12 +62,12 @@ import ConfirmDialogue from './ConfirmDialogue.vue'
 
 export default {
 
-        name: 'TableList',
+        name: 'SimpleDataTable',
 
         components: { ConfirmDialogue },
 
         props: {
-            cols: Array,
+            cols: [Array, Object],
             rows: [Array, Object],
             startIndex: Number
         },

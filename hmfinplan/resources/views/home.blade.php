@@ -16,16 +16,22 @@
     <section class="pt-10 bg-white h-screen font-serif font-semibold text-white flex flex-col md:flex-row items-center md:items-start justify-evenly">
         <div></div>
         <a class="block" href="{{ route('customers') }}">
-            <div class="bg-blue-600 pt-1 px-2 bg-gradient-to-b from-blue-400 to-blue-500 rounded-xl shadow-lg cursor-pointer hover:opacity-95 w-72 h-52 flex flex-col justify-around">
+            <div class="pt-1 px-2 bg-gradient-to-b from-blue-300 to-blue-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-blue-600 hover:to-blue-900 w-48 h-72 flex flex-col justify-around">
                 <div class="self-center">
-                    <p>{{ __('Add / Edit Customer Details')}}</p>
+                    <p>{{ __('Customer Financial Plan Software')}}</p>
                 </div>
             </div>
         </a>
         
-        <div class="bg-blue-600 pt-1 px-2 bg-gradient-to-b from-indigo-400 to-indigo-500 rounded-xl shadow-lg cursor-pointer hover:opacity-95 w-72 h-52 flex flex-col justify-around">
+        <div class="pt-1 px-2 bg-gradient-to-b from-indigo-300 to-indigo-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-indigo-500 hover:to-indigo-900 w-48 h-72 flex flex-col justify-around">
             <div class="self-center">
-                <p>{{ __('Generate Reports')}}</p>
+                <p>{{ __('FIFO Capital Gain Report')}}</p>
+            </div>
+        </div>
+        
+        <div class="pt-1 px-2 bg-gradient-to-b from-green-300 to-green-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-green-600 hover:to-green-900 w-48 h-72 flex flex-col justify-around">
+            <div class="self-center">
+                <p>{{ __('Bill Ledger Computation Report')}}</p>
             </div>
         </div>
 

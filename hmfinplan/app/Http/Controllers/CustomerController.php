@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\customer;
+use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
@@ -22,7 +22,7 @@ class CustomerController extends Controller
         //                 ->orderBy('first_name')
         //                 ->paginate($pageSize);
 
-        $customers = customer::select('id', 'first_name', 'last_name', 'active')
+        $customers = Customer::select('id', 'first_name', 'last_name', 'active')
                             ->orderBy('first_name')
                             ->paginate($pageSize);
         
@@ -51,17 +51,19 @@ class CustomerController extends Controller
         return $data;
     }
 
-    public function show(customer $customer)
+    public function show(Customer $customer)
     {
         // return response()->json([
         //     'formdata' => $data,
         //     'message' => 'Success'
         //   ], 200);
+       
+        $current = 'dashboard';
         
-        return View('customer.show');
+        return View('customer.show', compact('customer', 'current'));
     }
 
-    public function update(customer $customer)
+    public function update(Customer $customer)
     {
         $data = request()->validate([
              'first_name' => 'required|alpha',
@@ -79,7 +81,7 @@ class CustomerController extends Controller
         return $customer;
     }
 
-    public function destroy(customer $customer)
+    public function destroy(Customer $customer)
     {
         $customer->delete();
     }

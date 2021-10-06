@@ -20,7 +20,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('customer-list', require('./components/Customers/CustomerListComponent.vue').default);
+// Vue.component('customer-list', require('./components/Customers/CustomerListComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,4 +30,8 @@ Vue.component('customer-list', require('./components/Customers/CustomerListCompo
 
 const app = new Vue({
     el: '#app',
+    components: {
+        CustomerList: () => import('./components/Customers/CustomerListComponent.vue'),
+        CustomerDashboard: () => import('./components/Dashboard/CustomerDashboard.vue'),
+    }
 });

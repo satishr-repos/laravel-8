@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class customer extends Model
+class Customer extends Model
 {
     use HasFactory;
     
@@ -14,5 +14,13 @@ class customer extends Model
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Get the personal details associated with the customer.
+     */
+    public function personalDetails()
+    {
+        return $this->hasOne(PersonalDetail::class);
     }
 }

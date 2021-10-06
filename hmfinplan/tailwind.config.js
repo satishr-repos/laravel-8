@@ -12,8 +12,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'nunito': ['Nunito', 'sans-serif'],
-        'noto' : ['Noto Sans', 'sans-serif']
+        'lato'          : ['Lato', 'sans-serif'],
+        'merriweather'  : ['Merriweather', 'serif'],
+        'montserrat'    : ['Montserrat', 'sans-serif'],
+        'noto-serif'    : ['Noto Serif', 'serif'],
+        'raleway'       : ['Raleway', 'sans-serif'],
+        'roboto'        : ['Roboto', 'sans-serif'],
+        'roboto-slab'   : ['Roboto Slab', 'serif'],
+        'ubuntu'        : ['Ubuntu', 'sans-serif'],
       },
       height: theme => ({
         "screen-80" : "80vh",
@@ -26,7 +32,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      animation: ['hover'],
+      cursor : ['hover'],
+    }
   },
   plugins: [],
 }

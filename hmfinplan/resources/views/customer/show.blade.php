@@ -2,38 +2,61 @@
 
 @section('header')
 <div class="grid grid-cols-5">
-        <div class="col-span-1">
-                @include('partials.sidebar')
-        </div>
+    <div class="col-span-1">
+        @include('partials.sidebar')
+    </div>
 
-        <div class="col-span-4">
-                @include('partials.nav')
-        </div>
+    <div class="col-span-4">
+        @include('partials.nav')
+    </div>
 </div>
 @endsection
 
 @section('content')
 <div class="grid grid-cols-5">
-        <div class="col-span-1">
+    <div class="col-span-1">
 
+    </div>
+
+    <section class="col-span-4">
+        <nav class="bg-grey-light rounded font-sans w-full">
+            <ol class="list-reset flex text-grey-dark">
+              <li><a href="{{ route('home') }}" class="font-bold">Home</a></li>
+              <li><span class="mx-2">/</span></li>
+              <li><a href="{{ route('customers') }}" class="font-bold">Customers</a></li>
+              <li><span class="mx-2">/</span></li>
+              <li>{{ $current }}</li>
+            </ol>
+        </nav>
+
+        <div id="app">
+            @switch($current)
+                @case('dashboard')
+                    <customer-dashboard></customer-dashboard>
+                    @break
+                
+                @case('personal')
+                    {{-- {{ $personalDetails }} --}}
+                    {{ $customer }}
+                    @break
+            
+                @default
+                    
+            @endswitch
         </div>
-
-        <section class="col-span-4 h-screen-80">
-
-        
-        </section>
+    </section>
 </div>
 @endsection
 
 @section('footer')
 <div class="grid grid-cols-5">
-        <div class="col-span-1">
+    <div class="col-span-1">
 
-        </div>
+    </div>
 
-        <div class="col-span-4">
-                @include('partials.footer')
-        </div>
+    <div class="col-span-4">
+        @include('partials.footer')
+    </div>
 </div>
 @endsection
 

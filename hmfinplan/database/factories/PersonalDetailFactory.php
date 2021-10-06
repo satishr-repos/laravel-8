@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Customer;
+use App\Models\PersonalDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Arr;
 
-class CustomerFactory extends Factory
+class PersonalDetailFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Customer::class;
+    protected $model = PersonalDetail::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +22,7 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
-            'active' => $this->faker->randomElement($array = array(true, false)),           //
+            //
         ];
     }
 }
