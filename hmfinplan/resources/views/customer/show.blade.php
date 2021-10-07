@@ -37,7 +37,7 @@
                 
                 @case('personal')
                     {{-- {{ $personalDetails }} --}}
-                    {{ $customer }}
+                    <personal-details v-bind:base-route="{{ json_encode(route('customer.personal', $customer)) }}"></personal-details>
                     @break
             
                 @default

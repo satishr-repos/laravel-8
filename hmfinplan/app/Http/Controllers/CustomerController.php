@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 class CustomerController extends Controller
 {
@@ -22,7 +23,7 @@ class CustomerController extends Controller
         //                 ->orderBy('first_name')
         //                 ->paginate($pageSize);
 
-        $customers = Customer::select('id', 'first_name', 'last_name', 'active')
+        $customers = Customer::select('id', 'first_name', 'middle_name', 'last_name', 'active')
                             ->orderBy('first_name')
                             ->paginate($pageSize);
         
@@ -37,6 +38,7 @@ class CustomerController extends Controller
     {
         $data = request()->validate([
              'first_name' => 'required|alpha',
+             'middle_name' => 'alpha|nullable',
              'last_name' => 'required|alpha',
              'active' => 'boolean'
             ]);
@@ -46,9 +48,9 @@ class CustomerController extends Controller
         //     'message' => 'Success'
         //   ], 200);
         
-        customer::create($data);
+        $customer = Customer::create($data);
         
-        return $data;
+        return $customer;
     }
 
     public function show(Customer $customer)
@@ -67,6 +69,7 @@ class CustomerController extends Controller
     {
         $data = request()->validate([
              'first_name' => 'required|alpha',
+             'middle_name' => 'alpha|nullable',
              'last_name' => 'required|alpha',
              'active' => 'boolean'
             ]);

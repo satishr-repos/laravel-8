@@ -31,7 +31,8 @@ window.Vue = require('vue').default;
 const app = new Vue({
     el: '#app',
     components: {
-        CustomerList: () => import('./components/Customers/CustomerListComponent.vue'),
-        CustomerDashboard: () => import('./components/Dashboard/CustomerDashboard.vue'),
+        CustomerList: () => import('./components/Customers/CustomerList.vue'),
+        CustomerDashboard: () => import('./components/Customers/CustomerDashboard.vue'),
+        PersonalDetails: () => import('./components/Personal/PersonalDetails.vue'),
     }
 });

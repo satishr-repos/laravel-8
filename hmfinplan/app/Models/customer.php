@@ -9,7 +9,7 @@ class Customer extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['first_name', 'last_name', 'active'];
+    protected $fillable = ['first_name', 'middle_name', 'last_name', 'active'];
 
     public function getFullNameAttribute()
     {

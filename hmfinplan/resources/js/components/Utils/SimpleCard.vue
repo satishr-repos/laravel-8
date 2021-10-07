@@ -1,13 +1,13 @@
 <template>
-    <div class="max-w-xl box-border">
-        <div class="bg-white rounded shadow-md w-full">
-            <div class="">
+    <div class="max-w-4xl box-border">
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="border-t border-gray-100">
                 <div class="w-full py-2 flex justify-between items-center" :class="bgColor">
                     <h2 class="pl-3 text-lg font-raleway font-semibold" :class="textColor">{{ title }}</h2>
                     <slot name="title"></slot>
                 </div>
             </div>    
-            <div class="">
+            <div class="border-t border-gray-200">
                 <slot name="content"></slot>
             </div>
         </div>
@@ -22,8 +22,8 @@ export default {
 
     props: {
         title: String,
-        bgColor: { default: 'bg-gradient-to-r from-purple-200 to-purple-500'},
-        textColor: { default: 'text-black'}
+        bgColor: { default: 'bg-white'},
+        textColor: { default: 'text-gray-800'}
     },
 
     data() { 

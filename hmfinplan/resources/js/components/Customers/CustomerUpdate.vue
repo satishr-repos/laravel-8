@@ -16,6 +16,13 @@
             </div>
 
             <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="middlename">
+                    Middle Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="middlename" name="middlename" type="text" placeholder="MiddleName" v-model="customer.middle_name">
+            </div>
+
+            <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
                     Last Name
                 </label>
@@ -52,6 +59,7 @@ export default {
         errors: {},
         customer: {
             first_name: String,
+            middle_name: String,
             last_name: String,
             active: Number
         },
@@ -64,7 +72,7 @@ export default {
         async add(route, customers) {
             this.close = false;
             this.route = route;
-            this.customer =  { first_name:'', last_name:'', active:false };
+            this.customer =  { first_name:'', middle_name: '', last_name:'', active:false };
             this.customerRef = customers;
             this.opAdd = true;
             const ok = await this.$refs.PopupForm.show();
@@ -83,10 +91,12 @@ export default {
 
             if(this.opAdd)
             {
+                console.log(this.customer);
                 axios.post(this.route, this.customer)
                     .then(response => {
                         
-                        // console.log("form submitted", response);
+                        console.log("form submitted", response.data);
+                        this.customer = response.data;
                         this.customerRef.unshift(this.customer);
                         this.close = true;
                     })
@@ -104,6 +114,7 @@ export default {
                     .then(response => {
                         
                         // console.log("form submitted", response);
+                        this.customer = response.data;
                         Object.assign(this.customerRef, this.customer);
                         this.close = true;
                     })

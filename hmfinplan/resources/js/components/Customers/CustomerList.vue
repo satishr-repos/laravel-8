@@ -75,8 +75,12 @@ export default {
           this.spinner = false;
           this.startIndex = response.data.from;
           
-          let cols = Object.keys(customers[0]);
-          let columns = {};
+        //   let cols = Object.keys(customers[0]);
+          let columns = { 
+                            id: 'id', 
+                            first_name: 'First Name',
+                            last_name : 'Last Name'
+                        };
           // const convertArrayToObject = (array, key) => {
           //         const initialValue = {};
           //         return array.reduce((obj, item) => {
@@ -87,9 +91,9 @@ export default {
           //         }, initialValue);
           //       };
 
-          cols.forEach(item => {
-              columns[item] = item.replace(/_/g, ' ');
-          });
+        //   cols.forEach(item => {
+        //       columns[item] = item.replace(/_/g, ' ');
+        //   });
 
           // this.cols = columns.map(str => {
           //     return str.replace(/_/g, ' ')
@@ -118,6 +122,8 @@ export default {
       deleteCustomer({id, index}) {
 
         let route = this.baseRoute + '/' + id;
+
+        console.log("DELETE:", route);
 
         axios.delete(route)
           .then((response) => {
