@@ -35,7 +35,7 @@ export default {
                     (this.items[name]) === null ) {
                     delete this.items[name];
                 } else {
-                    let item = this.items[name].replace(/undefined[\n, ' ']*/gi, "");
+                    let item = this.items[name].replace(/(undefined|null)[\n, ' ']*/gi, "");
                     if (/\S/.test(item)) {
                         // string is not empty and not just whitespace
                         this.items[name] = item;

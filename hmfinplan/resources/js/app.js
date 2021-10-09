@@ -27,6 +27,36 @@ window.Vue = require('vue').default;
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.mixin({
+    methods: {
+        randomString(len, charSet) {
+            charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var randomString = '';
+            for (var i = 0; i < len; i++) {
+                var randomPoz = Math.floor(Math.random() * charSet.length);
+                randomString += charSet.substring(randomPoz,randomPoz+1);
+            }
+            return randomString;
+        },
+    },
+});
+
+Vue.directive('click-outside', {
+    bind(el, binding, vnode) {
+        var vm = vnode.context;
+        var callback = binding.value;
+
+        el.clickOutsideEvent = function (event) {
+            if (!(el == event.target || el.contains(event.target))) {
+                return callback.call(vm, event);
+            }
+        };
+        document.body.addEventListener('click', el.clickOutsideEvent);
+    },
+    unbind(el) {
+        document.body.removeEventListener('click', el.clickOutsideEvent);
+    }
+});
 
 const app = new Vue({
     el: '#app',

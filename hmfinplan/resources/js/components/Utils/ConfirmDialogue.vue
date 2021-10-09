@@ -2,9 +2,13 @@
     <popup-modal ref="popup">
         <h2 class="text-gray-800 text-3xl font-semibold">{{ title }}</h2>
         <p class="mt-2 text-gray-600">{{ message }}</p>
-        <div class="mt-2 flex justify-between w-1/2">
-            <button class="p-2 pl-5 pr-5 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-4 border-green-300" @click="_cancel">{{ cancelButton }}</button>
-            <button class="p-2 pl-5 pr-5 bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-red-300" @click="_confirm">{{ okButton }}</button>
+        <div class="mt-2 flex justify-start">
+            <button class="p-2 mr-5 bg-green-500 text-gray-100 text-lg rounded-lg focus:border-4 border-green-300" @click="_cancel">
+                {{ cancelButton }}
+            </button>
+            <button class="p-2 mr-5 bg-red-500 text-gray-100 text-lg rounded-lg focus:border-4 border-red-300" @click="_confirm">
+                {{ okButton }}
+            </button>
         </div>
     </popup-modal>
 </template>

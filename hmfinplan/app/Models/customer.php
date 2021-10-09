@@ -19,7 +19,7 @@ class Customer extends Model
     /**
      * Get the personal details associated with the customer.
      */
-    public function personalDetails()
+    public function personalDetail()
     {
         return $this->hasOne(PersonalDetail::class);
     }

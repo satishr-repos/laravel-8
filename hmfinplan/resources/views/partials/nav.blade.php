@@ -3,7 +3,7 @@
     {{-- Navbar brand --}}
     <div class="ml-5 uppercase font-merriweather">
         {{-- <a href="#" class="flex items-center py-4 px-2"> --}}
-        <a class="flex items-center py-4 px-2 hover:animate-pulse" href=" {{ url('/') }}">
+        <a class="transform flex items-center py-4 px-2 hover:scale-110" href=" {{ url('/') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Logo" class="h-8 w-12 mr-2 " />
             <span class="font-semibold text-gray-500 text-lg">{{ config('app.name', 'Harmoney Wealth') }}</span>
         </a>

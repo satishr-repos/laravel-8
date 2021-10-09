@@ -1,6 +1,6 @@
 <template>
 
-    <popup-form ref="PopupForm" title="Edit Customer Details" v-on:popupFormSubmitted="formSubmitted" :closeForm="close">
+    <popup-form ref="PopupForm" :title="title" v-on:popupFormSubmitted="formSubmitted" :closeForm="close">
 
         <div slot="alerts">
             <simple-alert :errors="errors"></simple-alert>
@@ -9,24 +9,24 @@
         <div slot="form_fields">
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">
+                <label class="input-label" for="firstname">
                     First Name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstname" name="firstname" type="text" placeholder="FirstName" v-model="customer.first_name">
+                <input class="input" id="firstname" name="firstname" type="text" placeholder="FirstName" v-model="customer.first_name">
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="middlename">
+                <label class="input-label" for="middlename">
                     Middle Name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="middlename" name="middlename" type="text" placeholder="MiddleName" v-model="customer.middle_name">
+                <input class="input" id="middlename" name="middlename" type="text" placeholder="MiddleName" v-model="customer.middle_name">
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">
+                <label class="input-label" for="lastname">
                     Last Name
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastname" name="lastname" type="text" placeholder="LastName" v-model="customer.last_name">
+                <input class="input" id="lastname" name="lastname" type="text" placeholder="LastName" v-model="customer.last_name">
             </div>
 
             <div>
@@ -58,18 +58,20 @@ export default {
         route: '',
         errors: {},
         customer: {
-            first_name: String,
-            middle_name: String,
-            last_name: String,
-            active: Number
+            first_name: '',
+            middle_name: '',
+            last_name: '',
+            active: false
         },
         customerRef: Object,
-        opAdd: false
+        opAdd: false,
+        title: '',
     }),
 
     methods: {
 
         async add(route, customers) {
+            this.title = "Add Customer";
             this.close = false;
             this.route = route;
             this.customer =  { first_name:'', middle_name: '', last_name:'', active:false };
@@ -79,6 +81,7 @@ export default {
         },
 
         async update(route, customer) {
+            this.title = "Update Customer";
             this.close = false;
             this.route = route;
             this.customer =  { ...customer };

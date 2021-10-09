@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalDetail extends Model
 {
     use HasFactory;
-
+ 
+    protected $guarded = [];
+ 
     /**
      * Get the customer of this personal details.
      */

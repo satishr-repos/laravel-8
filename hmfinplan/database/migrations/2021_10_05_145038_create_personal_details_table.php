@@ -16,28 +16,26 @@ class CreatePersonalDetailsTable extends Migration
     {
         Schema::create('personal_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(customer::class);
-            $table->string('marital_status', 20);
-            $table->string('gender', 20);
-            $table->string('address_1', 75);
-            $table->string('address_2', 75);
-            $table->string('city', 50);
-            $table->string('state', 50);
-            $table->string('pincode', 20);
-            $table->string('country', 50);
-            $table->string('place_of_birth', 50);
-            $table->string('residential_status', 25);
-            $table->string('father_first_name', 50);
-            $table->string('father_last_name', 50);
-            $table->string('mother_first_name', 50);
-            $table->string('mother_last_name', 50);
-            $table->string('pan', 20);
-            $table->string('email1', 50);
-            $table->string('email2', 50);
-            $table->string('aadhar', 20);
-            $table->string('primary_nos', 20);
-            $table->string('secondary_nos', 20);
-            $table->date('dob');
+            $table->foreignIdFor(customer::class)->constrained()->onDelete('cascade');
+            $table->string('marital_status', 20)->nullable();
+            $table->string('gender', 20)->nullable();
+            $table->string('address_1', 75)->nullable();
+            $table->string('address_2', 75)->nullable();
+            $table->string('city', 50)->nullable();
+            $table->string('state', 50)->nullable();
+            $table->string('pincode', 20)->nullable();
+            $table->string('country', 50)->nullable();
+            $table->string('place_of_birth', 50)->nullable();
+            $table->string('residential_status', 25)->nullable();
+            $table->string('father_name', 50)->nullable();
+            $table->string('mother_name', 50)->nullable();
+            $table->string('pan', 20)->nullable();
+            $table->string('primary_email', 50)->nullable();
+            $table->string('secondary_email', 50)->nullable();
+            $table->string('aadhar', 20)->nullable();
+            $table->string('primary_nos', 20)->nullable();
+            $table->string('secondary_nos', 20)->nullable();
+            $table->date('dob')->nullable();
             $table->timestamps();
         });
     }

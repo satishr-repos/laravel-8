@@ -32,3 +32,6 @@ Route::post('/customers', [App\Http\Controllers\CustomerController::class, 'stor
 
 // personal details controller
 Route::get('/customers/{customer}/personal', [App\Http\Controllers\PersonalDetailController::class, 'index'])->name('customer.personal');
+Route::post('/customers/{customer}/personal', [App\Http\Controllers\PersonalDetailController::class, 'store']);
+Route::patch('/customers/{customer}/personal/{personal}', [App\Http\Controllers\PersonalDetailController::class, 'update']);
+Route::delete('/customers/{customer}/personal/{personal}', [App\Http\Controllers\PersonalDetailController::class, 'destroy']);

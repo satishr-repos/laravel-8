@@ -4,7 +4,7 @@
     <simple-spinner :show="spinner"></simple-spinner>
 
     <simple-card title="Customer List"> 
-      <round-button slot="title" class="pr-2" @click.native="addCustomer"></round-button>
+      <icon-button slot="title" class="pr-2 mr-5" iconType="round-plus" @click.native="addCustomer"></icon-button>
       <simple-data-table
           slot="content"
           v-bind:cols="cols" 
@@ -22,7 +22,7 @@
 
 <script>
 import Pagination from '../Utils/PaginationComponent'
-import RoundButton from '../Utils/RoundButton.vue'
+import IconButton from '../Utils/IconButton.vue'
 import SimpleSpinner from '../Utils/SimpleSpinner.vue'
 import SimpleCard from '../Utils/SimpleCard.vue'
 import CustomerUpdate from './CustomerUpdate.vue'
@@ -31,7 +31,7 @@ import SimpleDataTable from '../Utils/SimpleDataTable.vue'
 
 export default {
 
-  components: { Pagination, RoundButton, SimpleSpinner, SimpleCard, CustomerUpdate, SimpleDataTable },
+  components: { Pagination, IconButton, SimpleSpinner, SimpleCard, CustomerUpdate, SimpleDataTable },
 
   props: {
     baseRoute: String,

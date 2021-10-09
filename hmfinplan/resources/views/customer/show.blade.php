@@ -19,7 +19,7 @@
     </div>
 
     <section class="col-span-4">
-        <nav class="bg-grey-light rounded font-sans w-full">
+        <nav class="bg-grey-light rounded font-sans w-full mt-2 mb-5">
             <ol class="list-reset flex text-grey-dark">
               <li><a href="{{ route('home') }}" class="font-bold">Home</a></li>
               <li><span class="mx-2">/</span></li>
