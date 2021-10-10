@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   purge: [
 
@@ -21,6 +23,7 @@ module.exports = {
         'roboto-slab'   : ['Roboto Slab', 'serif'],
         'ubuntu'        : ['Ubuntu', 'sans-serif'],
       },
+      
       height: theme => ({
         "screen-80" : "80vh",
         "screen-75" : "75vh",
@@ -29,6 +32,12 @@ module.exports = {
         "screen/4": "calc(100vh / 4)",
         "screen/5": "calc(100vh / 5)",
       }),
+
+      colors: {
+        gray:colors.blueGray,
+        teal:colors.teal,
+        orange:colors.orange,
+      },
     },
   },
   variants: {

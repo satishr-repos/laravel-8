@@ -23,7 +23,7 @@ class PersonalDetailFactory extends Factory
     public function definition()
     {
         return [
-            'customer_id' => Customer::pluck('id')[$this->faker->numberBetween(1,Customer::count()-1)],
+            // 'customer_id' => Customer::pluck('id')[$this->faker->numberBetween(1,Customer::count()-1)],
             'dob' => $this->faker->date($format = 'Y-m-d', $max = '2000-01-01'),
             'marital_status' => $this->faker->randomElement($array = array('Single', 'Married')),
             'gender' => $this->faker->randomElement($array = array('Male', 'Female')),

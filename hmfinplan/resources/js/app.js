@@ -63,6 +63,7 @@ const app = new Vue({
     components: {
         CustomerList: () => import('./components/Customers/CustomerList.vue'),
         CustomerDashboard: () => import('./components/Customers/CustomerDashboard.vue'),
-        PersonalDetails: () => import('./components/Personal/PersonalDetails.vue'),
+        PersonalDetail: () => import('./components/Personal/PersonalDetail.vue'),
+        FamilyMember: () => import('./components/Personal/FamilyMember.vue'),
     }
 });

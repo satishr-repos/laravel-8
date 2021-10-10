@@ -1,5 +1,5 @@
 {{-- <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"> --}}
-    <div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
+    <div class="fixed flex flex-col top-0 left-0 max-w-max bg-white h-full border-r">
       <div class="flex items-center justify-around h-16 border-b">
         <img src="{{ asset('img/avatar-male.png') }}" alt="Logo" class="h-8 w-12" />
         <div class="text-blue-700 font-semibold font-serif">
