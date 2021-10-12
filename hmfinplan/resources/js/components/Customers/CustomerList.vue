@@ -21,17 +21,13 @@
 </template>
 
 <script>
-import Pagination from '../Utils/PaginationComponent'
-import IconButton from '../Utils/IconButton.vue'
-import SimpleSpinner from '../Utils/SimpleSpinner.vue'
-import SimpleCard from '../Utils/SimpleCard.vue'
-import CustomerUpdate from './CustomerUpdate.vue'
-import SimpleDataTable from '../Utils/SimpleDataTable.vue'
 
 
 export default {
 
-  components: { Pagination, IconButton, SimpleSpinner, SimpleCard, CustomerUpdate, SimpleDataTable },
+  components: {
+      CustomerUpdate: () => import('./CustomerUpdate.vue'),
+   },
 
   props: {
     baseRoute: String,

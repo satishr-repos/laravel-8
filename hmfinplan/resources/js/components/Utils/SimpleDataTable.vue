@@ -58,13 +58,12 @@
 </template>
 
 <script>
-import ConfirmDialogue from './ConfirmDialogue.vue'
 
 export default {
 
         name: 'SimpleDataTable',
 
-        components: { ConfirmDialogue },
+        components: { },
 
         props: {
             cols: [Array, Object],

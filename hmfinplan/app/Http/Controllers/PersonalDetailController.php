@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\PersonalDetail;
 use App\Http\Requests\PersonalDetailRequest;
-use PHPUnit\Util\Json;
 use Barryvdh\Debugbar\Facade as Debugbar;
 
 class PersonalDetailController extends Controller

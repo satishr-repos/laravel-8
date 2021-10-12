@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\FamilyMembers;
+use App\Models\FamilyMember;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FamilyMemberFactory extends Factory
@@ -22,6 +22,12 @@ class FamilyMemberFactory extends Factory
     public function definition()
     {
         return [
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'pan' => $this->faker->regexify('[A-Z]{5}[1-9]{4}[A-Z]'),
+            'dob' => $this->faker->date($format = 'Y-m-d'),
+            'relation' => $this->faker->randomElement($array = array('Spouse', 'Son', 'Daughter', 'Others')),
+            'wedding_date' => $this->faker->date($format = 'Y-m-d'),
             //
         ];
     }

@@ -22,13 +22,11 @@
 </template>
 
 <script>
-import PopupModal from './PopupModal.vue'
-import SimpleCard from './SimpleCard.vue'
 
 export default {
     name: 'PopupForm',
 
-    components: { PopupModal, SimpleCard },
+    components: { },
 
     props: {
         title: String,

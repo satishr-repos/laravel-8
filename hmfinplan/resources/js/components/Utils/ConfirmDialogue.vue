@@ -14,12 +14,11 @@
 </template>
 
 <script>
-import PopupModal from './PopupModal.vue'
 
 export default {
     name: 'ConfirmDialogue',
 
-    components: { PopupModal },
+    components: { },
 
     data: () => ({
         // Parameters that change depending on the type of dialogue

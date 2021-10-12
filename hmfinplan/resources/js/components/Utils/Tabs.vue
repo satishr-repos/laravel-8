@@ -16,7 +16,11 @@
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-lg rounded">
         <div class="px-4 py-5 flex-auto">
           <div class="tab-content tab-space">
-              <component v-if="componentsAvailable" :is="componentList[current].name" v-bind="componentList[current].props"></component>
+              <component v-if="componentsAvailable" 
+                :is="componentList[current].name" 
+                v-bind="componentList[current].props" 
+                v-on="componentList[current].events">
+              </component>
           </div>
         </div>
       </div>
@@ -30,7 +34,7 @@ export default {
     name: "Tabs",
 
     components: {
-        DataList: () => import('../Utils/DataList.vue'),
+        FamilyMemberForm: () => import('../Personal/FamilyMemberForm.vue'),
     },
 
     props: {
@@ -59,7 +63,8 @@ export default {
        
             this.$emit('toggle-tab', tabNumber);
        
-        }
+        },
+
     }
 }
 </script>

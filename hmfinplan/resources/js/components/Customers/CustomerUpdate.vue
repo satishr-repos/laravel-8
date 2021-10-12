@@ -42,11 +42,9 @@
 </template>
 
 <script>
-import SimpleAlert from '../Utils/SimpleAlert.vue';
-import PopupForm from '../Utils/PopupForm.vue'
 
 export default {
-  components: { PopupForm, SimpleAlert },
+  components: { },
 
     name: 'CustomerUpdate',
     

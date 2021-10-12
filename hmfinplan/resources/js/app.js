@@ -58,11 +58,26 @@ Vue.directive('click-outside', {
     }
 });
 
+Vue.component('simple-spinner', () => import('./components/Utils/SimpleSpinner.vue'));
+Vue.component('simple-card', () => import('./components/Utils/SimpleCard.vue'));
+Vue.component('simple-alert', () => import('./components/Utils/SimpleAlert.vue'));
+Vue.component('simple-data-table', () => import('./components/Utils/SimpleDataTable.vue'));
+Vue.component('data-list', () => import('./components/Utils/DataList.vue'));
+Vue.component('icon-button', () => import('./components/Utils/IconButton.vue'));
+Vue.component('inline-form', () => import('./components/Utils/InlineForm.vue'));
+Vue.component('popup-form', () => import('./components/Utils/PopupForm.vue'));
+Vue.component('popup-modal', () => import('./components/Utils/PopupModal.vue'));
+Vue.component('form-select', () => import('./components/Utils/FormSelect.vue'));
+Vue.component('confirm-dialogue', () => import('./components/Utils/ConfirmDialogue.vue'));
+Vue.component('pagination', () => import('./components/Utils/Pagination.vue'));
+Vue.component('tabs', () => import('./components/Utils/Tabs.vue'));
+
 const app = new Vue({
     el: '#app',
     components: {
         CustomerList: () => import('./components/Customers/CustomerList.vue'),
         CustomerDashboard: () => import('./components/Customers/CustomerDashboard.vue'),
+        CustomerUpdate: () => import('./components/Customers/CustomerUpdate.vue'),
         PersonalDetail: () => import('./components/Personal/PersonalDetail.vue'),
         FamilyMember: () => import('./components/Personal/FamilyMember.vue'),
     }

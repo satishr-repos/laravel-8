@@ -39,8 +39,7 @@
             
                 <form-select label="Gender" 
                     name="gender"
-                    @selectChange="handleSelectChange"
-                    :initial="personal_detail.gender"
+                    :selection.sync="personal_detail.gender"
                     :options="[ 
                         { value:'Male', text:'Male'}, 
                         { value:'Female', text:'Female'}]">
@@ -58,8 +57,7 @@
 
                 <form-select label="Residential Status" 
                     name="nationality"
-                    @selectChange="handleSelectChange"
-                    :initial="personal_detail.residential_status"
+                    :selection.sync="personal_detail.residential_status"
                     :options="[ 
                         { value:'Indian', text:'Indian'}, 
                         { value:'Non Resident Indian', text:'Non Resident Indian'}, 
@@ -144,14 +142,6 @@
 export default {
 
     components: {
-        SimpleAlert: () => import('../Utils/SimpleAlert.vue'),
-        SimpleCard: () => import('../Utils/SimpleCard.vue'),
-        SimpleSpinner: () => import('../Utils/SimpleSpinner.vue'),
-        DataList: () => import('../Utils/DataList.vue'),
-        IconButton: () => import('../Utils/IconButton.vue'),
-        InlineForm: () => import('../Utils/InlineForm.vue'),
-        FormSelect: () => import('../Utils/FormSelect.vue'),
-        ConfirmDialogue: () => import('../Utils/ConfirmDialogue.vue'),
     },
     
     props: {
@@ -319,13 +309,6 @@ export default {
                 }
             }
         },
-
-        handleSelectChange(value, name) {
-            if(name === 'gender')
-                this.personal_detail.gender = value;
-            else if (name === 'nationality')
-                this.personal_detail.residential_status = value;
-        }
     }
 }
 </script>

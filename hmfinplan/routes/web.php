@@ -36,5 +36,8 @@ Route::post('/customers/{customer}/personal', [App\Http\Controllers\PersonalDeta
 Route::patch('/customers/{customer}/personal/{personal}', [App\Http\Controllers\PersonalDetailController::class, 'update']);
 Route::delete('/customers/{customer}/personal/{personal}', [App\Http\Controllers\PersonalDetailController::class, 'destroy']);
 
-// family members controller
+// family member controller
 Route::get('/customers/{customer}/family', [App\Http\Controllers\FamilyMemberController::class, 'index'])->name('customer.family');
+Route::post('/customers/{customer}/family', [App\Http\Controllers\FamilyMemberController::class, 'store']);
+Route::patch('/customers/{customer}/family/{family}', [App\Http\Controllers\FamilyMemberController::class, 'update']);
+Route::delete('/customers/{customer}/family/{family}', [App\Http\Controllers\FamilyMemberController::class, 'destroy']);

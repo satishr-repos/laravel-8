@@ -27,7 +27,6 @@ export default {
     name: 'InlineForm',
 
     components: { 
-        SimpleCard: () => import('./SimpleCard.vue'),
     },
 
     props: {

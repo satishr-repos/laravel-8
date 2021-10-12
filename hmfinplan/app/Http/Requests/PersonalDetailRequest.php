@@ -38,8 +38,8 @@ class PersonalDetailRequest extends FormRequest
             'primary_email' => ['email', 'required_with:secondary_email', 'nullable'],
             'secondary_email' => ['email', 'nullable'],
             'aadhar' => ['regex:/[0-9]{4}-[0-9]{4}-[0-9]{4}/u', 'nullable'],
-            'primary_nos' => ['regex:/^[0-9*#+]+$/u', 'min:8', 'nullable', 'required_with:secondary_nos'],
-            'secondary_nos' => ['regex:/^[0-9*#+]+$/u', 'min:8', 'nullable'],
+            'primary_nos' => ['regex:/^[0-9*#+-]+$/u', 'min:8', 'nullable', 'required_with:secondary_nos'],
+            'secondary_nos' => ['regex:/^[0-9*#+-]+$/u', 'min:8', 'nullable'],
             'dob' => ['date', 'before:'.$date, 'nullable' ],
         ];
     }

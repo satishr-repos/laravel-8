@@ -2,7 +2,7 @@
 <div>
     <label class="input-label" :for="id">{{ this.label}}</label>
     <div class="relative inline-block w-full text-gray-700">
-        <select class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-700 shadow border rounded-lg appearance-none focus:outline-none focus:ring focus:border-blue-100" :name="name" :id="id" v-model="selected" @change="$emit('selectChange', selected, name)">
+        <select class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-700 shadow border rounded-lg appearance-none focus:outline-none focus:ring focus:border-blue-100" :name="name" :id="id" v-model="selected" @change="$emit('update:selection', selected)">
             <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">
                 {{ option.text }}
             </option>
@@ -24,7 +24,7 @@ export default {
         label: String,
         name: String,
         options: [Array, Object],
-        initial: { type:String, default:'' },
+        selection: { type:String, default:'' },
     },   
 
     data: () => ({
@@ -37,7 +37,7 @@ export default {
     
     created() {
         this.id = this.randomString(5);
-        this.selected = this.initial;
+        this.selected = this.selection;
         // console.log(this.id);
     },
 
