@@ -7,7 +7,7 @@
                     <slot name="title"></slot>
                 </div>
             </div>    
-            <div class="border-t border-gray-200">
+            <div class="border-t h-auto border-gray-200">
                 <slot name="content"></slot>
             </div>
         </div>

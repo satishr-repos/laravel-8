@@ -31,4 +31,12 @@ class Customer extends Model
     {
         return $this->hasMany(FamilyMember::class);
     }
+
+    /**
+     * Get the family members associated with the customer.
+     */
+    public function ProfessionalDetails()
+    {
+        return $this->hasMany(ProfessionalDetails::class);
+    }
 }

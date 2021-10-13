@@ -71,6 +71,7 @@ Vue.component('form-select', () => import('./components/Utils/FormSelect.vue'));
 Vue.component('confirm-dialogue', () => import('./components/Utils/ConfirmDialogue.vue'));
 Vue.component('pagination', () => import('./components/Utils/Pagination.vue'));
 Vue.component('tabs', () => import('./components/Utils/Tabs.vue'));
+Vue.component('multi-select', () => import('./components/Utils/MultiSelect.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -80,5 +81,6 @@ const app = new Vue({
         CustomerUpdate: () => import('./components/Customers/CustomerUpdate.vue'),
         PersonalDetail: () => import('./components/Personal/PersonalDetail.vue'),
         FamilyMember: () => import('./components/Personal/FamilyMember.vue'),
+        ProfessionalDetail: () => import('./components/Personal/ProfessionalDetail.vue'),
     }
 });
