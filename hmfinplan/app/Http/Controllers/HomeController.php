@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 class HomeController extends Controller
 {
+    private $debugbar;
+
     /**
      * Create a new controller instance.
      *
@@ -14,6 +17,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->debugbar = true;
     }
 
     /**
@@ -24,5 +28,24 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    
+    public function debug()
+    {
+        Debugbar::info('Toggle Debug', $this->debugbar);
+        if($this->debugbar == true)
+        {
+            $this->debugbar = false;
+            Debugbar::disable();
+        }
+        else
+        {
+            $this->debugbar = true;
+            DebugBar::enable();
+        }
+
+        $msg = ($this->debugbar == true) ? 'true' : 'false';
+
+        return redirect()->back()->with('msg' , $msg);
     }
 }
