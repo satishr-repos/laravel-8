@@ -42,3 +42,9 @@ Route::get('/customers/{customer}/family', [App\Http\Controllers\FamilyMemberCon
 Route::post('/customers/{customer}/family', [App\Http\Controllers\FamilyMemberController::class, 'store']);
 Route::patch('/customers/{customer}/family/{family}', [App\Http\Controllers\FamilyMemberController::class, 'update']);
 Route::delete('/customers/{customer}/family/{family}', [App\Http\Controllers\FamilyMemberController::class, 'destroy']);
+
+// profession detail controller
+Route::get('/customers/{customer}/profession', [App\Http\Controllers\ProfessionalDetailsController::class, 'index'])->name('customer.profession');
+Route::post('/customers/{customer}/profession', [App\Http\Controllers\ProfessionalDetailsController::class, 'store']);
+Route::patch('/customers/{customer}/profession/{profession}', [App\Http\Controllers\ProfessionalDetailsController::class, 'update']);
+Route::delete('/customers/{customer}/profession/{profession}', [App\Http\Controllers\ProfessionalDetailsController::class, 'destroy']);

@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('admin123'),
         ]);
 
         /* or you can add also another table that is dependent on user_id:*/

@@ -1,6 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
 <div class="container">
+    <simple-spinner ref="spinner"></simple-spinner>
     <div v-if="!showForm">
     <simple-card title="Customer Information">
         <div slot="title">
@@ -132,7 +133,6 @@
             </div>       
         </div>
     </inline-form>
-    <simple-spinner :show="spinner"></simple-spinner>
     <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
 </div>
 </template>
@@ -150,7 +150,6 @@ export default {
 
     data() {
         return {
-            spinner: false,
             showForm: false,
             customer: {},
             personal_detail: {},
@@ -161,14 +160,19 @@ export default {
 
     created() {
         this.customer_copy = {};
+    },
+  
+    mounted() {
         this.getPersonalDetails();
     },
-    
+  
     methods: {
 
         getPersonalDetails(){
 
-            this.spinner = true;
+            // console.log("Personal Detail:", this.$refs.spinner);
+
+            this.$refs.spinner.show();
             axios.get(this.baseRoute, {
                 params: {
                     json: true,
@@ -184,10 +188,10 @@ export default {
 
                 this.updateData(this.customer, this.personal_detail);
 
-                this.spinner = false;
+                this.$refs.spinner.close();
             })
             .catch((error) => {
-                this.spinner = false;
+                this.$refs.spinner.close();
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 }
@@ -224,8 +228,8 @@ export default {
         },
 
         formSubmitted() {
-            
-            this.spinner = true;
+           
+            this.$refs.spinner.show();
             if(this.personal_detail.id == null)
             {
                 axios.post(this.baseRoute, this.personal_detail)
@@ -236,12 +240,12 @@ export default {
                         this.customer_copy.personal_detail = this.personal_detail;
                         this.updateData(this.customer, this.personal_detail);
 
-                        this.spinner = false;
+                        this.$refs.spinner.close();
                         this.showForm = false;
                         this.$refs.InlineForm.close();
                     })
                     .catch((error) => {
-                        this.spinner = false;
+                        this.$refs.spinner.close();
                         if (error.response.status == 422) {
                                 this.errors = error.response.data.errors;
                         }
@@ -256,13 +260,13 @@ export default {
                         console.log('patch response:', response);
                         this.updateData(this.customer, this.personal_detail);
 
-                        this.spinner = false;
+                        this.$refs.spinner.close();
                         this.showForm = false;
                         this.$refs.InlineForm.close();
                         // console.log('customer:', customer, personal);
                     })
                     .catch((error) => {
-                        this.spinner = false;
+                        this.$refs.spinner.close();
                         if (error.response.status == 422) {
                                 this.errors = error.response.data.errors;
                         }

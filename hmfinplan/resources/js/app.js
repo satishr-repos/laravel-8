@@ -58,7 +58,10 @@ Vue.directive('click-outside', {
     }
 });
 
-Vue.component('simple-spinner', () => import('./components/Utils/SimpleSpinner.vue'));
+// load spinner statically instead of lazy load otherwise component is not able to get
+// ref for this object initially
+Vue.component('simple-spinner', require('./components/Utils/SimpleSpinner.vue').default);
+// Vue.component('simple-spinner', () => import('./components/Utils/SimpleSpinner.vue'));
 Vue.component('simple-card', () => import('./components/Utils/SimpleCard.vue'));
 Vue.component('simple-alert', () => import('./components/Utils/SimpleAlert.vue'));
 Vue.component('simple-data-table', () => import('./components/Utils/SimpleDataTable.vue'));

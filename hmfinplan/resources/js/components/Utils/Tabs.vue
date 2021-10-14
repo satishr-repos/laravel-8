@@ -35,6 +35,7 @@ export default {
 
     components: {
         FamilyMemberForm: () => import('../Personal/FamilyMemberForm.vue'),
+        ProfessionalDetailForm: () => import('../Personal/ProfessionalDetailForm.vue'),
     },
 
     props: {

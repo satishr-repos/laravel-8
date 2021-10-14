@@ -67,7 +67,6 @@ export default {
 
         getFamilyDetail(){
 
-            this.spinner = true;
             axios.get(this.baseRoute, {
                 params: {
                     json: true,
@@ -77,7 +76,7 @@ export default {
 
                 let family = response.data.familyMembers;
 
-                console.log('getFamilyDetail:', family);
+                // console.log('getFamilyDetail:', family);
 
                 for(var i=0; i < family.length; i++) {
 
@@ -93,10 +92,8 @@ export default {
                 }
 
                 this.labelList.push('ADD');
-                this.spinner = false;
             })
             .catch((error) => {
-                this.spinner = false;
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 }
@@ -130,7 +127,7 @@ export default {
                 var comp = { name: 'family-member-form', 
                                 props: {baseRoute: this.baseRoute, formData: data},
                                 events: {'form-closed' : this.formClosed } };
-                console.log(data);
+                // console.log(data);
 
                 this.componentList.splice(this.currentIndex, 1, comp);
             }            
@@ -145,7 +142,7 @@ export default {
 
             this.componentList.splice(this.currentIndex, 1, comp);
             this.labelList.splice(this.currentIndex, 1,  label);
-            console.log('form closed from familymember:', response);
+            // console.log('form closed from familymember:', response);
         },
 
         async deleteFamilyMember() {
@@ -168,7 +165,7 @@ export default {
                     axios.delete(route)
                         .then((response) => {
                           
-                            console.log('delete response:', response);
+                            // console.log('delete response:', response);
                         })
                         .catch((error) => {
                             if (error.response.status == 422) {

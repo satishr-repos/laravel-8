@@ -1,8 +1,5 @@
 <template>
   <div class="container mt-4">
-
-    <simple-spinner :show="spinner"></simple-spinner>
-
     <simple-card title="Customer List"> 
       <icon-button slot="title" class="pr-2 mr-5" iconType="round-plus" @click.native="addCustomer"></icon-button>
       <simple-data-table
@@ -17,6 +14,7 @@
     </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>
     <customer-update ref="customerEditDialogue"></customer-update>
+    <simple-spinner ref="spinner"></simple-spinner>
   </div>
 </template>
 
@@ -32,6 +30,7 @@ export default {
   props: {
     baseRoute: String,
   },
+
   data() {
     return {
       customers: {},
@@ -40,10 +39,10 @@ export default {
       lastPage: 0,
       pageSize: 10,
       startIndex: 0,
-      spinner: false,
     };
   },
-  created() {
+
+  mounted() {
       this.getCustomers(1);
   },
 
@@ -51,7 +50,7 @@ export default {
 
       getCustomers(page){
 
-        this.spinner = true;
+        this.$refs.spinner.show();
         axios.get(this.baseRoute, {
           params: {
             page: page,
@@ -68,8 +67,8 @@ export default {
           //   delete element.active;
           // });
 
-          this.spinner = false;
           this.startIndex = response.data.from;
+          this.$refs.spinner.close();
           
         //   let cols = Object.keys(customers[0]);
           let columns = { 
@@ -106,8 +105,8 @@ export default {
           // console.log(response);
         })
         .catch((error) => {
-          this.spinner = false;
           console.log(error);
+          this.$refs.spinner.close();
         });
       },
 
@@ -150,8 +149,5 @@ export default {
       }
   },
 
-  mounted() {
-    console.log("Component mounted.");
-  },
 };
 </script>

@@ -38,7 +38,7 @@ export default {
     created() {
         this.id = this.randomString(5);
         this.selected = this.selection;
-        // console.log(this.id);
+        // console.log("Form Select options", this.options);
     },
 
     methods: {

@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <inline-form ref="InlineForm" title="Edit Family Member Details" 
+    <inline-form ref="InlineForm" title="Edit Professional Details" 
         v-on:inlineFormSubmitted="formSubmitted" 
         v-on:inlineFormCancelled="formCancelled">
         <div slot="alerts">
@@ -9,39 +9,39 @@
 
         <div slot="form_fields">
 
-            <div class="grid grid-cols-3 gap-3">
-                <div>
-                    <label class="input-label" for="firstname">First Name</label>
-                    <input class="input" id="firstname" type="text" placeholder="FirstName" v-model="family.first_name">
-                </div>
+            <div class="grid grid-cols-2 gap-3">
 
-                <div class="">
-                    <label class="input-label" for="lastname">Last Name</label>
-                    <input class="input" id="lastname" type="text" placeholder="LastName" v-model="family.last_name">
-                </div>
-            
-                <form-select label="Relation" 
-                    :selection.sync="family.relation"
-                    :options="[ 
-                        { value:'Spouse', text:'Spouse'}, 
-                        { value:'Son', text:'Son'}, 
-                        { value:'Daughter', text:'Daughter'}, 
-                        { value:'Others', text:'Other'}]">
+                <form-select label="Name" 
+                    :selection.sync="profession.name"
+                    :options="namesObj">
                 </form-select>
 
-                <div class="">
-                    <label class="input-label" for="dob">Date of Birth</label>
-                    <input class="input" id="dob" type="date" v-model="family.dob">
-                </div>
-                
                 <div>
-                    <label class="input-label" for="pan">Permanent Account Number</label>
-                    <input class="input" id="pan" type="text" placeholder="" v-model="family.pan">
+                    <label class="input-label" for="title">Job Title</label>
+                    <input class="input" id="title" type="text" placeholder="title" v-model="profession.title">
                 </div>
 
-                <div class="" v-if="family.relation === 'Spouse'">
-                    <label class="input-label" for="wedding">Wedding Date</label>
-                    <input class="input" id="wedding" type="date" v-model="family.wedding_date">
+                <div class="">
+                    <label class="input-label" for="company">Company Name</label>
+                    <input class="input" id="company" type="text" placeholder="company" v-model="profession.employer">
+                </div>
+            
+                <div class="">
+                    <label class="input-label" for="education">Education</label>
+                    <input class="input" id="education" type="text" v-model="profession.education">
+                </div>
+
+                <div class="">
+                <label class="input-label" for="education">Preferred Contact Time</label>
+                <multi-select label="Preferred Contact Time"
+                    :selection.sync="profession.preferred_time"
+                    :options="[ 
+                        { name:'Morning', value:'Morning' },
+                        { name:'Noon', value:'Noon' },
+                        { name:'Evening', value:'Evening' },
+                        { name:'Weekdays', value:'Weekdays' },
+                        { name:'Weekends', value:'Weekends' }]">
+                </multi-select> 
                 </div>
                 
             </div>       
@@ -52,26 +52,31 @@
 </template>
 
 <script>
+import MultiSelect from '../Utils/MultiSelect.vue';
 
 export default {
 
     components: {
+        MultiSelect
     },
     
     props: {
         baseRoute: String,
         formData: Object,
+        names: Array
     },
 
     data() {
         return {
-            family: { first_name:'', last_name:'', relation:'', dob:'', pan:'', wedding_date:''},
+            namesObj: {},
+            profession: { name:'', title:'', employer:'', education:'', preferred_time:[]},
             errors: {},
         };
     },
 
     created() {
-        Object.assign(this.family, this.formData);
+        this.namesObj = this.names.map((str) => ({ value: str, text: str }));
+        Object.assign(this.profession, this.formData);
     },
 
     mounted() {
@@ -82,14 +87,18 @@ export default {
     methods: {
 
         formSubmitted() {
-            
+           
+            // console.log("professional detail form selected:", this.profession.preferred_time.toString());
+            // this.profession.preferred_time = this.profession.preferred_time.toString();
+            let profession = {...this.profession};
+            profession.preferred_time = profession.preferred_time.toString();
             this.$refs.spinner.show();
             if(this.formData.id < 1)
             {
-                axios.post(this.baseRoute, this.family)
+                axios.post(this.baseRoute, profession)
                     .then((response) => {
                         
-                        // console.log('post response:', response);
+                        console.log('post response:', response);
 
                         this.$refs.spinner.close();
                         this.$refs.InlineForm.close();
@@ -105,10 +114,10 @@ export default {
                     });
             } else {
                 let route = this.baseRoute + '/' + this.formData.id;
-                axios.patch(route, this.family)
+                axios.patch(route, profession)
                     .then((response) => {
                         
-                        // console.log('patch response:', response);
+                        console.log('patch response:', response);
 
                         this.$refs.spinner.close();
                         this.$refs.InlineForm.close();

@@ -1,6 +1,6 @@
 <template>
-<div class="w-full md:w-1/2 flex flex-col">
-    <div class="w-full px-4" v-bind:class="{'h-60' : show}">
+<div class="w-full flex flex-col">
+    <div class="w-full" v-bind:class="{'h-60' : show}">
         <div class="flex flex-col items-center relative">
             <div class="w-full  svelte-1l8159u">
                 <div class="my-2 p-1 flex border border-gray-200 bg-white appearance-none rounded-lg svelte-1l8159u">
@@ -22,7 +22,7 @@
                             <input placeholder="" v-model="value" v-on:keyup.enter="onEnter" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800">
                         </div>
                     </div>
-                    <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u" @click="show = !show">
+                    <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u" @click.prevent="onChevron">
                         <button class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
                             <div v-if="!show">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,11 +66,7 @@ export default {
         label: String,
         name: String,
         options: { type:[Array, Object], default: function() {
-                return [ 
-                        {name: 'morning', value: 'morning'},
-                        {name: 'noon', value: 'noon'},
-                        {name: 'evening', value: 'evening'},
-                        {name: 'night', value: 'night'} ]
+                return []
             } },
         selection: { type: Array, default: () => [] },
     },   
@@ -121,6 +117,10 @@ export default {
             }
 
             this.value = '';
+        },
+
+        onChevron() {
+            this.show = !this.show;
         },
 
     },

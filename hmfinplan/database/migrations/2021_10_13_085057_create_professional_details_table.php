@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\customer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,11 +17,11 @@ class CreateProfessionalDetailsTable extends Migration
         Schema::create('professional_details', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(customer::class)->constrained()->onDelete('cascade');
-            $table->String('name', 50);
-            $table->String('title', 50);
-            $table->String('employer', 50);
-            $table->String('education', 50);
-            $table->String('preferred_time', 50);
+            $table->String('name', 50)->nullable();
+            $table->String('title', 50)->nullable();
+            $table->String('employer', 50)->nullable();
+            $table->String('education', 50)->nullable();
+            $table->String('preferred_time', 50)->nullable();
             $table->timestamps();
         });
     }
