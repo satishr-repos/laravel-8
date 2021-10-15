@@ -39,4 +39,12 @@ class Customer extends Model
     {
         return $this->hasMany(ProfessionalDetails::class);
     }
+    
+    /**
+     * Get the real estate associated with the customer.
+     */
+    public function realEstate()
+    {
+        return $this->hasMany(RealEstate::class);
+    }
 }

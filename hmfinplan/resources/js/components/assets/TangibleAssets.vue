@@ -1,9 +1,8 @@
 <template>
 <div class="container">
-    <simple-card title="Professional Details">
+    <simple-card title="Tangible Assets">
         <div slot="title">
-            <icon-button class="mr-1" iconType="edit" @click.prevent.native="editProfessionDetail"></icon-button>
-            <icon-button class="mr-5" iconType="delete" @click.prevent.native="deleteProfessionalDetail"></icon-button>
+            <icon-button class="mr-5" iconType="add" @click.native="addAsset"></icon-button>
         </div>
         <div slot="content">
             <tabs   v-bind:labels="labelList" 
@@ -14,19 +13,16 @@
         </div>
     </simple-card>
     <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
-    <simple-spinner ref="spinner"></simple-spinner>
 </div>
 </template>
 
 <script>
-import MultiSelect from '../Utils/MultiSelect.vue';
 
 export default {
 
-    name: 'ProfessionalDetail',
+    name: 'TangibleAssets',
 
     components: {
-        MultiSelect
     },
     
     props: {
@@ -39,38 +35,37 @@ export default {
 
     data() {
         return {
-            labelList: [],
+
+            familyList: [],
+            labelList: ['Real Estate', 'Personal Items'],
             componentList: [],
             currentIndex: 0
         };
     },
 
     created() {
-        this.names = [];
+        this.getFamilyDetail();
     },
-   
-    mounted() {
-        this.getProfessionDetails();
-    },
-   
+    
     methods: {
 
-         initData(profession){
+        initData(family){
 
             var data = {};
 
-            data['Name'] = profession.name;
-            data['Job Title'] = profession.title;
-            data['Company'] = profession.employer;
-            data['Educational Qualification'] = profession.education;
-            data['Preferred Contact Time'] = profession.preferred_time;
+            data['First Name'] = family.first_name;
+            data['Last Name'] = family.last_name;
+            data['Relation'] = family.relation;
+            data['Date of Birth'] = family.dob;
+            data['Permanent Account Number'] = family.pan;
+            if(family.relation.toLowerCase() === 'spouse')
+                data['Wedding Date'] = family.wedding_date;
 
             return data;
         },
 
-        getProfessionDetails(){
+        getFamilyDetail(){
 
-            this.$refs.spinner.show();
             axios.get(this.baseRoute, {
                 params: {
                     json: true,
@@ -78,43 +73,30 @@ export default {
             })
             .then((response) => {
 
-                let customer = response.data.customer;
-                let family = response.data.family;
-                let profession = response.data.profession;
-                console.log('getProfessionalDetails:', customer, family, profession);
+                let family = response.data.familyMembers;
 
-                let name = customer.first_name + ' ' + customer.last_name;
-                this.names.push(name);
-                for(let index in family) {
-                    name = family[index].first_name + ' ' + family[index].last_name;
-                    this.names.push(name);
-                }
+                // console.log('getFamilyDetail:', family);
 
-                console.log("Name List:", this.names);
+                for(var i=0; i < family.length; i++) {
 
-                for(var i=0; i < profession.length; i++) {
-
-                    var data = this.initData(profession[i]);
+                    var data = this.initData(family[i]);
 
                     // store database id as part of the component
-                    var comp = { name: 'data-list', props: {items: data}, db: profession[i] };
+                    var comp = { name: 'data-list', props: {items: data}, db: family[i] };
 
-                    var label = profession[i].title;
+                    var label = (family[i].relation == null)? 'member' : family[i].relation;
 
                     this.labelList.push(label);           
                     this.componentList.push(comp);
                 }
 
                 this.labelList.push('ADD');
-                this.$refs.spinner.close();
-
             })
             .catch((error) => {
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 }
 
-                this.$refs.spinner.close();
                 console.log("ERROR:", error);
             });
         },
@@ -123,59 +105,52 @@ export default {
 
             if (labelIndex == (this.labelList.length - 1))
             {
-                var profession = { id: -1 };
-                var comp = { name: 'professional-detail-form',
-                                props: {baseRoute: this.baseRoute, formData: profession, names: this.names},
+                var family = { id: -1, first_name: '', last_name: '', relation: '' };
+                var comp = { name: 'family-member-form',
+                                props: {baseRoute: this.baseRoute, formData: family},
                                 events: {'form-closed' : this.formClosed } };
                 this.componentList.push(comp);
 
-                this.labelList.splice(labelIndex, 0, 'new');                
+                this.labelList.splice(labelIndex, 0, 'member');                
             }
             
             this.currentIndex = labelIndex;
         },
 
-        editProfessionDetail() {
+        editFamilyMember() {
             if ((this.currentIndex < this.labelList.length - 1) &&
                 this.componentList.length > this.currentIndex)
             {
-                let profession = this.componentList[this.currentIndex].db;
-                let data = _.pick(profession, ['id', 'name', 'title', 'employer', 'education']);
-                if(profession.preferred_time != null)
-                    data['preferred_time'] = profession.preferred_time.split(',');
-                var comp = { name: 'professional-detail-form', 
-                                props: {baseRoute: this.baseRoute, formData: data, names: this.names},
+                let family = this.componentList[this.currentIndex].db;
+                let data = _.pick(family, ['id', 'first_name', 'last_name', 'relation', 'dob', 'pan', 'wedding_date']);
+                var comp = { name: 'family-member-form', 
+                                props: {baseRoute: this.baseRoute, formData: data},
                                 events: {'form-closed' : this.formClosed } };
-                console.log(data);
+                // console.log(data);
 
                 this.componentList.splice(this.currentIndex, 1, comp);
             }            
         },
 
         formClosed(response) {
-            var profession = response;
+            var family = response;
+            var data = this.initData(family);
 
-            console.log("pd:form closed", profession);
-
-            if(profession.preferred_time != null && typeof(profession.preferred_time) == 'object')
-                profession.preferred_time = profession.preferred_time.toString();
-
-            var data = this.initData(profession);
-
-            var comp = { name: 'data-list', props: {items: data}, db: profession };
-            var label = profession.title? profession.title : 'New';
+            var comp = { name: 'data-list', props: {items: data}, db: family };
+            var label = (family.relation == null)? 'member' : family.relation;
 
             this.componentList.splice(this.currentIndex, 1, comp);
             this.labelList.splice(this.currentIndex, 1,  label);
+            // console.log('form closed from familymember:', response);
         },
 
-        async deleteProfessionalDetail() {
+        async deleteFamilyMember() {
 
             if(this.labelList.length <= 1)
                 return; // nothing to delete
 
             const ok = await this.$refs.confirmDialogue.show({
-                title: 'Delete Professional Details?',
+                title: 'Delete Customer Details?',
                 message: 'Are you sure you want to delete? It cannot be undone.',
                 okButton: 'Delete',
             });
@@ -183,13 +158,13 @@ export default {
             if (ok)
             {
                 let id = this.componentList[this.currentIndex].db.id;
-                if(id != null && id >= 0)
+                if(id != null)
                 {
                     let route = this.baseRoute + '/' + id;
                     axios.delete(route)
                         .then((response) => {
                           
-                            console.log('delete response:', response);
+                            // console.log('delete response:', response);
                         })
                         .catch((error) => {
                             if (error.response.status == 422) {

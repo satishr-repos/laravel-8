@@ -18,8 +18,8 @@ class CreateProfessionalDetailsTable extends Migration
             $table->id();
             $table->foreignIdFor(customer::class)->constrained()->onDelete('cascade');
             $table->String('name', 50)->nullable();
-            $table->String('title', 50)->nullable();
-            $table->String('employer', 50)->nullable();
+            $table->String('title', 100)->nullable();
+            $table->String('employer', 100)->nullable();
             $table->String('education', 50)->nullable();
             $table->String('preferred_time', 50)->nullable();
             $table->timestamps();

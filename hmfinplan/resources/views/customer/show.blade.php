@@ -38,11 +38,15 @@
                     @break
                 
                 @case('personal')
-                    <personal-detail v-bind:base-route="{{ json_encode(route('customer.personal', $customer)) }}"></personal-detail>
-                    <family-member v-bind:base-route="{{ json_encode(route('customer.family', $customer)) }}"></family-member>
+                    <personal-detail class="mb-3" v-bind:base-route="{{ json_encode(route('customer.personal', $customer)) }}"></personal-detail>
+                    <family-member class="mb-3" v-bind:base-route="{{ json_encode(route('customer.family', $customer)) }}"></family-member>
                     <professional-detail v-bind:base-route="{{ json_encode(route('customer.profession', $customer)) }}"></professional-detail>
                     @break
-            
+           
+                @case('assets')
+                
+                    @break
+
                 @default
                     
             @endswitch

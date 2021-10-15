@@ -1,5 +1,5 @@
 <template>
-    <div class="w-auto border-t border-gray-200">
+    <div class="w-auto border-t border-gray-200 font-montserrat">
         <dl>
             <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" 
                 v-for="(values, name, index) in nonNullItems" :key="index" :class="isStriped(index)">

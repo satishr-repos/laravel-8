@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/home/debug', [App\Http\Controllers\HomeController::class, 'debug'])->name('debug');
+// Route::post('/home/debug', [App\Http\Controllers\HomeController::class, 'debug'])->name('debug');
 
 // customer controller
 Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers');
@@ -48,3 +48,9 @@ Route::get('/customers/{customer}/profession', [App\Http\Controllers\Professiona
 Route::post('/customers/{customer}/profession', [App\Http\Controllers\ProfessionalDetailsController::class, 'store']);
 Route::patch('/customers/{customer}/profession/{profession}', [App\Http\Controllers\ProfessionalDetailsController::class, 'update']);
 Route::delete('/customers/{customer}/profession/{profession}', [App\Http\Controllers\ProfessionalDetailsController::class, 'destroy']);
+
+// assets controller
+Route::get('/customers/{customer}/realestate', [App\Http\Controllers\RealEstateController::class, 'index'])->name('customer.assets');
+Route::post('/customers/{customer}/realestate', [App\Http\Controllers\RealEstateController::class, 'store']);
+Route::patch('/customers/{customer}/realestate/{realestate}', [App\Http\Controllers\RealEstateController::class, 'update']);
+Route::delete('/customers/{customer}/realestate/{realestate}', [App\Http\Controllers\RealEstateController::class, 'destroy']);

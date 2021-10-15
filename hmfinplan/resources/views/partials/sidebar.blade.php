@@ -1,5 +1,5 @@
 {{-- <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"> --}}
-    <div class="fixed flex flex-col top-0 left-0 max-w-max bg-white h-full border-r">
+    <div class="fixed flex flex-col top-0 left-0 max-w-none w-auto bg-white h-full border-r">
       <div class="flex items-center justify-around h-16 border-b">
         <img src="{{ asset('img/avatar-male.png') }}" alt="Logo" class="h-8 w-12" />
         <div class="text-blue-700 font-semibold font-serif">
@@ -40,7 +40,7 @@
             </div>
           </li>
           <li>
-            <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:shadow-md hover:border-indigo-500 pr-6">
+            <a href="{{ route('customer.assets', $customer) }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-r-4 {{ $current == 'assets'? 'border-red-500' : 'border-transparent'}} hover:shadow-md hover:border-indigo-500 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>

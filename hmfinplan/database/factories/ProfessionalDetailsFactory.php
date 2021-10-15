@@ -24,8 +24,8 @@ class ProfessionalDetailsFactory extends Factory
         return [
             'title' => $this->faker->jobTitle(),
             'employer' => $this->faker->company(),
-            'education' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
-            'preferred_time' => $this->faker->randomElement($array = array('morning', 'noon', 'evening', 'night')),
+            'education' => $this->faker->text($maxNbChars = 50),
+            'preferred_time' => $this->faker->randomElement($array = array('morning', 'noon', 'evening', 'night', 'weekdays', 'weekends')),
         ];
     }
 }
