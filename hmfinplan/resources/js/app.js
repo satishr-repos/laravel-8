@@ -87,5 +87,6 @@ const app = new Vue({
         FamilyMember: () => import('./components/Personal/FamilyMember.vue'),
         ProfessionalDetail: () => import('./components/Personal/ProfessionalDetail.vue'),
         TangibleAssets: () => import('./components/Asset/TangibleAssets.vue'),
+        FinancialAssets: () => import('./components/Asset/FinancialAssets.vue'),
     }
 });

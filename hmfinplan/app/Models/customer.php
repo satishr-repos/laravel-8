@@ -47,4 +47,20 @@ class Customer extends Model
     {
         return $this->hasMany(RealEstate::class);
     }
+    
+    /**
+     * Get the personal items associated with the customer.
+     */
+    public function personalItem()
+    {
+        return $this->hasMany(PersonalItem::class);
+    }
+    
+    /**
+     * Get the bank accounts associated with the customer.
+     */
+    public function bankAssets()
+    {
+        return $this->hasMany(BankAsset::class);
+    }
 }

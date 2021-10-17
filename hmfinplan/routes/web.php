@@ -54,3 +54,15 @@ Route::get('/customers/{customer}/assets/realestate', [App\Http\Controllers\Real
 Route::post('/customers/{customer}/assets/realestate', [App\Http\Controllers\RealEstateController::class, 'store']);
 Route::patch('/customers/{customer}/assets/realestate/{realestate}', [App\Http\Controllers\RealEstateController::class, 'update']);
 Route::delete('/customers/{customer}/assets/realestate/{realestate}', [App\Http\Controllers\RealEstateController::class, 'destroy']);
+
+// personal items controller
+Route::get('/customers/{customer}/assets/personalitem', [App\Http\Controllers\PersonalItemController::class, 'index'])->name('customer.personalitem');
+Route::post('/customers/{customer}/assets/personalitem', [App\Http\Controllers\PersonalItemController::class, 'store']);
+Route::patch('/customers/{customer}/assets/personalitem/{personalItem}', [App\Http\Controllers\PersonalItemController::class, 'update']);
+Route::delete('/customers/{customer}/assets/personalitem/{personalItem}', [App\Http\Controllers\PersonalItemController::class, 'destroy']);
+
+// bank asset controller
+Route::get('/customers/{customer}/assets/bank', [App\Http\Controllers\BankAssetController::class, 'index'])->name('customer.bank');
+Route::post('/customers/{customer}/assets/bank', [App\Http\Controllers\BankAssetController::class, 'store']);
+Route::patch('/customers/{customer}/assets/bank/{bank}', [App\Http\Controllers\BankAssetController::class, 'update']);
+Route::delete('/customers/{customer}/assets/bank/{bank}', [App\Http\Controllers\BankAssetController::class, 'destroy']);

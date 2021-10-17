@@ -1,8 +1,8 @@
 <template>
 <div class="container">
-    <simple-card title="Tangible Assets">
+    <simple-card title="Financial Assets">
         <div slot="title">
-            <icon-button class="mr-5 " iconType="add" @click.native="onAddAsset"></icon-button>
+            <icon-button class="mr-5" iconType="add" @click.native="onAddAsset"></icon-button>
         </div>
         <div slot="content">
             <tabs   text-color="text-yellow-500"
@@ -23,14 +23,17 @@ import EventBus from '../../eventbus'
 
 export default {
 
-    name: 'TangibleAssets',
+    name: 'FinancialAssets',
 
     components: {
     },
     
     props: {
-        realEstate: String,
-        personalItem: String,
+        bankRoute: String,
+        fixedRoute: String,
+        investRoute: String,
+        epfRoute: String,
+        otherRoute: String,
     },
 
     computed: {
@@ -40,7 +43,7 @@ export default {
     data() {
         return {
 
-            labelList: ['Real Estate', 'Personal Items'],
+            labelList: ['Bank', 'Fixed', 'Investments', 'EPF', 'Others' ],
             componentList: [],
             currentIndex: 0,
         };
@@ -48,16 +51,37 @@ export default {
 
     mounted () {
         this.componentList.push({ 
-            name: 'real-estate', 
+            name: 'bank-asset', 
             props: { 
-                route:this.realEstate,
+                route:this.bankRoute,
             }
         });
 
         this.componentList.push({ 
-            name: 'personal-item', 
+            name: 'fixed-asset', 
             props: {
-                route: this.personalItem,
+                route: this.fixedRoute,
+            }
+        });
+        
+        this.componentList.push({ 
+            name: 'investment-asset', 
+            props: {
+                route: this.investRoute,
+            }
+        });
+        
+        this.componentList.push({ 
+            name: 'epf-asset', 
+            props: {
+                route: this.epfRoute,
+            }
+        });
+        
+        this.componentList.push({ 
+            name: 'other-asset', 
+            props: {
+                route: this.otherRoute,
             }
         });
     },
@@ -69,9 +93,9 @@ export default {
 
         onAddAsset() {
             if(this.currentIndex == 0)
-                EventBus.$emit('ADD_REAL_ESTATE');
+                EventBus.$emit('ADD_BANK_ASSET');
             else
-                EventBus.$emit('ADD_PERSONAL_ITEM');
+                EventBus.$emit('');
         },
     },
 }

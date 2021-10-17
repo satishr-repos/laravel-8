@@ -44,7 +44,12 @@
                     @break
            
                 @case('assets')
-                    <tangible-assets v-bind:real-estate="{{ json_encode(route('customer.realestate', $customer)) }}"></tangible-assets>
+                    <tangible-assets class="mb-3" v-bind:real-estate="{{ json_encode(route('customer.realestate', $customer)) }}"
+                        v-bind:personal-item="{{json_encode(route('customer.personalitem', $customer)) }}">
+                    </tangible-assets>
+                    <financial-assets v-bind:bank-route="{{ json_encode(route('customer.bank', $customer)) }}"
+                        v-bind:fixed-route="{{json_encode(route('customer.personalitem', $customer)) }}">
+                    </financial-assets>
                 
                     @break
 

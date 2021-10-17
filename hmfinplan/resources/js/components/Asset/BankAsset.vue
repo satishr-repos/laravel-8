@@ -10,10 +10,10 @@ import EventBus from '../../eventbus'
 
     export default {
 
-        name: 'RealEstate',
+        name: 'BankAsset',
 
         components: {
-            RealEstateForm: () => import('./RealEstateForm.vue'),
+            BankAssetForm: () => import('./BankAssetForm.vue'),
         },
 
         props: {
@@ -35,16 +35,16 @@ import EventBus from '../../eventbus'
         },
        
         mounted () {
-            this.getRealEstates();
-            EventBus.$on('ADD_REAL_ESTATE', () => {
-                this.compName = 'real-estate-form';
+            this.getBankAssets();
+            EventBus.$on('ADD_BANK_ASSET', () => {
+                this.compName = 'bank-asset-form';
                 Object.assign(this.compProps, { baseRoute: this.route, formData: {id: -1} });
                 Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
             });
         },
        
         methods: {
-            getRealEstates() {
+            getBankAssets() {
                 this.$refs.spinner.show();
                 axios.get(this.route, {
                         params: {
@@ -53,24 +53,22 @@ import EventBus from '../../eventbus'
                     })
                     .then((response) => {
 
-                        let realEstate = response.data.realEstate;
+                        let bank = response.data.bank;
 
-                        console.log('getRealEstates:', realEstate);
+                        console.log('getBank:', bank);
                         
                         let columns = { 
                             id: 'id', 
-                            type: 'Type',
-                            desc: 'Address',
-                            area : 'Area',
-                            purchase_yr: 'Purchase Year',
-                            purchase_cost: 'Purchase Cost',
-                            expct_growth_rt : 'Expected Growth %',
-                            current_val : 'Current Value',
+                            acct_typ: 'Account Type',
+                            desc: 'Bank Details',
+                            acct_nbr : 'Account Number',
+                            curr_bal: 'Current Balance',
+                            intrst_rt: 'Interest Rate',
                             status : 'Status',
                         };
 
                         Object.assign(this.cols, columns);
-                        Object.assign(this.assets, realEstate);
+                        Object.assign(this.assets, bank);
 
                         this.$refs.spinner.close();
                         this.loadDataTable();
@@ -87,7 +85,7 @@ import EventBus from '../../eventbus'
 
             loadDataTable() {
 
-                console.log("re-loaddt:", this.cols, this.assets);
+                console.log("bk-loaddt:", this.cols, this.assets);
                 this.compName = 'simple-data-table';
                 Object.assign(this.compProps, { cols: this.cols, rows: this.assets});
                 Object.assign(this.compEvents, { 
@@ -97,15 +95,15 @@ import EventBus from '../../eventbus'
             },
 
             onEditAsset({id, index}) {
-                console.log("re-onedit:", id, index)
-                this.compName = 'real-estate-form';
+                console.log("bk-onedit:", id, index)
+                this.compName = 'bank-asset-form';
                 Object.assign(this.compProps, { baseRoute: this.route, formData: this.assets[index]});
                 Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
             },
 
             onFormClosed(response) {
                 let id = response.id;
-                console.log("re-formclosed", response);
+                console.log("bk-formclosed", response);
                 if(id > 0)
                 {
                     let obj = this.assets.find(o => o.id === id);
@@ -119,7 +117,7 @@ import EventBus from '../../eventbus'
             },
 
             onDeleteAsset({id, index}) {
-                console.log("re-ondelete:", id, index)
+                console.log("bk-ondelete:", id, index)
                 let route = this.route + '/' + id;
                 axios.delete(route)
                     .then((response) => {

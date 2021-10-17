@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap">
     <div class="w-full">
-      <ul class="flex mb-0 ml-2 list-none flex-wrap pt-3 pb-4 flex-row">
+      <ul class="flex mb-0 ml-2 list-none flex-wrap pt-3 pb-2 flex-row">
         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center cursor-default" v-for="(label, index) in labels" :key="'A'+index">
           <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded leading-normal flex items-center" v-on:click="toggleTabs(index)" v-bind:class="[ (current !== index)? passiveText : activeText,  (current !== index)? passiveColor : activeColor ]">
             <span v-if="label == 'ADD'" class="mr-3">
@@ -14,7 +14,7 @@
         </li>
       </ul>
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-lg rounded">
-        <div class="px-2 py-5 flex-auto">
+        <div class="px-2 py-3 flex-auto">
           <div class="tab-content tab-space">
               <component v-if="componentsAvailable" 
                 :is="componentList[current].name" 
@@ -36,8 +36,9 @@ export default {
     components: {
         FamilyMemberForm: () => import('../Personal/FamilyMemberForm.vue'),
         ProfessionalDetailForm: () => import('../Personal/ProfessionalDetailForm.vue'),
-        PersonalItems: () => import('../Asset/PersonalItems.vue'),
+        PersonalItem: () => import('../Asset/PersonalItem.vue'),
         RealEstate: () => import('../Asset/RealEstate.vue'),
+        BankAsset: () => import('../Asset/BankAsset.vue'),
     },
 
     props: {

@@ -10,10 +10,10 @@ import EventBus from '../../eventbus'
 
     export default {
 
-        name: 'RealEstate',
+        name: 'PersonalItem',
 
         components: {
-            RealEstateForm: () => import('./RealEstateForm.vue'),
+            PersonalItemForm: () => import('./PersonalItemForm.vue'),
         },
 
         props: {
@@ -35,16 +35,16 @@ import EventBus from '../../eventbus'
         },
        
         mounted () {
-            this.getRealEstates();
-            EventBus.$on('ADD_REAL_ESTATE', () => {
-                this.compName = 'real-estate-form';
+            this.getPersonalItems();
+            EventBus.$on('ADD_PERSONAL_ITEM', () => {
+                this.compName = 'personal-item-form';
                 Object.assign(this.compProps, { baseRoute: this.route, formData: {id: -1} });
                 Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
             });
         },
        
         methods: {
-            getRealEstates() {
+            getPersonalItems() {
                 this.$refs.spinner.show();
                 axios.get(this.route, {
                         params: {
@@ -53,15 +53,14 @@ import EventBus from '../../eventbus'
                     })
                     .then((response) => {
 
-                        let realEstate = response.data.realEstate;
+                        let personalItem = response.data.personalItem;
 
-                        console.log('getRealEstates:', realEstate);
+                        console.log('getPersonalItems:', personalItem);
                         
                         let columns = { 
                             id: 'id', 
                             type: 'Type',
-                            desc: 'Address',
-                            area : 'Area',
+                            desc: 'Description',
                             purchase_yr: 'Purchase Year',
                             purchase_cost: 'Purchase Cost',
                             expct_growth_rt : 'Expected Growth %',
@@ -70,7 +69,7 @@ import EventBus from '../../eventbus'
                         };
 
                         Object.assign(this.cols, columns);
-                        Object.assign(this.assets, realEstate);
+                        Object.assign(this.assets, personalItem);
 
                         this.$refs.spinner.close();
                         this.loadDataTable();
@@ -98,7 +97,7 @@ import EventBus from '../../eventbus'
 
             onEditAsset({id, index}) {
                 console.log("re-onedit:", id, index)
-                this.compName = 'real-estate-form';
+                this.compName = 'personal-item-form';
                 Object.assign(this.compProps, { baseRoute: this.route, formData: this.assets[index]});
                 Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
             },

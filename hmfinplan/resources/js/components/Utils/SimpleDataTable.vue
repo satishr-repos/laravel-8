@@ -20,7 +20,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-300">
+                    <tbody class="divide-y divide-gray-300" v-if="rows.length">
                         <tr class="whitespace-nowrap hover:bg-green-50 hover:cursor-pointer hover:shadow-lg" v-for="(row, i) in rows" :key="i">
                             <td @click="doSelect(row['id'], i)" class="px-6 py-2 text-xm text-gray-500" v-for="(value, name) in cols" :key="name">
                                 <span v-if="name === 'id'">{{ startIndex + i }}</span>

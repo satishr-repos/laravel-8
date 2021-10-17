@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-full w-3/4 box-border">
+    <div class="max-w-screen-md w-auto box-border">
         <div class="bg-white shadow overflow-auto sm:rounded-lg">
             <div class="border-t border-gray-100">
                 <div class="py-2 flex justify-between items-center" :class="bgColor">
