@@ -7,9 +7,9 @@
           v-bind:cols="cols" 
           v-bind:rows="customers" 
           v-bind:start-index="startIndex"
-          v-on:deleteRow="deleteCustomer"
-          v-on:editRow="editCustomer"
-          v-on:selectRow="selectCustomer">
+          v-on:delete-row="deleteCustomer"
+          v-on:edit-row="editCustomer"
+          v-on:select-row="selectCustomer">
       </simple-data-table>
     </simple-card>
     <pagination v-bind:current-page="currentPage" v-bind:last-page="lastPage" v-on:pageSelected="changePage($event)"></pagination>

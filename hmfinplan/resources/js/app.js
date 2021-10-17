@@ -67,7 +67,8 @@ Vue.component('simple-alert', () => import('./components/Utils/SimpleAlert.vue')
 Vue.component('simple-data-table', () => import('./components/Utils/SimpleDataTable.vue'));
 Vue.component('data-list', () => import('./components/Utils/DataList.vue'));
 Vue.component('icon-button', () => import('./components/Utils/IconButton.vue'));
-Vue.component('inline-form', () => import('./components/Utils/InlineForm.vue'));
+Vue.component('inline-form', require('./components/Utils/InlineForm.vue').default);
+// Vue.component('inline-form', () => import('./components/Utils/InlineForm.vue'));
 Vue.component('popup-form', () => import('./components/Utils/PopupForm.vue'));
 Vue.component('popup-modal', () => import('./components/Utils/PopupModal.vue'));
 Vue.component('form-select', () => import('./components/Utils/FormSelect.vue'));
@@ -85,5 +86,6 @@ const app = new Vue({
         PersonalDetail: () => import('./components/Personal/PersonalDetail.vue'),
         FamilyMember: () => import('./components/Personal/FamilyMember.vue'),
         ProfessionalDetail: () => import('./components/Personal/ProfessionalDetail.vue'),
+        TangibleAssets: () => import('./components/Asset/TangibleAssets.vue'),
     }
 });

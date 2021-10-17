@@ -23,13 +23,13 @@ class RealEstateFactory extends Factory
     {
         return [
             'type' => $this->faker->randomElement($array = array('land', 'house', 'apartment')),
-            'desc' => $this->faker->text($maxNbChars = 80),
+            'desc' => $this->faker->streetAddress(),
+		    'area' => $this->faker->randomNumber($nbDigits=5),
             'purchase_yr' => $this->faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null),
             'purchase_cost' => $this->faker->randomNumber($nbDigits=7),
-            'expct_growth_rt' => $this->faker->randomFloat($nbMaxDecimals=2, $max=100),
-            'current_val' => $this->faker->randomFloat($nbMaxDecimals=2, $max=100000000),
-		    'area' => $this->faker->randomNumber($nbDigits=5),
-            'status' => $this->faker->randomElement($array = array('sold', 'not sold')),
+            'expct_growth_rt' => $this->faker->randomFloat(2, 0, 20),
+            'current_val' => $this->faker->randomFloat(2, 0, null),
+            'status' => $this->faker->randomElement($array = array(true, false)),
         ];
     }
 }

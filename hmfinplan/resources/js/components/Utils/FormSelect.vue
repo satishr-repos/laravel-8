@@ -24,7 +24,7 @@ export default {
         label: String,
         name: String,
         options: [Array, Object],
-        selection: { type:String, default:'' },
+        selection: { type:[String,Number], default:'' },
     },   
 
     data: () => ({

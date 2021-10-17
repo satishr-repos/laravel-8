@@ -1,8 +1,8 @@
 <template>
-    <div class="max-w-screen-md box-border">
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="max-w-full w-3/4 box-border">
+        <div class="bg-white shadow overflow-auto sm:rounded-lg">
             <div class="border-t border-gray-100">
-                <div class="w-full py-2 flex justify-between items-center" :class="bgColor">
+                <div class="py-2 flex justify-between items-center" :class="bgColor">
                     <h2 class="pl-3 text-lg font-raleway font-semibold" :class="textColor">{{ title }}</h2>
                     <slot name="title"></slot>
                 </div>

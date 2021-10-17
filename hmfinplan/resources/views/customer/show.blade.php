@@ -44,6 +44,7 @@
                     @break
            
                 @case('assets')
+                    <tangible-assets v-bind:real-estate="{{ json_encode(route('customer.realestate', $customer)) }}"></tangible-assets>
                 
                     @break
 

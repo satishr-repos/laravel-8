@@ -15,10 +15,11 @@ class RealEstateController extends Controller
                 'type' => 'alpha|nullable',
                 'desc' => 'string|nullable',
                 'purchase_yr' => 'date|nullable',
+                'purchase_cost' => 'numeric|nullable',
                 'expct_growth_rt' => 'numeric|nullable',
                 'current_val' => 'numeric|nullable',
                 'area' => 'string|nullable',
-                'status' => 'string|nullable',
+                'status' => 'numeric|nullable',
             ]);
 
         return $data;

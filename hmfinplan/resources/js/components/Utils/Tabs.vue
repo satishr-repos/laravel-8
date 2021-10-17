@@ -14,7 +14,7 @@
         </li>
       </ul>
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full shadow-lg rounded">
-        <div class="px-4 py-5 flex-auto">
+        <div class="px-2 py-5 flex-auto">
           <div class="tab-content tab-space">
               <component v-if="componentsAvailable" 
                 :is="componentList[current].name" 
@@ -36,6 +36,8 @@ export default {
     components: {
         FamilyMemberForm: () => import('../Personal/FamilyMemberForm.vue'),
         ProfessionalDetailForm: () => import('../Personal/ProfessionalDetailForm.vue'),
+        PersonalItems: () => import('../Asset/PersonalItems.vue'),
+        RealEstate: () => import('../Asset/RealEstate.vue'),
     },
 
     props: {

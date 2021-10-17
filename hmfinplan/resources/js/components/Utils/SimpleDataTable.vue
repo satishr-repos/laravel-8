@@ -1,21 +1,21 @@
 <template>
-<div class="container flex justify-center">
+<div class="container flex justify-start">
     <div class="flex flex-col">
         <div class="w-full">
             <!-- <div class="border border-gray-200 shadow"> -->
-            <div class="">
+            <div class="border-t border-gray-200">
                 <table class="bg-white divide-y divide-gray-300 ">
-                    <thead class="capitalize">
-                        <tr class="divide-x-2 divide-gray-100">
-                            <th class="px-6 py-2 text-xs text-gray-600 " v-for="col in cols" v-bind:key="col">
+                    <thead class="capitalize font-mono">
+                        <tr class="divide-x-2 divide-gray-100 bg-gray-50">
+                            <th class="px-6 py-1 text-xs text-gray-600 " v-for="col in cols" v-bind:key="col">
                                 {{ col }}
                             </th>
                             
-                            <th class="px-6 py-2 text-xs text-gray-600 ">
+                            <th class="px-6 py-1 text-xs text-gray-600 ">
                                 Edit
                             </th>
                             
-                            <th class="px-6 py-2 text-xs text-gray-600">
+                            <th class="px-6 py-1 text-xs text-gray-600">
                                 Delete
                             </th>
                         </tr>
@@ -38,7 +38,7 @@
                                 </a>
                             </td>
 
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-2">
                                 <a href="#" @click.prevent="doDelete(row['id'], i)"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -68,7 +68,7 @@ export default {
         props: {
             cols: [Array, Object],
             rows: [Array, Object],
-            startIndex: Number
+            startIndex: {type:Number, default: 1}
         },
 
         data() {
@@ -95,17 +95,17 @@ export default {
 
                 // If you throw an error, the method will terminate here unless you surround it wil try/catch
                 if (ok) {
-                    this.$emit('deleteRow', {id: id, index: index});
+                    this.$emit('delete-row', {id: id, index: index});
                 } else {
                 }
             },
 
             doEdit(id, index) {
-                this.$emit('editRow', {id: id, index: index});
+                this.$emit('edit-row', {id: id, index: index});
             },
 
             doSelect(id, index) {
-                this.$emit('selectRow', {id: id, index: index});
+                this.$emit('select-row', {id: id, index: index});
             }
         }
     }
