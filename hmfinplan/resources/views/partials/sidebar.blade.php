@@ -1,6 +1,6 @@
 {{-- <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"> --}}
     <div class="fixed flex flex-col top-0 left-0 max-w-none w-auto bg-white h-full border-r">
-      <div class="flex items-center justify-around h-16 border-b">
+      <div class="flex items-center justify-center h-12 w-56 border-b">
         <img src="{{ asset('img/avatar-male.png') }}" alt="Logo" class="h-8 w-12" />
         <div class="text-blue-700 font-semibold font-serif">
             <span>{{ $customer->first_name }}&nbsp{{ $customer->last_name }}&nbsp&nbsp</span>

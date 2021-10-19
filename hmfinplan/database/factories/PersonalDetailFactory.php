@@ -37,7 +37,7 @@ class PersonalDetailFactory extends Factory
             'residential_status' => $this->faker->randomElement($array = array('Indian', 'Non Resident Indian', 'Foreign')),
             'father_name' => $this->faker->name($gender = 'male'),
             'mother_name' => $this->faker->name($gender = 'female'),
-            'pan' => $this->faker->regexify('[A-Z]{5}[1-9]{4}[A-Z]'),
+            'pan' => $this->faker->regexify('[A-Z]{5}[0-9]{4}[A-Z]'),
             'primary_email' => $this->faker->email(),
             'secondary_email' => $this->faker->companyEmail(),
             'aadhar' => $this->faker->regexify('[1-9]{4}-[0-9]{4}-[0-9]{4}'),

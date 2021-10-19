@@ -63,4 +63,20 @@ class Customer extends Model
     {
         return $this->hasMany(BankAsset::class);
     }
+
+    /**
+     * Get the fixed assets associated with the customer.
+     */
+    public function fixedAssets()
+    {
+        return $this->hasMany(FixedAsset::class);
+    }
+
+    /**
+     * Get the stocks and MF associated with the customer.
+     */
+    public function investmentAssets()
+    {
+        return $this->hasMany(InvestmentAsset::class);
+    }
 }

@@ -66,3 +66,15 @@ Route::get('/customers/{customer}/assets/bank', [App\Http\Controllers\BankAssetC
 Route::post('/customers/{customer}/assets/bank', [App\Http\Controllers\BankAssetController::class, 'store']);
 Route::patch('/customers/{customer}/assets/bank/{bank}', [App\Http\Controllers\BankAssetController::class, 'update']);
 Route::delete('/customers/{customer}/assets/bank/{bank}', [App\Http\Controllers\BankAssetController::class, 'destroy']);
+
+// fixed asset controller
+Route::get('/customers/{customer}/assets/fixedasset', [App\Http\Controllers\FixedAssetController::class, 'index'])->name('customer.fixedAsset');
+Route::post('/customers/{customer}/assets/fixedasset', [App\Http\Controllers\FixedAssetController::class, 'store']);
+Route::patch('/customers/{customer}/assets/fixedasset/{fixedAsset}', [App\Http\Controllers\FixedAssetController::class, 'update']);
+Route::delete('/customers/{customer}/assets/fixedasset/{fixedAsset}', [App\Http\Controllers\FixedAssetController::class, 'destroy']);
+
+// investment asset controller
+Route::get('/customers/{customer}/assets/investmentasset', [App\Http\Controllers\InvestmentAssetController::class, 'index'])->name('customer.investmentAsset');
+Route::post('/customers/{customer}/assets/investmentasset', [App\Http\Controllers\InvestmentAssetController::class, 'store']);
+Route::patch('/customers/{customer}/assets/investmentasset/{investmentAsset}', [App\Http\Controllers\InvestmentAssetController::class, 'update']);
+Route::delete('/customers/{customer}/assets/investmentasset/{investmentAsset}', [App\Http\Controllers\InvestmentAssetController::class, 'destroy']);

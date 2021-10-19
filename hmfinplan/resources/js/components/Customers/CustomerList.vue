@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-4">
     <simple-card title="Customer List"> 
-      <icon-button slot="title" class="pr-2 mr-5" iconType="round-plus" @click.native="addCustomer"></icon-button>
+      <icon-button slot="title" class="pr-2 mr-5" iconType="add" @click.native="addCustomer"></icon-button>
       <simple-data-table
           slot="content"
           v-bind:cols="cols" 

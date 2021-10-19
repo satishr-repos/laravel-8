@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <inline-form ref="InlineForm" title="Bank Account Details" 
+    <inline-form ref="InlineForm" title="Investment Details" 
         v-on:inlineFormSubmitted="formSubmitted" 
         v-on:inlineFormCancelled="formCancelled">
         <div slot="alerts">
@@ -11,35 +11,40 @@
 
             <div class="grid grid-cols-2 gap-3">
 
-                <form-select label="type" 
-                    :selection.sync="bank.acct_typ"
+                <form-select label="Investment Type" 
+                    :selection.sync="investment.stk_typ"
                     :options="[ 
-                        { value:'savings', text:'Savings'}, 
-                        { value:'current', text:'Current'}]">
+                        { value:'debt', text:'Debt'}, 
+                        { value:'equity', text:'Equity'}]">
                 </form-select>
 
                 <div>
-                    <label class="input-label" for="desc">Bank Details</label>
-                    <input class="input" id="desc" type="text" placeholder="title" v-model="bank.desc">
+                    <label class="input-label" for="isin">ISIN Number</label>
+                    <input class="input" id="isin" type="text" placeholder="" v-model="investment.isin_nbr">
                 </div>
                 
                 <div>
-                    <label class="input-label" for="accnbr">Account Number</label>
-                    <input class="input" id="accnbr" type="text" placeholder="" v-model="bank.acct_nbr">
+                    <label class="input-label" for="stkdesc">Stock Description</label>
+                    <input class="input" id="stkdesc" type="text" placeholder="" v-model="investment.stk_dtl">
                 </div>
             
                 <div>
-                    <label class="input-label" for="currbal">Current Balance</label>
-                    <input class="input" id="currbal" type="number" step="0.05" v-model="bank.curr_bal">
+                    <label class="input-label" for="untsheld">Units Held</label>
+                    <input class="input" id="untsheld" type="number" step="0.05" v-model="investment.units_held">
                 </div>
 
                 <div>
-                    <label class="input-label" for="intrstrate">Interest Rate</label>
-                    <input class="input" id="intrstrate" type="number" step="0.05" v-model="bank.intrst_rt">
+                    <label class="input-label" for="prchsecst">Purchase Cost</label>
+                    <input class="input" id="prchsecst" type="number" step="0.05" v-model="investment.purchse_cst">
+                </div>
+
+                <div>
+                    <label class="input-label" for="currntval">Current Value</label>
+                    <input class="input" id="currntval" type="number" step="0.05" v-model="investment.currnt_val">
                 </div>
 
                 <form-select label="Status" 
-                    :selection.sync="bank.status"
+                    :selection.sync="investment.status"
                     :options="[ 
                         { value: 1, text:'Active'}, 
                         { value: 0, text:'Inactive'} ]">
@@ -56,7 +61,7 @@
 
 export default {
 
-    name: 'BankAccountForm',
+    name: 'InvestmentAccountForm',
 
     components: {
     },
@@ -68,19 +73,20 @@ export default {
 
     data() {
         return {
-            bank: { 
-                acct_typ:'', 
-                desc:'', 
-                acct_nbr:'', 
-                curr_bal:0,
-                intrst_rt:0,
+            investment: { 
+                stk_typ:'', 
+                isin_nbr:'', 
+                stk_dtl:'', 
+                units_held:0,
+                purchse_cst:0,
+                currnt_val:0,
                 status:1 },
             errors: {},
         };
     },
 
     created() {
-        Object.assign(this.bank, this.formData);
+        Object.assign(this.investment, this.formData);
     },
 
     mounted() {
@@ -95,7 +101,7 @@ export default {
             this.$refs.spinner.show();
             if(this.formData.id < 1)
             {
-                axios.post(this.baseRoute, this.bank)
+                axios.post(this.baseRoute, this.investment)
                     .then((response) => {
                         
                         console.log('post response:', response);
@@ -114,7 +120,7 @@ export default {
                     });
             } else {
                 let route = this.baseRoute + '/' + this.formData.id;
-                axios.patch(route, this.bank)
+                axios.patch(route, this.investment)
                     .then((response) => {
                         
                         console.log('patch response:', response);

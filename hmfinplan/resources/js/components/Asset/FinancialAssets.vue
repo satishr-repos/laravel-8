@@ -33,7 +33,6 @@ export default {
         fixedRoute: String,
         investRoute: String,
         epfRoute: String,
-        otherRoute: String,
     },
 
     computed: {
@@ -43,7 +42,7 @@ export default {
     data() {
         return {
 
-            labelList: ['Bank', 'Fixed', 'Investments', 'EPF', 'Others' ],
+            labelList: ['Bank', 'Fixed', 'Investment', 'EPF' ],
             componentList: [],
             currentIndex: 0,
         };
@@ -78,12 +77,6 @@ export default {
             }
         });
         
-        this.componentList.push({ 
-            name: 'other-asset', 
-            props: {
-                route: this.otherRoute,
-            }
-        });
     },
 
     methods: {
@@ -94,8 +87,10 @@ export default {
         onAddAsset() {
             if(this.currentIndex == 0)
                 EventBus.$emit('ADD_BANK_ASSET');
-            else
-                EventBus.$emit('');
+            else if(this.currentIndex == 1)
+                EventBus.$emit('ADD_FIXED_ASSET');
+            else if(this.currentIndex == 2)
+                EventBus.$emit('ADD_INVESTMENT_ASSET');
         },
     },
 }
