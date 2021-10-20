@@ -50,7 +50,8 @@
                     <financial-assets 
                         v-bind:bank-route="{{ json_encode(route('customer.bank', $customer)) }}"
                         v-bind:fixed-route="{{ json_encode(route('customer.fixedAsset', $customer)) }}"
-                        v-bind:invest-route="{{ json_encode(route('customer.investmentAsset', $customer)) }}" >
+                        v-bind:invest-route="{{ json_encode(route('customer.investmentAsset', $customer)) }}"
+                        v-bind:retirement-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}" >
                     </financial-assets>
                 
                     @break

@@ -79,4 +79,9 @@ class Customer extends Model
     {
         return $this->hasMany(InvestmentAsset::class);
     }
+
+    public function retirementAssets()
+    {
+        return $this->hasMany(RetirementAsset::class);
+    }
 }

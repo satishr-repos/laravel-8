@@ -41,6 +41,7 @@ export default {
         BankAsset: () => import('../Asset/BankAsset.vue'),
         FixedAsset: () => import('../Asset/FixedAsset.vue'),
         InvestmentAsset: () => import('../Asset/InvestmentAsset.vue'),
+        RetirementAsset: () => import('../Asset/RetirementAsset.vue'),
     },
 
     props: {

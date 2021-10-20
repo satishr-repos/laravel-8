@@ -78,3 +78,9 @@ Route::get('/customers/{customer}/assets/investmentasset', [App\Http\Controllers
 Route::post('/customers/{customer}/assets/investmentasset', [App\Http\Controllers\InvestmentAssetController::class, 'store']);
 Route::patch('/customers/{customer}/assets/investmentasset/{investmentAsset}', [App\Http\Controllers\InvestmentAssetController::class, 'update']);
 Route::delete('/customers/{customer}/assets/investmentasset/{investmentAsset}', [App\Http\Controllers\InvestmentAssetController::class, 'destroy']);
+
+// epf controller
+Route::get('/customers/{customer}/assets/retirementasset', [App\Http\Controllers\RetirementAssetController::class, 'index'])->name('customer.retirementAsset');
+Route::post('/customers/{customer}/assets/retirementasset', [App\Http\Controllers\RetirementAssetController::class, 'store']);
+Route::patch('/customers/{customer}/assets/retirementasset/{retirementAsset}', [App\Http\Controllers\RetirementAssetController::class, 'update']);
+Route::delete('/customers/{customer}/assets/retirementasset/{retirementAsset}', [App\Http\Controllers\RetirementAssetController::class, 'destroy']);

@@ -12,6 +12,7 @@ use App\Models\RealEstate;
 use App\Models\BankAsset;
 use App\Models\FixedAsset;
 use App\Models\InvestmentAsset;
+use App\Models\RetirementAsset;
 
 class CustomersTableSeeder extends Seeder
 {
@@ -32,6 +33,7 @@ class CustomersTableSeeder extends Seeder
             ->has(BankAsset::factory()->count(3))
             ->has(FixedAsset::factory()->count(4))
             ->has(InvestmentAsset::factory()->count(4))
+            ->has(RetirementAsset::factory()->count(3))
             ->create();
     }
 }
