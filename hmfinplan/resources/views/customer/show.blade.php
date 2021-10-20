@@ -56,6 +56,10 @@
                 
                     @break
 
+                @case('liabilities')
+                    <liability v-bind:route="{{ json_encode(route('customer.liability', $customer)) }}" ></liability>
+
+                    @break
                 @default
                     
             @endswitch

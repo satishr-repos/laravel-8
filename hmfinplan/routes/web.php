@@ -84,3 +84,9 @@ Route::get('/customers/{customer}/assets/retirementasset', [App\Http\Controllers
 Route::post('/customers/{customer}/assets/retirementasset', [App\Http\Controllers\RetirementAssetController::class, 'store']);
 Route::patch('/customers/{customer}/assets/retirementasset/{retirementAsset}', [App\Http\Controllers\RetirementAssetController::class, 'update']);
 Route::delete('/customers/{customer}/assets/retirementasset/{retirementAsset}', [App\Http\Controllers\RetirementAssetController::class, 'destroy']);
+
+// liabilities controller
+Route::get('/customers/{customer}/liabilities', [App\Http\Controllers\LiabilityController::class, 'index'])->name('customer.liability');
+Route::post('/customers/{customer}/liabilities', [App\Http\Controllers\LiabilityController::class, 'store']);
+Route::patch('/customers/{customer}/liabilities/{liability}', [App\Http\Controllers\LiabilityController::class, 'update']);
+Route::delete('/customers/{customer}/liabilities/{liability}', [App\Http\Controllers\LiabilityController::class, 'destroy']);

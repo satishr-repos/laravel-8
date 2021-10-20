@@ -88,5 +88,6 @@ const app = new Vue({
         ProfessionalDetail: () => import('./components/Personal/ProfessionalDetail.vue'),
         TangibleAssets: () => import('./components/Asset/TangibleAssets.vue'),
         FinancialAssets: () => import('./components/Asset/FinancialAssets.vue'),
+        Liability: () => import('./components/Liability/Liability.vue'),
     }
 });
