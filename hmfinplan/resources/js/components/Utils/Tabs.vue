@@ -42,6 +42,7 @@ export default {
         FixedAsset: () => import('../Asset/FixedAsset.vue'),
         InvestmentAsset: () => import('../Asset/InvestmentAsset.vue'),
         RetirementAsset: () => import('../Asset/RetirementAsset.vue'),
+        LiabilityForm: () => import('../Liability/LiabilityForm.vue'),
     },
 
     props: {

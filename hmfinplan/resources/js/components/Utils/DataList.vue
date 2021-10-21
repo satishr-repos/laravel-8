@@ -30,11 +30,15 @@ export default {
 
         nonNullItems() {
 
+            // console.log("dl-items:", this.items);
             for(var name in this.items) {
+                // console.log("dl-name:", name, "type:", typeof(this.items[name]));
                 if( (this.items[name] === undefined) ||
                     (this.items[name]) === null ) {
                     delete this.items[name];
                 } else {
+                    if(typeof(this.items[name]) != 'string')
+                        this.items[name] = this.items[name].toString();
                     let item = this.items[name].replace(/(undefined|null)[\n, ' ']*/gi, "");
                     if (/\S/.test(item)) {
                         // string is not empty and not just whitespace
