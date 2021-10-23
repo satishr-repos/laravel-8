@@ -13,7 +13,11 @@ use App\Models\BankAsset;
 use App\Models\FixedAsset;
 use App\Models\InvestmentAsset;
 use App\Models\Liability;
+use App\Models\OtherIncome;
+use App\Models\PensionIncome;
+use App\Models\RentalIncome;
 use App\Models\RetirementAsset;
+use App\Models\SalaryIncome;
 
 class CustomersTableSeeder extends Seeder
 {
@@ -36,6 +40,10 @@ class CustomersTableSeeder extends Seeder
             ->has(InvestmentAsset::factory()->count(4))
             ->has(RetirementAsset::factory()->count(3))
             ->has(Liability::factory()->count(3))
+            ->has(SalaryIncome::factory()->count(2))
+            ->has(PensionIncome::factory()->count(1))
+            ->has(RentalIncome::factory()->count(2))
+            ->has(OtherIncome::factory()->count(1))
             ->create();
     }
 }

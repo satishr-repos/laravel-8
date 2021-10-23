@@ -89,4 +89,24 @@ class Customer extends Model
     {
         return $this->hasMany(Liability::class);
     }
+
+    public function salaryIncomes()
+    {
+        return $this->hasMany(SalaryIncome::class);
+    }
+    
+    public function pensionIncomes()
+    {
+        return $this->hasMany(PensionIncome::class);
+    }
+
+    public function rentalIncomes()
+    {
+        return $this->hasMany(RentalIncome::class);
+    }
+
+    public function otherIncomes()
+    {
+        return $this->hasMany(OtherIncome::class);
+    }
 }

@@ -2,7 +2,7 @@
 <div>
     <label class="input-label" :for="id">{{ this.label}}</label>
     <div class="relative inline-block w-full text-gray-700">
-        <select class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-700 shadow border rounded-lg appearance-none focus:outline-none focus:ring focus:border-blue-100" :name="name" :id="id" v-model="selected" @change="$emit('update:selection', selected)">
+        <select class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-700 shadow border rounded-lg appearance-none focus:outline-none focus:ring focus:border-blue-100" :name="name" :id="id" v-model="selected" @change="$emit('update:selection', selected)" :disabled="disable">
             <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.value">
                 {{ option.text }}
             </option>
@@ -23,6 +23,7 @@ export default {
     props: {
         label: String,
         name: String,
+        disable: Boolean,
         options: [Array, Object],
         selection: { type:[String,Number], default:'' },
     },   

@@ -60,6 +60,17 @@
                     <liability v-bind:base-route="{{ json_encode(route('customer.liability', $customer)) }}" ></liability>
 
                     @break
+                
+                @case('incomes')
+                    <income 
+                        v-bind:salary-route="{{ json_encode(route('customer.salary', $customer)) }}"
+                        v-bind:rental-route="{{ json_encode(route('customer.rental', $customer)) }}"
+                        v-bind:pension-route="{{ json_encode(route('customer.pension', $customer)) }}"
+                        v-bind:other-route="{{ json_encode(route('customer.other', $customer)) }}">
+                    </income>
+
+                    @break
+
                 @default
                     
             @endswitch
