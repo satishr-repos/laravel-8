@@ -114,3 +114,9 @@ Route::get('/customers/{customer}/otherincome', [App\Http\Controllers\OtherIncom
 Route::post('/customers/{customer}/otherincome', [App\Http\Controllers\OtherIncomeController::class, 'store']);
 Route::patch('/customers/{customer}/otherincome/{otherIncome}', [App\Http\Controllers\OtherIncomeController::class, 'update']);
 Route::delete('/customers/{customer}/otherincome/{otherIncome}', [App\Http\Controllers\OtherIncomeController::class, 'destroy']);
+
+// expense controller
+Route::get('/customers/{customer}/expenses', [App\Http\Controllers\ExpenseController::class, 'index'])->name('customer.expense');
+Route::post('/customers/{customer}/expenses', [App\Http\Controllers\ExpenseController::class, 'store']);
+Route::patch('/customers/{customer}/expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'update']);
+Route::delete('/customers/{customer}/expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'destroy']);

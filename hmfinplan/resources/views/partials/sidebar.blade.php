@@ -73,7 +73,7 @@
             </a>
           </li>
           <li>
-            <a href="#" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:shadow-md hover:border-indigo-500 pr-6">
+            <a href="{{ route('customer.expense', $customer) }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-r-4 {{ $current == 'expenses'? 'border-red-500' : 'border-transparent'}} hover:shadow-md hover:border-indigo-500 pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path>
                 </svg>

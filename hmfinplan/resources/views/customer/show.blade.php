@@ -70,6 +70,11 @@
                     </income>
 
                     @break
+                
+                @case('expenses')
+                    <expense v-bind:route="{{ json_encode(route('customer.expense', $customer)) }}">
+                    </expense>
+                    @break
 
                 @default
                     

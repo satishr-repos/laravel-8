@@ -10,6 +10,7 @@ use App\Models\PersonalItem;
 use App\Models\ProfessionalDetails;
 use App\Models\RealEstate;
 use App\Models\BankAsset;
+use App\Models\Expense;
 use App\Models\FixedAsset;
 use App\Models\InvestmentAsset;
 use App\Models\Liability;
@@ -44,6 +45,7 @@ class CustomersTableSeeder extends Seeder
             ->has(PensionIncome::factory()->count(1))
             ->has(RentalIncome::factory()->count(2))
             ->has(OtherIncome::factory()->count(1))
+            ->has(Expense::factory()->count(10))
             ->create();
     }
 }
