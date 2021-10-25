@@ -10,6 +10,11 @@ use DebugBar\DebugBar as DebugBarDebugBar;
 
 class ExpenseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     private function verify(Request $request)
     {
         $data = request()->validate([

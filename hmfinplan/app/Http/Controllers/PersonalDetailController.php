@@ -9,6 +9,11 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class PersonalDetailController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(Customer $customer)
     {
         $personalDetail = $customer->personalDetail;

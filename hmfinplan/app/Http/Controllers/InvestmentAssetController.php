@@ -9,6 +9,11 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class InvestmentAssetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     private function verify(Request $request)
     {
         $data = request()->validate([

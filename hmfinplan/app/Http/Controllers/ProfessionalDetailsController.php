@@ -10,6 +10,11 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class ProfessionalDetailsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     private function verify(Request $request)
     {
         $data = request()->validate([
