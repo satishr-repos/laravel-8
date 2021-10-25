@@ -14,7 +14,7 @@ class ProfessionalDetailsController extends Controller
     {
         $data = request()->validate([
                 'name' => 'regex:/^[a-z ]+$/i|nullable',
-                'title' => 'string|nullable',
+                'title' => 'string|required',
                 'employer' => 'string|nullable',
                 'education' => 'string|nullable',
                 'preferred_time' => 'string|nullable',

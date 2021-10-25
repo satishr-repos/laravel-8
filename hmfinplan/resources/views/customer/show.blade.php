@@ -80,6 +80,11 @@
                     <insurance v-bind:route="{{ json_encode(route('customer.insurance', $customer)) }}">
                     </insurance>
                     @break
+                
+                @case('goals')
+                    <goal v-bind:route="{{ json_encode(route('customer.goal', $customer)) }}">
+                    </goal>
+                    @break
 
                 @default
                     

@@ -92,28 +92,28 @@ Route::patch('/customers/{customer}/liabilities/{liability}', [App\Http\Controll
 Route::delete('/customers/{customer}/liabilities/{liability}', [App\Http\Controllers\LiabilityController::class, 'destroy']);
 
 // Salary Income controller
-Route::get('/customers/{customer}/salaryincome', [App\Http\Controllers\SalaryIncomeController::class, 'index'])->name('customer.salary');
-Route::post('/customers/{customer}/salaryincome', [App\Http\Controllers\SalaryIncomeController::class, 'store']);
-Route::patch('/customers/{customer}/salaryincome/{salaryIncome}', [App\Http\Controllers\SalaryIncomeController::class, 'update']);
-Route::delete('/customers/{customer}/salaryincome/{salaryIncome}', [App\Http\Controllers\SalaryIncomeController::class, 'destroy']);
+Route::get('/customers/{customer}/salaryincomes', [App\Http\Controllers\SalaryIncomeController::class, 'index'])->name('customer.salary');
+Route::post('/customers/{customer}/salaryincomes', [App\Http\Controllers\SalaryIncomeController::class, 'store']);
+Route::patch('/customers/{customer}/salaryincomes/{salaryIncome}', [App\Http\Controllers\SalaryIncomeController::class, 'update']);
+Route::delete('/customers/{customer}/salaryincomes/{salaryIncome}', [App\Http\Controllers\SalaryIncomeController::class, 'destroy']);
 
 // Pension income controller
-Route::get('/customers/{customer}/pensionincome', [App\Http\Controllers\PensionIncomeController::class, 'index'])->name('customer.pension');
-Route::post('/customers/{customer}/pensionincome', [App\Http\Controllers\PensionIncomeController::class, 'store']);
-Route::patch('/customers/{customer}/pensionincome/{pensionIncome}', [App\Http\Controllers\PensionIncomeController::class, 'update']);
-Route::delete('/customers/{customer}/pensionincome/{pensionIncome}', [App\Http\Controllers\PensionIncomeController::class, 'destroy']);
+Route::get('/customers/{customer}/pensionincomes', [App\Http\Controllers\PensionIncomeController::class, 'index'])->name('customer.pension');
+Route::post('/customers/{customer}/pensionincomes', [App\Http\Controllers\PensionIncomeController::class, 'store']);
+Route::patch('/customers/{customer}/pensionincomes/{pensionIncome}', [App\Http\Controllers\PensionIncomeController::class, 'update']);
+Route::delete('/customers/{customer}/pensionincomes/{pensionIncome}', [App\Http\Controllers\PensionIncomeController::class, 'destroy']);
 
 // Rental income controller
-Route::get('/customers/{customer}/rentalincome', [App\Http\Controllers\RentalIncomeController::class, 'index'])->name('customer.rental');
-Route::post('/customers/{customer}/rentalincome', [App\Http\Controllers\RentalIncomeController::class, 'store']);
-Route::patch('/customers/{customer}/rentalincome/{rentalIncome}', [App\Http\Controllers\RentalIncomeController::class, 'update']);
-Route::delete('/customers/{customer}/rentalincome/{rentalIncome}', [App\Http\Controllers\RentalIncomeController::class, 'destroy']);
+Route::get('/customers/{customer}/rentalincomes', [App\Http\Controllers\RentalIncomeController::class, 'index'])->name('customer.rental');
+Route::post('/customers/{customer}/rentalincomes', [App\Http\Controllers\RentalIncomeController::class, 'store']);
+Route::patch('/customers/{customer}/rentalincomes/{rentalIncome}', [App\Http\Controllers\RentalIncomeController::class, 'update']);
+Route::delete('/customers/{customer}/rentalincomes/{rentalIncome}', [App\Http\Controllers\RentalIncomeController::class, 'destroy']);
 
 // Other income controller
-Route::get('/customers/{customer}/otherincome', [App\Http\Controllers\OtherIncomeController::class, 'index'])->name('customer.other');
-Route::post('/customers/{customer}/otherincome', [App\Http\Controllers\OtherIncomeController::class, 'store']);
-Route::patch('/customers/{customer}/otherincome/{otherIncome}', [App\Http\Controllers\OtherIncomeController::class, 'update']);
-Route::delete('/customers/{customer}/otherincome/{otherIncome}', [App\Http\Controllers\OtherIncomeController::class, 'destroy']);
+Route::get('/customers/{customer}/otherincomes', [App\Http\Controllers\OtherIncomeController::class, 'index'])->name('customer.other');
+Route::post('/customers/{customer}/otherincomes', [App\Http\Controllers\OtherIncomeController::class, 'store']);
+Route::patch('/customers/{customer}/otherincomes/{otherIncome}', [App\Http\Controllers\OtherIncomeController::class, 'update']);
+Route::delete('/customers/{customer}/otherincomes/{otherIncome}', [App\Http\Controllers\OtherIncomeController::class, 'destroy']);
 
 // expense controller
 Route::get('/customers/{customer}/expenses', [App\Http\Controllers\ExpenseController::class, 'index'])->name('customer.expense');
@@ -121,8 +121,14 @@ Route::post('/customers/{customer}/expenses', [App\Http\Controllers\ExpenseContr
 Route::patch('/customers/{customer}/expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'update']);
 Route::delete('/customers/{customer}/expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'destroy']);
 
-// expense controller
+// insurance controller
 Route::get('/customers/{customer}/insurances', [App\Http\Controllers\InsuranceController::class, 'index'])->name('customer.insurance');
 Route::post('/customers/{customer}/insurances', [App\Http\Controllers\InsuranceController::class, 'store']);
 Route::patch('/customers/{customer}/insurances/{insurance}', [App\Http\Controllers\InsuranceController::class, 'update']);
 Route::delete('/customers/{customer}/insurances/{insurance}', [App\Http\Controllers\InsuranceController::class, 'destroy']);
+
+// goal controller
+Route::get('/customers/{customer}/goals', [App\Http\Controllers\GoalController::class, 'index'])->name('customer.goal');
+Route::post('/customers/{customer}/goals', [App\Http\Controllers\GoalController::class, 'store']);
+Route::patch('/customers/{customer}/goals/{goal}', [App\Http\Controllers\GoalController::class, 'update']);
+Route::delete('/customers/{customer}/goals/{goal}', [App\Http\Controllers\GoalController::class, 'destroy']);

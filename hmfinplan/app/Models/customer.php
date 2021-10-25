@@ -119,4 +119,9 @@ class Customer extends Model
     {
         return $this->hasMany(Insurance::class);
     }
+    
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
 }

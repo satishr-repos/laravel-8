@@ -1,13 +1,13 @@
 <template>
 <div class="container">
-    <simple-card title="Insurance Details">
+    <simple-card title="Needs and Goals">
         <div slot="title">
-            <icon-button class="mr-1" iconType="edit" @click.native="editInsurance"></icon-button>
-            <icon-button class="mr-5" iconType="delete" @click.native="deleteInsurance"></icon-button>
+            <icon-button class="mr-1" iconType="edit" @click.prevent.native="editGoal"></icon-button>
+            <icon-button class="mr-5" iconType="delete" @click.prevent.native="deleteGoal"></icon-button>
         </div>
         <div slot="content">
-            <tabs   text-color="text-purple-500"
-                    bg-color="bg-purple-500"
+            <tabs   text-color="text-light-blue-500"
+                    bg-color="bg-light-blue-500"
                     v-bind:labels="labelList" 
                     v-bind:current="currentIndex" 
                     v-bind:component-list="componentList" 
@@ -24,7 +24,7 @@
 
 export default {
 
-    name: 'Insurance',
+    name: 'Goal',
 
     components: {
     },
@@ -39,8 +39,6 @@ export default {
 
     data() {
         return {
-
-            insuranceList: [],
             labelList: [],
             componentList: [],
             currentIndex: 0
@@ -48,29 +46,29 @@ export default {
     },
 
     created() {
-        this.getInsurances();
     },
-    
+   
+    mounted() {
+        this.getGoals();
+    },
+   
     methods: {
 
-        initData(insurance){
+         initData(goal){
 
             var data = {};
 
-            data['Policy Type'] = insurance.polcy_typ;
-            data['Insurance Provider'] = insurance.insurnce_cmpny;
-            data['Policy Name'] = insurance.polcy_name;
-            data['Policy Number'] = insurance.polcy_nbr;
-            data['Policy Start Date'] = insurance.polcy_start_dt;
-            data['Policy End Date'] = insurance.polcy_end_dt;
-            data['Sum Insured'] = insurance.sum_insurd;
-            data['Annual Premium'] = insurance.annul_prmium;
-            data['Premium Mode'] = insurance.prmium_mode;
+            data['Goal Type'] = goal.goal_typ;
+            data['Goal Description'] = goal.goal_desc;
+            data['Current Savings'] = goal.current_saving;
+            data['Goal Start Date'] = goal.goal_start_dt;
+            data['Goal Target Date'] = goal.goal_target_dt;
+            data['Goal Priority'] = goal.goal_pri;
 
             return data;
         },
 
-        getInsurances(){
+        getGoals(){
 
             this.$refs.spinner.show();
             axios.get(this.route, {
@@ -80,18 +78,17 @@ export default {
             })
             .then((response) => {
 
-                let insurance = response.data.insurance;
+                let goal = response.data.goal;
+                console.log('getGoalDetails:', goal);
 
-                // console.log('getFamilyDetail:', family);
+                for(var i=0; i < goal.length; i++) {
 
-                for(var i=0; i < insurance.length; i++) {
-
-                    var data = this.initData(insurance[i]);
+                    var data = this.initData(goal[i]);
 
                     // store database id as part of the component
-                    var comp = { name: 'data-list', props: {items: data}, db: insurance[i] };
+                    var comp = { name: 'data-list', props: {items: data}, db: goal[i] };
 
-                    var label = (insurance[i].polcy_typ == null)? 'Type' : insurance[i].polcy_typ;
+                    var label = goal[i].goal_typ;
 
                     this.labelList.push(label);           
                     this.componentList.push(comp);
@@ -99,6 +96,7 @@ export default {
 
                 this.labelList.push('ADD');
                 this.$refs.spinner.close();
+
             })
             .catch((error) => {
                 if (error.response.status == 422) {
@@ -114,51 +112,54 @@ export default {
 
             if (labelIndex == (this.labelList.length - 1))
             {
-                var insurance = { id: -1 };
-                var comp = { name: 'insurance-form',
-                                props: {baseRoute: this.route, formData: insurance},
+                var goal = { id: -1 };
+                var comp = { name: 'goal-form',
+                                props: {baseRoute: this.route, formData: goal},
                                 events: {'form-closed' : this.formClosed } };
                 this.componentList.push(comp);
 
-                this.labelList.splice(labelIndex, 0, 'Type'); 
+                this.labelList.splice(labelIndex, 0, 'new');
             }
             
             this.currentIndex = labelIndex;
         },
 
-        editInsurance() {
+        editGoal() {
             if ((this.currentIndex < this.labelList.length - 1) &&
                 this.componentList.length > this.currentIndex)
             {
-                let insurance = this.componentList[this.currentIndex].db;
-                let data = _.pick(insurance, ['id', 'polcy_typ', 'insurnce_cmpny', 'polcy_name', 'polcy_nbr', 'polcy_start_dt', 'polcy_end_dt', 'sum_insurd', 'annul_prmium', 'prmium_mode']);
-                var comp = { name: 'insurance-form', 
+                let goal = this.componentList[this.currentIndex].db;
+                let data = _.pick(goal, ['id', 'goal_typ', 'goal_desc', 'current_saving', 'goal_start_dt','goal_target_dt', 'goal_pri']);
+                var comp = { name: 'goal-form', 
                                 props: {baseRoute: this.route, formData: data},
                                 events: {'form-closed' : this.formClosed } };
-                // console.log(data);
+                console.log("goal:", data);
 
                 this.componentList.splice(this.currentIndex, 1, comp);
             }            
         },
 
         formClosed(response) {
-            var insurance = response;
-            var data = this.initData(insurance);
+            var goal = response;
 
-            var comp = { name: 'data-list', props: {items: data}, db: insurance };
-            var label = (insurance.polcy_typ == null)? 'Type' : insurance.polcy_typ;
+            console.log("gl:form closed", goal);
+
+            var data = this.initData(goal);
+
+            var comp = { name: 'data-list', props: {items: data}, db: goal };
+            var label = goal.goal_typ? goal.goal_typ : 'New';
 
             this.componentList.splice(this.currentIndex, 1, comp);
             this.labelList.splice(this.currentIndex, 1,  label);
         },
 
-        async deleteInsurance() {
+        async deleteGoal() {
 
             if(this.labelList.length <= 1)
                 return; // nothing to delete
 
             const ok = await this.$refs.confirmDialogue.show({
-                title: 'Delete Insurance Details?',
+                title: 'Delete Goal?',
                 message: 'Are you sure you want to delete? It cannot be undone.',
                 okButton: 'Delete',
             });
@@ -166,13 +167,13 @@ export default {
             if (ok)
             {
                 let id = this.componentList[this.currentIndex].db.id;
-                if(id != null)
+                if(id != null && id >= 0)
                 {
                     let route = this.route + '/' + id;
                     axios.delete(route)
                         .then((response) => {
                           
-                            // console.log('delete response:', response);
+                            console.log('delete response:', response);
                         })
                         .catch((error) => {
                             if (error.response.status == 422) {

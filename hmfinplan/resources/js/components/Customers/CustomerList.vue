@@ -143,7 +143,7 @@ export default {
       },
       
       selectCustomer({id, index}) {
-          let route = this.baseRoute + '/' + id + '/dashboard';
+          let route = this.baseRoute + '/' + id + '/personal';
 
           window.location.href = route;
       }
