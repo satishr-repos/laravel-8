@@ -23,7 +23,7 @@ export default {
     props: {
         label: String,
         name: String,
-        disable: Boolean,
+        disable: {type:Boolean, default:false},
         options: [Array, Object],
         selection: { type:[String,Number], default:'' },
     },   

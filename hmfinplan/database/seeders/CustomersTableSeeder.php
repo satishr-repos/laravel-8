@@ -12,6 +12,7 @@ use App\Models\RealEstate;
 use App\Models\BankAsset;
 use App\Models\Expense;
 use App\Models\FixedAsset;
+use App\Models\Insurance;
 use App\Models\InvestmentAsset;
 use App\Models\Liability;
 use App\Models\OtherIncome;
@@ -46,6 +47,7 @@ class CustomersTableSeeder extends Seeder
             ->has(RentalIncome::factory()->count(2))
             ->has(OtherIncome::factory()->count(1))
             ->has(Expense::factory()->count(10))
+            ->has(Insurance::factory()->count(7))
             ->create();
     }
 }

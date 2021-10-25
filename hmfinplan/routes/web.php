@@ -120,3 +120,9 @@ Route::get('/customers/{customer}/expenses', [App\Http\Controllers\ExpenseContro
 Route::post('/customers/{customer}/expenses', [App\Http\Controllers\ExpenseController::class, 'store']);
 Route::patch('/customers/{customer}/expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'update']);
 Route::delete('/customers/{customer}/expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'destroy']);
+
+// expense controller
+Route::get('/customers/{customer}/insurances', [App\Http\Controllers\InsuranceController::class, 'index'])->name('customer.insurance');
+Route::post('/customers/{customer}/insurances', [App\Http\Controllers\InsuranceController::class, 'store']);
+Route::patch('/customers/{customer}/insurances/{insurance}', [App\Http\Controllers\InsuranceController::class, 'update']);
+Route::delete('/customers/{customer}/insurances/{insurance}', [App\Http\Controllers\InsuranceController::class, 'destroy']);

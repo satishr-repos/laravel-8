@@ -91,5 +91,6 @@ const app = new Vue({
         Liability: () => import('./components/Liability/Liability.vue'),
         Income: () => import('./components/Income/Income.vue'),
         Expense: () => import('./components/Expense/Expense.vue'),
+        Insurance: () => import('./components/Insurance/Insurance.vue'),
     }
 });

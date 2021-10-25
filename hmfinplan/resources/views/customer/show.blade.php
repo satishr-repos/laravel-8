@@ -76,6 +76,11 @@
                     </expense>
                     @break
 
+                @case('insurances')
+                    <insurance v-bind:route="{{ json_encode(route('customer.insurance', $customer)) }}">
+                    </insurance>
+                    @break
+
                 @default
                     
             @endswitch
