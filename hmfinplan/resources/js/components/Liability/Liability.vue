@@ -138,8 +138,18 @@ export default {
 
         formClosed(response) {
             var liability = response;
-            var data = this.initData(liability);
+            
+            if(liability.id == -1) // form cancelled
+            {
+                this.$delete(this.labelList, this.currentIndex);
+                this.$delete(this.componentList, this.currentIndex);
+                if(this.currentIndex > 0)
+                    this.currentIndex--;
 
+                return;
+            }
+
+            var data = this.initData(liability);
             var comp = { name: 'data-list', props: {items: data}, db: liability };
             var label = (liability.loan_typ == null)? 'loan' : liability.loan_typ;
 

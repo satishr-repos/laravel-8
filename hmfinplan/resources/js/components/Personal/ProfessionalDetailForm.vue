@@ -11,7 +11,7 @@
 
             <div class="grid grid-cols-2 gap-3">
 
-                <form-select label="Name" 
+                <form-select label="Family Member Name" 
                     :selection.sync="profession.name"
                     :options="namesObj">
                 </form-select>

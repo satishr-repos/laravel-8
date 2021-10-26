@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use App\Models\FamilyMember;
 use App\Models\ProfessionalDetails;
 use Barryvdh\Debugbar\Facade as Debugbar;
 

@@ -19,7 +19,7 @@ class FamilyMemberController extends Controller
         $data = request()->validate([
                 'first_name' => 'alpha|nullable',
                 'last_name' => 'alpha|nullable',
-                'relation' => 'alpha|nullable',
+                'relation' => 'alpha|required',
                 'dob' => 'date|nullable',
                 'pan' => ['regex:/[A-Za-z]{5}[0-9]{4}[A-Za-z]/u', 'nullable'],
             ]);

@@ -137,6 +137,15 @@ export default {
             var family = response;
             var data = this.initData(family);
 
+            if(family.id == -1) // form cancelled
+            {
+                this.$delete(this.labelList, this.currentIndex);
+                this.$delete(this.componentList, this.currentIndex);
+                if(this.currentIndex > 0)
+                    this.currentIndex--;
+
+                return;
+            }
             var comp = { name: 'data-list', props: {items: data}, db: family };
             var label = (family.relation == null)? 'member' : family.relation;
 

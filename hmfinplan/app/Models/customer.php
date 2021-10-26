@@ -124,4 +124,9 @@ class Customer extends Model
     {
         return $this->hasMany(Goal::class);
     }
+
+    public function riskTolerances()
+    {
+        return $this->hasMany(RiskTolerance::class);
+    }
 }

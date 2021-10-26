@@ -7,8 +7,6 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class HomeController extends Controller
 {
-    private $debugbar;
-
     /**
      * Create a new controller instance.
      *
@@ -30,22 +28,22 @@ class HomeController extends Controller
         return view('home');
     }
     
-    public function debug()
-    {
-        Debugbar::info('Toggle Debug', $this->debugbar);
-        if($this->debugbar == true)
-        {
-            $this->debugbar = false;
-            Debugbar::disable();
-        }
-        else
-        {
-            $this->debugbar = true;
-            DebugBar::enable();
-        }
+    // public function debug()
+    // {
+    //     Debugbar::info('Toggle Debug', $this->debugbar);
+    //     if($this->debugbar == true)
+    //     {
+    //         $this->debugbar = false;
+    //         Debugbar::disable();
+    //     }
+    //     else
+    //     {
+    //         $this->debugbar = true;
+    //         DebugBar::enable();
+    //     }
 
-        $msg = ($this->debugbar == true) ? 'true' : 'false';
+    //     $msg = ($this->debugbar == true) ? 'true' : 'false';
 
-        return redirect()->back()->with('msg' , $msg);
-    }
+    //     return redirect()->back()->with('msg' , $msg);
+    // }
 }

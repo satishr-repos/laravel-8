@@ -59,7 +59,7 @@ export default {
 
             var data = {};
 
-            data['Name'] = profession.name;
+            data['Family Member Name'] = profession.name;
             data['Job Title'] = profession.title;
             data['Company'] = profession.employer;
             data['Educational Qualification'] = profession.education;
@@ -156,6 +156,15 @@ export default {
             var profession = response;
 
             console.log("pd:form closed", profession);
+            if(profession.id == -1) // form cancelled
+            {
+                this.$delete(this.labelList, this.currentIndex);
+                this.$delete(this.componentList, this.currentIndex);
+                if(this.currentIndex > 0)
+                    this.currentIndex--;
+
+                return;
+            }
 
             if(profession.preferred_time != null && typeof(profession.preferred_time) == 'object')
                 profession.preferred_time = profession.preferred_time.toString();

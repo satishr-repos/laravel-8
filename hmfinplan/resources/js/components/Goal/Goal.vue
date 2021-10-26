@@ -143,6 +143,15 @@ export default {
             var goal = response;
 
             console.log("gl:form closed", goal);
+            if(goal.id == -1) // form cancelled
+            {
+                this.$delete(this.labelList, this.currentIndex);
+                this.$delete(this.componentList, this.currentIndex);
+                if(this.currentIndex > 0)
+                    this.currentIndex--;
+
+                return;
+            }
 
             var data = this.initData(goal);
 

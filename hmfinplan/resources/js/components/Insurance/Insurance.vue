@@ -143,6 +143,17 @@ export default {
 
         formClosed(response) {
             var insurance = response;
+
+            if(insurance.id == -1) // form cancelled
+            {
+                this.$delete(this.labelList, this.currentIndex);
+                this.$delete(this.componentList, this.currentIndex);
+                if(this.currentIndex > 0)
+                    this.currentIndex--;
+
+                return;
+            }
+
             var data = this.initData(insurance);
 
             var comp = { name: 'data-list', props: {items: data}, db: insurance };
