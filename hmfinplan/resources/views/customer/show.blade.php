@@ -85,6 +85,11 @@
                     <goal v-bind:route="{{ json_encode(route('customer.goal', $customer)) }}">
                     </goal>
                     @break
+                
+                @case('risks')
+                    <risk-tolerance v-bind:route="{{ json_encode(route('customer.risk', $customer)) }}">
+                    </risk-tolerance>
+                    @break
 
                 @default
                     

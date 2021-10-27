@@ -18,4 +18,14 @@ class RiskTolerance extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function survey()
+    {
+        return $this->belongsTo(RiskAssessQuestion::class, 'question_id');
+    }
+    
+    public function response()
+    {
+        return $this->belongsTo(RiskAssessAnswer::class, 'answer_id');
+    }
 }

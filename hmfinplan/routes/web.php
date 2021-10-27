@@ -132,3 +132,9 @@ Route::get('/customers/{customer}/goals', [App\Http\Controllers\GoalController::
 Route::post('/customers/{customer}/goals', [App\Http\Controllers\GoalController::class, 'store']);
 Route::patch('/customers/{customer}/goals/{goal}', [App\Http\Controllers\GoalController::class, 'update']);
 Route::delete('/customers/{customer}/goals/{goal}', [App\Http\Controllers\GoalController::class, 'destroy']);
+
+// risk controller
+Route::get('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'index'])->name('customer.risk');
+Route::post('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'store']);
+Route::patch('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'update']);
+Route::delete('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'destroy']);

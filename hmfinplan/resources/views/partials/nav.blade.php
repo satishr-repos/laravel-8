@@ -1,7 +1,7 @@
 <nav class="py-1 h-16 bg-white border-b border-gray-100 flex justify-evenly items-center">
 
     {{-- Navbar brand --}}
-    <div class="ml-5 uppercase font-merriweather">
+    <div class="ml-0 uppercase font-merriweather">
         {{-- <a href="#" class="flex items-center py-4 px-2"> --}}
         <a class="transform flex items-center py-4 px-2 hover:scale-110" href=" {{ url('/') }}">
             <img src="{{ asset('img/logo.png') }}" alt="Logo" class="h-8 w-12 mr-2 " />

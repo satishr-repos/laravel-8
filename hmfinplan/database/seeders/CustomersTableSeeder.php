@@ -20,6 +20,7 @@ use App\Models\OtherIncome;
 use App\Models\PensionIncome;
 use App\Models\RentalIncome;
 use App\Models\RetirementAsset;
+use App\Models\RiskTolerance;
 use App\Models\SalaryIncome;
 
 class CustomersTableSeeder extends Seeder
@@ -48,8 +49,9 @@ class CustomersTableSeeder extends Seeder
             ->has(RentalIncome::factory()->count(2))
             ->has(OtherIncome::factory()->count(1))
             ->has(Expense::factory()->count(10))
-            ->has(Insurance::factory()->count(7))
+            ->has(Insurance::factory()->count(5))
             ->has(Goal::factory()->count(5))
+            ->has(RiskTolerance::factory()->count(10))
             ->create();
     }
 }

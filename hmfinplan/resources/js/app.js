@@ -76,6 +76,7 @@ Vue.component('confirm-dialogue', () => import('./components/Utils/ConfirmDialog
 Vue.component('pagination', () => import('./components/Utils/Pagination.vue'));
 Vue.component('tabs', () => import('./components/Utils/Tabs.vue'));
 Vue.component('multi-select', () => import('./components/Utils/MultiSelect.vue'));
+Vue.component('multi-data-list', () => import('./components/Utils/MultiDataList.vue'));
 
 const app = new Vue({
     el: '#app',
@@ -93,5 +94,6 @@ const app = new Vue({
         Expense: () => import('./components/Expense/Expense.vue'),
         Insurance: () => import('./components/Insurance/Insurance.vue'),
         Goal: () => import('./components/Goal/Goal.vue'),
+        RiskTolerance: () => import('./components/Risk/RiskTolerance.vue'),
     }
 });

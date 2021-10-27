@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-wrap">
     <div class="w-full">
-      <ul class="flex mb-0 ml-2 list-none flex-wrap pt-3 pb-2 flex-row">
+      <ul class="flex mb-0 ml-2 list-none flex-wrap content-between pt-3 pb-2 flex-row">
         <li class="-mb-px mr-2 last:mr-0 flex-auto text-center cursor-default" v-for="(label, index) in labels" :key="'A'+index">
-          <a class="text-xs font-bold uppercase px-3 py-3 shadow-lg rounded leading-normal flex items-center" v-on:click="toggleTabs(index)" v-bind:class="[ (current !== index)? passiveText : activeText,  (current !== index)? passiveColor : activeColor ]">
+          <a class="text-xs font-bold uppercase px-3 py-3 mb-3 shadow-lg rounded leading-normal flex items-center" v-on:click="toggleTabs(index)" v-bind:class="[ (current !== index)? passiveText : activeText,  (current !== index)? passiveColor : activeColor ]">
             <span v-if="label == 'ADD'" class="mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z" />
@@ -44,7 +44,7 @@ export default {
         RetirementAsset: () => import('../Asset/RetirementAsset.vue'),
         LiabilityForm: () => import('../Liability/LiabilityForm.vue'),
         InsuranceForm: () => import('../Insurance/InsuranceForm.vue'),
-        GoalForm: () => import('../Goal/GoalForm.vue'),
+        GoalForm: () => import('../Goal/GoalForm'),
     },
 
     props: {
