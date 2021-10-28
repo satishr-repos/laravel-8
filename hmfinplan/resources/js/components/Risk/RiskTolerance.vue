@@ -31,7 +31,6 @@ export default {
 
     data() {
         return {
-            data: [],
             errors: {},
             comp: { name:'', props:{}},
         };
@@ -43,8 +42,6 @@ export default {
   
     mounted() {
         this.getRiskTolerance();
-        this.comp.name = 'multi-data-list';
-        this.comp.props = {items: this.data};
     },
   
     methods: {
@@ -65,7 +62,11 @@ export default {
 
                 console.log('getRisk:', risks);
 
-                this.initData(risks);
+                var data = this.initData(risks);
+                var comp = {name: 'multi-data-list', 
+                            props: {items: data}};
+
+                Object.assign(this.comp, comp);
 
                 this.$refs.spinner.close();
             })
@@ -78,7 +79,8 @@ export default {
 
         initData(risks) {
 
-            this.data.splice(0);
+            var data = [];
+
             risks.forEach(risk => {
                 var obj = {};
 
@@ -86,9 +88,10 @@ export default {
                 obj['key2'] = risk.survey.question;
                 obj['key3'] = risk.response.choice;
 
-                this.data.push(obj);
+                data.push(obj);
             });
 
+            return data;
         },
 
         editRiskTolerance() {
@@ -124,17 +127,16 @@ export default {
         },
 
         formClosed(response){
-            let comp = {};
-
             console.log("risk-formclosed", response);
 
             if(response)
-                this.initData(response);
-            else 
-                this.initData(this.riskTolerance);
+                this.riskTolerance = response;
 
-            comp.name = 'multi-data-list';
-            comp.props = {items: this.data};
+            var data = this.initData(this.riskTolerance);
+
+            var comp = {name: 'multi-data-list', 
+                        props: {items: data}};
+
             Object.assign(this.comp, comp);
         },
 
@@ -149,8 +151,10 @@ export default {
             if (ok) {
                 axios.delete(this.route)
                 .then((response) => {
-                    this.data.splice(0);
                     this.riskTolerance = null;
+                    var comp = {name: 'multi-data-list', 
+                        props: {items: []}};
+                    Object.assign(this.comp, comp);
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
