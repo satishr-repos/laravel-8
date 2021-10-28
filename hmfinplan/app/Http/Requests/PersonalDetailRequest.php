@@ -33,7 +33,7 @@ class PersonalDetailRequest extends FormRequest
         return [
             'address_1' => ['regex:/^[a-z\d\-_\s]+$/i', 'required_with:address_2', 'nullable'],
             'address_2' => ['regex:/^[a-z\d\-_\s]+$/i', 'nullable'],
-            'pincode' => ['alpha_dash', 'nullable'],
+            'pincode' => ['regex:/^[0-9-]+$/i', 'nullable'],
             'pan' => ['regex:/[A-Za-z]{5}[0-9]{4}[A-Za-z]/u', 'nullable'],
             'primary_email' => ['email', 'required_with:secondary_email', 'nullable'],
             'secondary_email' => ['email', 'nullable'],

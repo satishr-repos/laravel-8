@@ -48,9 +48,9 @@ class PersonalDetailController extends Controller
         $validated = $request->validated();
         $others = $request->except($validated);
         $data = array_merge($validated, $others);
-        $personalDetail = $personal->update($data);
+        $personal->update($data);
 
-        return $personalDetail;
+        return $personal;
     }
     
     public function destroy(Customer $customer, PersonalDetail $personal)
