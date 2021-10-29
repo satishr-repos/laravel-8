@@ -21,6 +21,7 @@ class InsuranceController extends Controller
                 'insurnce_cmpny' => 'string|nullable',
                 'polcy_name' => 'string|nullable',
                 'polcy_nbr' => 'alpha_num|nullable',
+                'insuree_name' => 'regex:/^[a-z ]+$/i|nullable',
                 'polcy_start_dt' => 'date|nullable',
                 'polcy_end_dt' => 'date|nullable',
                 'sum_insurd' => 'numeric|nullable',
@@ -36,8 +37,15 @@ class InsuranceController extends Controller
     {
         $insurance = $customer->insurances;
 
+        $familyMembers = array($customer->first_name . ' ' . $customer->last_name);
+
+        foreach($customer->familyMembers as $family)
+        {
+            array_push($familyMembers, $family->first_name . ' ' . $family->last_name);
+        }
+
         if(request()->query('json')){
-            return response()->json(compact('insurance'), 200);
+            return response()->json(compact('insurance', 'familyMembers'), 200);
         }
 
         $current = 'insurances';

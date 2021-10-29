@@ -26,6 +26,7 @@ class InsuranceFactory extends Factory
             'insurnce_cmpny' => $this->faker->company(),
             'polcy_name' => $this->faker->sentence(),
             'polcy_nbr' => $this->faker->swiftBicNumber(),
+            'insuree_name' => $this->faker->name(),
             'polcy_start_dt' => $this->faker->dateTimeBetween('-10 years'),
             'polcy_end_dt' => $this->faker->dateTimeBetween('+5 years', '+20 years'),
             'sum_insurd' => $this->faker->randomFloat(2, 100000, 9000000),

@@ -21,6 +21,7 @@ class CreateInsurancesTable extends Migration
             $table->string('insurnce_cmpny', 150)->nullable();
             $table->string('polcy_name', 255)->nullable();
             $table->string('polcy_nbr', 50)->nullable();
+            $table->string('insuree_name', 100)->nullable();
             $table->date('polcy_start_dt')->nullable();
             $table->date('polcy_end_dt')->nullable();
             $table->decimal('sum_insurd', 18, 2)->nullable();

@@ -108,6 +108,7 @@ export default {
             var data = {};
 
             data['Gross Salary(Annual)'] = salary.gross_salry;
+            data['Deductions'] = salary.gross_salry - salary.net_salry;
             data['Net Salary(Annual)'] = salary.net_salry;
             data['Expected Growth Rate(%)'] = salary.grwth_rt;
 

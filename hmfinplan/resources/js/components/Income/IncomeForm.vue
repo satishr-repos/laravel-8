@@ -24,6 +24,11 @@
                     <label class="input-label" for="gross">Gross Salary</label>
                     <input class="input" id="gross" type="number" step="100" v-model="salary.gross_salry">
                 </div>
+                
+                <div>
+                    <label class="input-label" for="deduct">Deductions</label>
+                    <input class="input" id="deduct" type="number" step="100" v-model="computeSalary">
+                </div>
 
                 <div>
                     <label class="input-label" for="nets">Net Salary</label>
@@ -131,8 +136,20 @@ export default {
             other: { id:0, inc_typ:'', inc_desc:'', annul_inc:0, inc_tx_rt:0, grwth_rt:0},
             errors: {},
             incomeType:'Salary',
-            title:''
+            deductions:0,
+            title:'',
         };
+    },
+    
+    computed: {
+      computeSalary: {
+          get: function () {
+              return this.salary.gross_salry - this.salary.net_salry;
+          },
+          set: function (newValue) {
+              this.salary.net_salry = this.salary.gross_salry - newValue;
+          }
+        },
     },
 
     created() {

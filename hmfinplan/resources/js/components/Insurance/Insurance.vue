@@ -47,6 +47,10 @@ export default {
         };
     },
 
+    created() {
+        this.familyMembers = [];
+    },
+
     mounted() {
         this.getInsurances();
     },
@@ -61,6 +65,7 @@ export default {
             data['Insurance Provider'] = insurance.insurnce_cmpny;
             data['Policy Name'] = insurance.polcy_name;
             data['Policy Number'] = insurance.polcy_nbr;
+            data['Insuree Name'] = insurance.insuree_name;
             data['Policy Start Date'] = insurance.polcy_start_dt;
             data['Policy End Date'] = insurance.polcy_end_dt;
             data['Sum Insured'] = insurance.sum_insurd;
@@ -81,8 +86,11 @@ export default {
             .then((response) => {
 
                 let insurance = response.data.insurance;
+                let family = response.data.familyMembers;
 
-                // console.log('getFamilyDetail:', family);
+                console.log('getInsurances:', family);
+
+                this.familyMembers = family;
 
                 for(var i=0; i < insurance.length; i++) {
 
@@ -116,7 +124,7 @@ export default {
             {
                 var insurance = { id: -1 };
                 var comp = { name: 'insurance-form',
-                                props: {baseRoute: this.route, formData: insurance},
+                                props: {baseRoute: this.route, formData: insurance, family: this.familyMembers},
                                 events: {'form-closed' : this.formClosed } };
                 this.componentList.push(comp);
 
@@ -131,9 +139,9 @@ export default {
                 this.componentList.length > this.currentIndex)
             {
                 let insurance = this.componentList[this.currentIndex].db;
-                let data = _.pick(insurance, ['id', 'polcy_typ', 'insurnce_cmpny', 'polcy_name', 'polcy_nbr', 'polcy_start_dt', 'polcy_end_dt', 'sum_insurd', 'annul_prmium', 'prmium_mode']);
+                let data = _.pick(insurance, ['id', 'polcy_typ', 'insurnce_cmpny', 'polcy_name', 'polcy_nbr', 'insuree_name', 'polcy_start_dt', 'polcy_end_dt', 'sum_insurd', 'annul_prmium', 'prmium_mode']);
                 var comp = { name: 'insurance-form', 
-                                props: {baseRoute: this.route, formData: data},
+                                props: {baseRoute: this.route, formData: data, family: this.familyMembers},
                                 events: {'form-closed' : this.formClosed } };
                 // console.log(data);
 

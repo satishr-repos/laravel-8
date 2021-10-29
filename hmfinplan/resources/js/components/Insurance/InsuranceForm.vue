@@ -36,6 +36,11 @@
                     <label class="input-label" for="polcynum">Policy Number</label>
                     <input class="input" id="polcynum" type="text" v-model="insurance.polcy_nbr">
                 </div>
+                
+                <form-select label="Insuree Name" 
+                    :selection.sync="insurance.insuree_name"
+                    :options="familyObj">
+                </form-select>
             
                 <div>
                     <label class="input-label" for="polcystdt">Policy Start Date</label>
@@ -83,17 +88,20 @@ export default {
     props: {
         baseRoute: String,
         formData: Object,
+        family: Array,
     },
 
     data() {
         return {
-            insurance: { polcy_typ:'', insurnce_cmpny:'', polcy_name:'', polcy_nbr:0, polcy_start_dt:'', polcy_end_dt:'', sum_insurd:0, annul_prmium:0, prmium_mode:'' },
+            insurance: { polcy_typ:'', insurnce_cmpny:'', polcy_name:'', insuree_name:'', polcy_nbr:0, polcy_start_dt:'', polcy_end_dt:'', sum_insurd:0, annul_prmium:0, prmium_mode:'' },
             errors: {},
+            familyObj: {}
         };
     },
 
     created() {
         Object.assign(this.insurance, this.formData);
+        this.familyObj = this.family.map((str) => ({ value: str, text: str }));
     },
 
     mounted() {
