@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-screen-md box-border">
-        <div class="bg-white shadow overflow-auto sm:rounded-lg">
+        <div class="flex flex-col bg-white shadow overflow-auto sm:rounded-lg">
             <div class="border-t border-gray-100">
                 <div class="py-2 flex justify-between items-center" :class="bgColor">
                     <h2 class="pl-3 text-lg font-raleway font-semibold" :class="textColor">{{ title }}</h2>
