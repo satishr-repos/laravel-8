@@ -2,10 +2,9 @@
 <div class="container flex justify-start">
     <div class="flex flex-col">
         <div class="w-full">
-            <!-- <div class="border border-gray-200 shadow"> -->
-            <div class="border-t border-gray-200">
+            <div class="border-t border-gray-200 shadow">
                 <table class="bg-white divide-y divide-gray-300 ">
-                    <thead class="capitalize font-mono text-sm">
+                    <thead class="capitalize font-roboto font-thin text-sm">
                         <tr class="divide-x-2 divide-gray-100 bg-gray-50">
                             <th class="px-6 py-1 text-gray-600 " v-for="col in cols" v-bind:key="col">
                                 {{ col }}
@@ -15,7 +14,7 @@
                                 Edit
                             </th>
                             
-                            <th class="px-6 py-1 text-gray-600">
+                            <th class="px-6 py-2 text-gray-600">
                                 Delete
                             </th>
                         </tr>
