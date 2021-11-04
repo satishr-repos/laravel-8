@@ -21,7 +21,7 @@
 
             <div v-if="incomeType == 'Salary'" class="grid grid-cols-2 gap-2">
                 <div>
-                    <label class="input-label" for="gross">Gross Salary</label>
+                    <label class="input-label" for="gross">Annual Gross Salary</label>
                     <input class="input" id="gross" type="number" step="100" v-model="salary.gross_salry">
                 </div>
                 
@@ -148,6 +148,15 @@ export default {
           },
           set: function (newValue) {
               this.salary.net_salry = this.salary.gross_salry - newValue;
+          }
+        },
+
+      computeMonthlyNet: {
+          get: function () {
+              return this.salary.net_salry / 12;
+          },
+          set: function (newValue) {
+              this.salary.net_salry = newValue * 12;
           }
         },
     },

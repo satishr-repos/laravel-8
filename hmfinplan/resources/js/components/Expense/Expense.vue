@@ -38,6 +38,13 @@
         },
        
         created () {
+            this.currency = new Intl.NumberFormat('en-IN', {
+                                style: 'currency',
+                                currency: 'INR',
+                                // These options are needed to round to whole numbers if that's what you want.
+                                //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+                                //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+                                });
         },
        
         mounted () {
@@ -68,6 +75,7 @@
                             exp_typ: 'Expense Type',
                             exp_typ_sub: 'Sub Category',
                             annul_exp : 'Annual Expenditure',
+                            monthly_exp : 'Monthly Expenditure',
                             is_essential: 'Essential?',
                         };
 
@@ -89,9 +97,16 @@
 
             loadDataTable() {
 
-                console.log("bk-loaddt:", this.cols, this.assets);
+                var assets = _.cloneDeep(this.assets);
+
+                assets.forEach(asset => {
+                    asset.monthly_exp = this.currency.format((asset.annul_exp / 12));
+                    asset.annul_exp = this.currency.format((asset.annul_exp));
+                });
+
+                console.log("bk-loaddt:", this.cols, assets);
                 this.compName = 'simple-data-table';
-                Object.assign(this.compProps, { cols: this.cols, rows: this.assets});
+                Object.assign(this.compProps, { cols: this.cols, rows: assets});
                 Object.assign(this.compEvents, { 
                                     'edit-row': this.onEditExpense, 
                                     'select-row': this.onEditExpense, 
