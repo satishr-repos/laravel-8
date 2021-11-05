@@ -16,6 +16,7 @@ class CreateRiskAssessAnswersTable extends Migration
         Schema::create('risk_assess_answers', function (Blueprint $table) {
             $table->id();
             $table->string('choice', 100);
+            $table->integer('value');
             $table->timestamps();
         });
     }

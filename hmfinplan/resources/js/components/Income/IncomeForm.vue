@@ -150,15 +150,6 @@ export default {
               this.salary.net_salry = this.salary.gross_salry - newValue;
           }
         },
-
-      computeMonthlyNet: {
-          get: function () {
-              return this.salary.net_salry / 12;
-          },
-          set: function (newValue) {
-              this.salary.net_salry = newValue * 12;
-          }
-        },
     },
 
     created() {

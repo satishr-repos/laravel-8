@@ -2,8 +2,15 @@
 <template>
 <div class="container">
     <simple-card title="Risk Tolerance">
-        <div slot="title">
-            <icon-button class="mr-1" iconType="edit" @click.native="editRiskTolerance"></icon-button>
+        <div slot="title" class="flex items-center">
+            <div v-for="n in Math.trunc(rating)" :key="n">
+                <icon-button class="mr-1" iconType="star"></icon-button>
+            </div>
+            <div v-if="(rating % 1) != 0">
+                <icon-button class="mr-1" iconType="half-star"></icon-button>
+            </div>
+            <span v-if="rating"> ({{ rating}}/5)</span>
+            <icon-button class="ml-10 mr-1" iconType="edit" @click.native="editRiskTolerance"></icon-button>
             <icon-button class="mr-5" iconType="delete" @click.native="deleteRiskTolerance"></icon-button>
         </div>
         <div slot="content">
@@ -33,6 +40,7 @@ export default {
         return {
             errors: {},
             comp: { name:'', props:{}},
+            rating: 0,
         };
     },
 
@@ -80,6 +88,7 @@ export default {
         initData(risks) {
 
             var data = [];
+            var rating = 0, total = 0;
 
             risks.forEach(risk => {
                 var obj = {};
@@ -88,8 +97,16 @@ export default {
                 obj['key2'] = risk.survey.question;
                 obj['key3'] = risk.response.choice;
 
+                rating += risk.response.value;
+                total++;
+
                 data.push(obj);
             });
+
+            if(total !== 0)
+                this.rating = rating / total;
+
+            console.log("star rating:", this.rating);
 
             return data;
         },
@@ -155,6 +172,7 @@ export default {
                     var comp = {name: 'multi-data-list', 
                         props: {items: []}};
                     Object.assign(this.comp, comp);
+                    this.rating = 0;
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
