@@ -1,24 +1,24 @@
 @extends('layouts.main')
 
 @section('header')
-<div class="grid grid-cols-6">
-    <div class="col-span-1">
+<div class="flex">
+    <div class="flex-shrink-0">
         @include('partials.sidebar')
     </div>
 
-    <div class="col-span-5">
+    <div class="flex-grow">
         @include('partials.nav')
     </div>
 </div>
 @endsection
 
 @section('content')
-<div class="grid grid-cols-6">
-    <div class="col-span-1">
-
+<div class="flex x-ignore">
+    <div class="w-56">
+        {{-- ugly hack to offset by sidebar width --}}
     </div>
 
-    <section class="col-span-5">
+    <section class="flex-grow">
         {{-- breadcrumps --}}
         <nav class="bg-grey-light rounded font-sans w-full mt-2 mb-5">
             <ol class="list-reset flex text-grey-dark">
@@ -100,14 +100,6 @@
 @endsection
 
 @section('footer')
-<div class="grid grid-cols-6">
-    <div class="col-span-1">
-
-    </div>
-
-    <div class="col-span-5">
-        @include('partials.footer')
-    </div>
-</div>
+    @include('partials.footer')
 @endsection
 

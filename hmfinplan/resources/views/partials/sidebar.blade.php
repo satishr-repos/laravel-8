@@ -1,6 +1,6 @@
-{{-- <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800"> --}}
-    <div class="fixed flex flex-col top-0 left-0 max-w-none w-auto bg-white h-full border-r">
-      <div class="flex flex-row items-center mt-2 h-14 w-52 border-b border-gray-100">
+<div class="h-full w-52">
+    <div class="fixed flex flex-col top-0 left-0 max-w-none w-auto bg-white border-r">
+      <div class="flex flex-row items-center mt-2 h-14 border-b border-gray-100">
         <img src="{{ asset('img/avatar-male.png') }}" alt="Logo" class="h-8 w-12 ml-4" />
         <div class="text-blue-700 font-semibold font-serif ml-3">
             <span>{{ $customer->first_name }}&nbsp{{ $customer->last_name }}&nbsp&nbsp</span>
@@ -129,4 +129,4 @@
           </li>
       </div>
     </div>
-  {{-- </div> --}}
+  </div>
