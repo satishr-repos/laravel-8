@@ -69,13 +69,6 @@ export default {
     },
 
     created () {
-        this.currency = new Intl.NumberFormat('en-IN', {
-                            style: 'currency',
-                            currency: 'INR',
-                            // These options are needed to round to whole numbers if that's what you want.
-                            //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-                            //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-                            });
     },
 
     mounted () {
@@ -117,10 +110,10 @@ export default {
 
             var data = {};
 
-            data['Gross Salary(Annual)'] = this.currency.format(salary.gross_salry);
-            data['Deductions'] = this.currency.format(salary.gross_salry - salary.net_salry);
-            data['Net Salary(Annual)'] = this.currency.format(salary.net_salry);
-            data['Net Salary(Monthly)'] = this.currency.format(salary.net_salry / 12);
+            data['Gross Salary(Annual)'] = currency.format(salary.gross_salry);
+            data['Deductions'] = currency.format(salary.gross_salry - salary.net_salry);
+            data['Net Salary(Annual)'] = currency.format(salary.net_salry);
+            data['Net Salary(Monthly)'] = currency.format(salary.net_salry / 12);
             data['Expected Growth Rate(%)'] = salary.grwth_rt;
 
             return data;
@@ -148,8 +141,8 @@ export default {
             var data = {};
 
             data['Pension Plan'] = pension.pension_plan;
-            data['Annual Income'] = this.currency.format(pension.annul_inc);
-            data['Monthly Income'] = this.currency.format(pension.annul_inc / 12);
+            data['Annual Income'] = currency.format(pension.annul_inc);
+            data['Monthly Income'] = currency.format(pension.annul_inc / 12);
             data['Starting Year'] = pension.strt_yr;
             data['Ending Year'] = pension.end_yr;
             data['Expected Growth Rate(%)'] = pension.grwth_rt;
@@ -178,8 +171,8 @@ export default {
 
             var data = {};
 
-            data['Annual Income'] = this.currency.format(rental.annul_inc);
-            data['Monthly Income'] = this.currency.format(rental.annul_inc / 12);
+            data['Annual Income'] = currency.format(rental.annul_inc);
+            data['Monthly Income'] = currency.format(rental.annul_inc / 12);
             data['Expected Growth Rate(%)'] = rental.grwth_rt;
 
             return data;
@@ -208,8 +201,8 @@ export default {
 
             data['Income Type'] = other.inc_typ;
             data['Income Description'] = other.inc_desc;
-            data['Annual Income'] = this.currency.format(other.annul_inc);
-            data['Monthly Income'] = this.currency.format(other.annul_inc / 12);
+            data['Annual Income'] = currency.format(other.annul_inc);
+            data['Monthly Income'] = currency.format(other.annul_inc / 12);
             data['Income Tax Rate(%)'] = other.inc_tx_rt;
             data['Expected Growth Rate(%)'] = other.grwth_rt;
 
