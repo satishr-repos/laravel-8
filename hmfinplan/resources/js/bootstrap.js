@@ -41,6 +41,12 @@ window.currency = new Intl.NumberFormat('en-IN', {
                         //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
                         });
 
+import Alpine from 'alpinejs'
+import persist from '@alpinejs/persist'
+ 
+Alpine.plugin(persist)
+Alpine.start()
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

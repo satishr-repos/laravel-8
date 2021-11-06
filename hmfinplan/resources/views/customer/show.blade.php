@@ -43,10 +43,14 @@
                     <professional-detail v-bind:base-route="{{ json_encode(route('customer.profession', $customer)) }}"></professional-detail>
                     @break
            
-                @case('assets')
+                @case('Tangible Assets')
                     <tangible-assets class="mb-3" v-bind:real-estate="{{ json_encode(route('customer.realestate', $customer)) }}"
                         v-bind:personal-item="{{json_encode(route('customer.personalitem', $customer)) }}">
                     </tangible-assets>
+
+                    @break
+                
+                @case('Financial Assets')
                     <financial-assets 
                         v-bind:bank-route="{{ json_encode(route('customer.bank', $customer)) }}"
                         v-bind:fixed-route="{{ json_encode(route('customer.fixedAsset', $customer)) }}"

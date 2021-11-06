@@ -38,7 +38,7 @@ class PersonalItemController extends Controller
             return response()->json(compact('personalItem'), 200);
         }
 
-        $current = 'assets';
+        $current = 'Tangible Assets';
 
         return View('customer.show', compact('customer', 'current'));
     }

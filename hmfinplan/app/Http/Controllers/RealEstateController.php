@@ -39,7 +39,7 @@ class RealEstateController extends Controller
             return response()->json(compact('realEstate'), 200);
         }
 
-        $current = 'assets';
+        $current = 'Tangible Assets';
 
         return View('customer.show', compact('customer', 'current'));
     }

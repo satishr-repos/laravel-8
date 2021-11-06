@@ -6,7 +6,7 @@
             <span>{{ $customer->first_name }}&nbsp{{ $customer->last_name }}&nbsp&nbsp</span>
         </div>
       </div>
-      <div class="overflow-y-auto overflow-x-hidden flex-grow">
+      <div class="overflow-y-auto overflow-x-hidden flex-grow" x-data="{ open: $persist(false) }">
         <ul class="flex flex-col py-4 space-y-1">
           <li class="px-5">
             <div class="flex flex-row items-center h-8">
@@ -40,12 +40,32 @@
             </div>
           </li>
           <li>
-            <a href="{{ route('customer.realestate', $customer) }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-r-4 {{ $current == 'assets'? 'border-red-500' : 'border-transparent'}} hover:shadow-md hover:border-indigo-500 pr-6">
+            <a x-on:click="open = !open" class="relative flex flex-row items-center h-11 cursor-default focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800  hover:shadow-md pr-6">
               <span class="inline-flex justify-center items-center ml-4">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
               </span>
-              <span class="ml-2 text-sm tracking-wide truncate">Assets</span>
+              <span class="ml-2 text-sm tracking-wide truncate inline-flex items-center">Assets
+                <svg fill="currentColor" viewBox="0 0 20 20" x-bind:class="{'rotate-180': open, 'rotate-0': !open }" class="inline w-5 h-5 mt-0 ml-1 transition-transform duration-200 transform"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              </span>
+            </a>
+          </li>
+          <li x-show="open">
+            <a href="{{ route('customer.realestate', $customer) }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-r-4 {{ $current == 'Tangible Assets'? 'border-red-500' : 'border-transparent'}} hover:shadow-md hover:border-indigo-500 ml-4 pr-6">
+              <span class="inline-flex justify-center items-center ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M19 2H9c-1.103 0-2 .897-2 2v5.586l-4.707 4.707A1 1 0 0 0 3 16v5a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4c0-1.103-.897-2-2-2zm-8 18H5v-5.586l3-3 3 3V20zm8 0h-6v-4a.999.999 0 0 0 .707-1.707L9 9.586V4h10v16z"></path><path d="M11 6h2v2h-2zm4 0h2v2h-2zm0 4.031h2V12h-2zM15 14h2v2h-2zm-8 1h2v2H7z"></path>
+                </svg>
+              </span>
+              <span class="ml-2 text-sm tracking-wide truncate">Tangible Assets</span>
+            </a>
+          </li>
+          <li x-show="open">
+            <a href="{{ route('customer.bank', $customer) }}" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-r-4 {{ $current == 'Financial Assets'? 'border-red-500' : 'border-transparent'}} hover:shadow-md hover:border-indigo-500 ml-4 pr-6">
+              <span class="inline-flex justify-center items-center ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12 22c3.976 0 8-1.374 8-4V6c0-2.626-4.024-4-8-4S4 3.374 4 6v12c0 2.626 4.024 4 8 4zm0-2c-3.722 0-6-1.295-6-2v-1.268C7.541 17.57 9.777 18 12 18s4.459-.43 6-1.268V18c0 .705-2.278 2-6 2zm0-16c3.722 0 6 1.295 6 2s-2.278 2-6 2-6-1.295-6-2 2.278-2 6-2zM6 8.732C7.541 9.57 9.777 10 12 10s4.459-.43 6-1.268V10c0 .705-2.278 2-6 2s-6-1.295-6-2V8.732zm0 4C7.541 13.57 9.777 14 12 14s4.459-.43 6-1.268V14c0 .705-2.278 2-6 2s-6-1.295-6-2v-1.268z"></path>
+                </svg>
+              </span>
+              <span class="ml-2 text-sm tracking-wide truncate">Financial Assets</span>
             </a>
           </li>
           <li>
