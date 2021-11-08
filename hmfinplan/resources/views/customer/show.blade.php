@@ -2,7 +2,7 @@
 
 @section('header')
 <div class="flex">
-    <div class="flex-shrink-0">
+    <div class="flex-shrink-0 w-56" id="sbwrapper">
         @include('partials.sidebar')
     </div>
 
@@ -13,12 +13,12 @@
 @endsection
 
 @section('content')
-<div class="flex x-ignore">
-    <div class="w-56">
+<div class="flex">
+    <div class="w-56" id="sbproxy">
         {{-- ugly hack to offset by sidebar width --}}
     </div>
 
-    <section class="flex-grow">
+    <section class="flex-grow" x-ignore>
         {{-- breadcrumps --}}
         <nav class="bg-grey-light rounded font-sans w-full mt-2 mb-5">
             <ol class="list-reset flex text-grey-dark">
@@ -44,9 +44,11 @@
                     @break
            
                 @case('Tangible Assets')
-                    <tangible-assets class="mb-3" v-bind:real-estate="{{ json_encode(route('customer.realestate', $customer)) }}"
-                        v-bind:personal-item="{{json_encode(route('customer.personalitem', $customer)) }}">
-                    </tangible-assets>
+                    <real-estate class="mb-3" v-bind:base-route="{{ json_encode(route('customer.realestate', $customer)) }}">
+                    </real-estate>
+                    
+                    <personal-asset class="mb-3" v-bind:base-route="{{ json_encode(route('customer.personalitem', $customer)) }}">
+                    </personal-asset>
 
                     @break
                 
@@ -107,3 +109,60 @@
     @include('partials.footer')
 @endsection
 
+@section('script')
+
+var value = localStorage.getItem('assetState');
+var open = JSON.parse(value) === true;
+
+window.onload = function() {
+
+    var sb = document.getElementById("sidebar");
+    var sbproxy = document.getElementById("sbproxy");
+    var width = sb.offsetWidth + 10;
+    
+    style = "display:block;" + "width:" + width + "px;";
+    sbwrapper.setAttribute("style", style );
+   
+    // width += 10;
+    style = "display:block;" + "width:" + width + "px;";
+    sbproxy.setAttribute("style", style);
+
+    toggleAsset(open);
+    
+    console.log(sbproxy.offsetWidth, sbproxy.clientWidth);
+};
+
+window.onunload = function() {
+    
+    localStorage.setItem('assetState', open);
+
+};
+
+document.getElementById("assets").onclick = function () {
+
+    open = !open;
+
+    // console.log("onClickAssets: ", open);
+
+    toggleAsset(open);
+};
+
+function toggleAsset(val) {
+    var tangible = document.getElementById("tangible");
+    var financial = document.getElementById("financial");
+    var clickimg = document.getElementById("clickimg");
+
+    if (val == false){
+        tangible.setAttribute("style", "display:none;");
+        financial.setAttribute("style", "display:none;");
+        clickimg.classList.remove('rotate-180');
+        clickimg.classList.add('rotate-0');
+    } else {
+        tangible.setAttribute("style", "display:block;");
+        financial.setAttribute("style", "display:block;");
+        clickimg.classList.remove('rotate-0');
+        clickimg.classList.add('rotate-180');
+    }
+}
+
+@endsection

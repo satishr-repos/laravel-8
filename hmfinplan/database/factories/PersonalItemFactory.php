@@ -22,7 +22,7 @@ class PersonalItemFactory extends Factory
     public function definition()
     {
         return [
-            'type' => $this->faker->randomElement($array = array('gold', 'silver', 'jewel', 'car', 'bike', 'painting', 'other')),
+            'type' => $this->faker->randomElement($array = array('Gold', 'Silver', 'Jewellery', 'Car', 'Motor Cycle', 'Painting', 'Other')),
             'desc' => $this->faker->text(50),
             'purchase_yr' => $this->faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null),
             'purchase_cost' => $this->faker->randomNumber($nbDigits=7),

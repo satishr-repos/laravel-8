@@ -40,7 +40,6 @@ export default {
     data() {
         return {
 
-            insuranceList: [],
             labelList: [],
             componentList: [],
             currentIndex: 0

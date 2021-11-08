@@ -1,13 +1,13 @@
 <template>
 <div class="container text-">
-    <simple-card title="Loan Information">
+    <simple-card title="Personal Assets">
         <div slot="title">
-            <icon-button class="mr-1" iconType="edit" @click.native="editLiability"></icon-button>
-            <icon-button class="mr-5" iconType="delete" @click.native="deleteLiability"></icon-button>
+            <icon-button class="mr-1" iconType="edit" @click.native="editPersonalAsset"></icon-button>
+            <icon-button class="mr-5" iconType="delete" @click.native="deletePersonalAsset"></icon-button>
         </div>
         <div slot="content">
-            <tabs   text-color="text-indigo-500"
-                    bg-color="bg-indigo-500"
+            <tabs   text-color="text-pink-500"
+                    bg-color="bg-pink-500"
                     v-bind:labels="labelList" 
                     v-bind:current="currentIndex" 
                     v-bind:component-list="componentList" 
@@ -23,7 +23,7 @@
 
 export default {
 
-    name: 'Liability',
+    name: 'PersonalAsset',
 
     components: {
     },
@@ -46,28 +46,27 @@ export default {
     },
 
     created() {
-        this.getLiabilities();
+        this.getPersonalAssets();
     },
     
     methods: {
 
-        initData(liability){
+        initData(personalAsset){
 
             var data = {};
 
-            data['Loan type'] = liability.loan_typ;
-            data['Financial Institute'] = liability.fin_inst;
-            data['Outstanding Amount'] = liability.amt_outstanding;
-            data['Monthly Installments'] = liability.emi;
-            data['Interest Rate'] = liability.inrst_rt;
-            data['Start Year'] = liability.start_yr;
-            data['Duration'] = liability.duration;
-            data['Status'] = liability.status;
+            data['Type'] = personalAsset.type;
+            data['Description'] = personalAsset.desc;
+            data['Purchase Year'] = personalAsset.purchase_yr;
+            data['Purchase Cost'] = currency.format(personalAsset.purchase_cost);
+            data['Current Value'] = currency.format(personalAsset.current_val);
+            data['Expected Growth Rate'] = personalAsset.expct_growth_rt;
+            data['Status'] = personalAsset.status;
 
             return data;
         },
 
-        getLiabilities(){
+        getPersonalAssets(){
 
             axios.get(this.baseRoute, {
                 params: {
@@ -76,18 +75,18 @@ export default {
             })
             .then((response) => {
 
-                let liability = response.data.liability;
+                let personalAsset = response.data.personalItem;
 
-                console.log('getLiabilities:', liability);
+                console.log('getPersonalAssets:', personalAsset);
 
-                for(var i=0; i < liability.length; i++) {
+                for(var i=0; i < personalAsset.length; i++) {
 
-                    var data = this.initData(liability[i]);
+                    var data = this.initData(personalAsset[i]);
 
                     // store database id as part of the component
-                    var comp = { name: 'data-list', props: {items: data}, db: liability[i] };
+                    var comp = { name: 'data-list', props: {items: data}, db: personalAsset[i] };
 
-                    var label = (liability[i].loan_typ == null)? 'loan' : liability[i].loan_typ;
+                    var label = (personalAsset[i].type == null)? 'Item' : personalAsset[i].type;
 
                     this.labelList.push(label);           
                     this.componentList.push(comp);
@@ -108,25 +107,25 @@ export default {
 
             if (labelIndex == (this.labelList.length - 1))
             {
-                var family = { id: -1 };
-                var comp = { name: 'liability-form',
-                                props: {baseRoute: this.baseRoute, formData: family},
+                var personalAsset = { id: -1 };
+                var comp = { name: 'personal-asset-form',
+                                props: {baseRoute: this.baseRoute, formData: personalAsset},
                                 events: {'form-closed' : this.formClosed } };
                 this.componentList.push(comp);
 
-                this.labelList.splice(labelIndex, 0, 'loan');                
+                this.labelList.splice(labelIndex, 0, 'Item');                
             }
             
             this.currentIndex = labelIndex;
         },
 
-        editLiability() {
+        editPersonalAsset() {
             if ((this.currentIndex < this.labelList.length - 1) &&
                 this.componentList.length > this.currentIndex)
             {
-                let family = this.componentList[this.currentIndex].db;
-                let data = _.pick(family, ['id', 'loan_typ', 'fin_inst', 'amt_outstanding', 'emi', 'inrst_rt', 'start_yr', 'duration', 'status']);
-                var comp = { name: 'liability-form', 
+                let personalAsset = this.componentList[this.currentIndex].db;
+                let data = _.pick(personalAsset, ['id', 'type', 'desc', 'purchase_yr', 'purchase_cost', 'current_val', 'expct_growth_rt', 'status']);
+                var comp = { name: 'personal-asset-form', 
                                 props: {baseRoute: this.baseRoute, formData: data},
                                 events: {'form-closed' : this.formClosed } };
                 // console.log(data);
@@ -136,9 +135,9 @@ export default {
         },
 
         formClosed(response) {
-            var liability = response;
+            var personalAsset = response;
             
-            if(liability.id == -1) // form cancelled
+            if(personalAsset.id == -1) // form cancelled
             {
                 this.$delete(this.labelList, this.currentIndex);
                 this.$delete(this.componentList, this.currentIndex);
@@ -148,22 +147,22 @@ export default {
                 return;
             }
 
-            var data = this.initData(liability);
-            var comp = { name: 'data-list', props: {items: data}, db: liability };
-            var label = (liability.loan_typ == null)? 'loan' : liability.loan_typ;
+            var data = this.initData(personalAsset);
+            var comp = { name: 'data-list', props: {items: data}, db: personalAsset };
+            var label = (personalAsset.type == null)? 'Item' : personalAsset.type;
 
             this.componentList.splice(this.currentIndex, 1, comp);
             this.labelList.splice(this.currentIndex, 1,  label);
             // console.log('form closed from familymember:', response);
         },
 
-        async deleteLiability() {
+        async deletePersonalAsset() {
 
             if(this.labelList.length <= 1)
                 return; // nothing to delete
 
             const ok = await this.$refs.confirmDialogue.show({
-                title: 'Delete Liability Details?',
+                title: 'Delete Personal Asset?',
                 message: 'Are you sure you want to delete? It cannot be undone.',
                 okButton: 'Delete',
             });

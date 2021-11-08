@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <inline-form ref="InlineForm" title="Personal Item Details" 
+    <inline-form ref="InlineForm" title="Personal Asset Details" 
         v-on:inlineFormSubmitted="formSubmitted" 
         v-on:inlineFormCancelled="formCancelled">
         <div slot="alerts">
@@ -14,13 +14,13 @@
                 <form-select label="type" 
                     :selection.sync="personalItem.type"
                     :options="[ 
-                        { value:'gold', text:'Gold'}, 
-                        { value:'silver', text:'Silver'}, 
-                        { value:'jewel', text:'Jewellery'}, 
-                        { value:'car', text:'Car'},
-                        { value:'bike', text:'Motor Cycle'},
-                        { value:'painting', text:'Painting'},
-                        { value:'other', text:'Other'}]">
+                        { value:'Gold', text:'Gold'}, 
+                        { value:'Silver', text:'Silver'}, 
+                        { value:'Jewellery', text:'Jewellery'}, 
+                        { value:'Car', text:'Car'},
+                        { value:'Motor Cycle', text:'Motor Cycle'},
+                        { value:'Painting', text:'Painting'},
+                        { value:'Other', text:'Other'}]">
                 </form-select>
 
                 <div>
@@ -66,7 +66,7 @@
 
 export default {
 
-    name: 'PersonalItemForm',
+    name: 'PersonalAssetForm',
 
     components: {
     },

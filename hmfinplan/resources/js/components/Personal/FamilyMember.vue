@@ -37,7 +37,6 @@ export default {
     data() {
         return {
 
-            familyList: [],
             labelList: [],
             componentList: [],
             currentIndex: 0

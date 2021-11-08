@@ -41,5 +41,10 @@
             
         @endif
     </footer>
+
+    <script>
+        @yield('script')
+    </script>
+
 </body>
 </html>

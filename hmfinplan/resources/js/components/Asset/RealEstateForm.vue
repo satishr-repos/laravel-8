@@ -14,10 +14,10 @@
                 <form-select label="type" 
                     :selection.sync="realEstate.type"
                     :options="[ 
-                        { value:'land', text:'Land'}, 
-                        { value:'apartment', text:'Apartment'}, 
-                        { value:'house', text:'House'},
-                        { value:'commercial', text:'commercial'}]">
+                        { value:'Land', text:'Land'}, 
+                        { value:'Apartment', text:'Apartment'}, 
+                        { value:'House', text:'House'},
+                        { value:'Commercial', text:'commercial'}]">
                 </form-select>
 
                 <div>

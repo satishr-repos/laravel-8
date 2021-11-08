@@ -36,8 +36,8 @@ export default {
     components: {
         FamilyMemberForm: () => import('../Personal/FamilyMemberForm.vue'),
         ProfessionalDetailForm: () => import('../Personal/ProfessionalDetailForm.vue'),
-        PersonalItem: () => import('../Asset/PersonalItem.vue'),
-        RealEstate: () => import('../Asset/RealEstate.vue'),
+        PersonalAssetForm: () => import('../Asset/PersonalAssetForm.vue'),
+        RealEstateForm: () => import('../Asset/RealEstateForm.vue'),
         BankAsset: () => import('../Asset/BankAsset.vue'),
         FixedAsset: () => import('../Asset/FixedAsset.vue'),
         InvestmentAsset: () => import('../Asset/InvestmentAsset.vue'),

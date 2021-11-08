@@ -22,11 +22,11 @@ class RealEstateFactory extends Factory
     public function definition()
     {
         return [
-            'type' => $this->faker->randomElement($array = array('land', 'house', 'apartment', 'commercial')),
+            'type' => $this->faker->randomElement($array = array('Land', 'House', 'Apartment', 'Commercial')),
             'desc' => $this->faker->streetAddress(),
 		    'area' => $this->faker->randomNumber($nbDigits=5),
             'purchase_yr' => $this->faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now', $timezone = null),
-            'purchase_cost' => $this->faker->randomNumber($nbDigits=7),
+            'purchase_cost' => $this->faker->randomFloat(2, 0, 500000000),
             'expct_growth_rt' => $this->faker->randomFloat(2, 0, 20),
             'current_val' => $this->faker->randomFloat(2, 0, null),
             'status' => $this->faker->randomElement($array = array(true, false)),
