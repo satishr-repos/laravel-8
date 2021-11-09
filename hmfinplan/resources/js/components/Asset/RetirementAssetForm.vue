@@ -14,8 +14,8 @@
                 <form-select label="Type" 
                     :selection.sync="retirement.acct_typ"
                     :options="[ 
-                        { value:'epf', text:'Employee Provident Fund'}, 
-                        { value:'ppf', text:'Public Provident Fund'}]">
+                        { value:'EPF', text:'Employee Provident Fund'}, 
+                        { value:'PPF', text:'Public Provident Fund'}]">
                 </form-select>
 
                 <div>

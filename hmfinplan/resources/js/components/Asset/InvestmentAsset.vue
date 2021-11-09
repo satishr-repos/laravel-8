@@ -1,12 +1,19 @@
 <template>
-<div class="container h-auto">
-    <component :is="compName" v-bind="compProps" v-on="compEvents"></component>
+<div class="container">
+    <simple-card title="Investment Assets">
+        <div slot="title">
+            <icon-button class="mr-5" iconType="add" @click.native="onAddAsset"></icon-button>
+        </div>
+        <div slot="content" class="container h-auto">
+            <component :is="compName" v-bind="compProps" v-on="compEvents"></component>
+        </div>
+    </simple-card>
+    <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
     <simple-spinner ref="spinner"></simple-spinner>
 </div>
 </template>
 
 <script>
-import EventBus from '../../eventbus'
 
     export default {
 
@@ -17,7 +24,7 @@ import EventBus from '../../eventbus'
         },
 
         props: {
-            route: { type: String, default: '' },
+            baseRoute: { type: String, default: '' },
         },
        
         data() {
@@ -36,17 +43,12 @@ import EventBus from '../../eventbus'
        
         mounted () {
             this.getInvestmentAssets();
-            EventBus.$on('ADD_INVESTMENT_ASSET', () => {
-                this.compName = 'investment-asset-form';
-                Object.assign(this.compProps, { baseRoute: this.route, formData: {id: -1} });
-                Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
-            });
         },
        
         methods: {
             getInvestmentAssets() {
                 this.$refs.spinner.show();
-                axios.get(this.route, {
+                axios.get(this.baseRoute, {
                         params: {
                             json: true,
                         },
@@ -95,10 +97,16 @@ import EventBus from '../../eventbus'
                                     'delete-row': this.onDeleteAsset });
             },
 
+            onAddAsset() {
+                this.compName = 'investment-asset-form';
+                Object.assign(this.compProps, { baseRoute: this.baseRoute, formData: {id: -1} });
+                Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
+            },
+
             onEditAsset({id, index}) {
                 console.log("iv-onedit:", id, index)
                 this.compName = 'investment-asset-form';
-                Object.assign(this.compProps, { baseRoute: this.route, formData: this.assets[index]});
+                Object.assign(this.compProps, { baseRoute: this.baseRoute, formData: this.assets[index]});
                 Object.assign(this.compEvents, { 'form-closed' : this.onFormClosed });
             },
 
@@ -119,7 +127,7 @@ import EventBus from '../../eventbus'
 
             onDeleteAsset({id, index}) {
                 console.log("iv-ondelete:", id, index)
-                let route = this.route + '/' + id;
+                let route = this.baseRoute + '/' + id;
                 axios.delete(route)
                     .then((response) => {
                         

@@ -17,8 +17,8 @@ class BankAssetController extends Controller
     private function verify(Request $request)
     {
         $data = request()->validate([
-                'acct_typ' => 'alpha|nullable',
-                'desc' => 'string|nullable',
+                'acct_typ' => 'alpha|required',
+                'desc' => 'string|required',
                 'acct_nbr' => 'string|nullable',
                 'curr_bal' => 'numeric|nullable',
                 'intrst_rt' => 'numeric|nullable',

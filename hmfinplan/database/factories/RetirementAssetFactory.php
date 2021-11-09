@@ -22,7 +22,7 @@ class RetirementAssetFactory extends Factory
     public function definition()
     {
         return [
-            'acct_typ' => $this->faker->randomElement($array = array('epf', 'ppf')),
+            'acct_typ' => $this->faker->randomElement($array = array('EPF', 'PPF')),
             'employe_contrb' => $this->faker->randomFloat(4, 1, 100000),
             'employr_contrb' => $this->faker->randomFloat(4, 1, 100000),
             'accmultd_value' => $this->faker->randomFloat(4, 1, 9000000),

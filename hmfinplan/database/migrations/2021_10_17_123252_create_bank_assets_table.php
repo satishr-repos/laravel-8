@@ -20,7 +20,7 @@ class CreateBankAssetsTable extends Migration
             $table->string('acct_nbr', 50)->nullable();
             $table->string('desc', 50)->nullable();
             $table->string('acct_typ', 50)->nullable();
-            $table->float('curr_bal', 10, 2)->nullable();
+            $table->float('curr_bal', 18, 2)->nullable();
             $table->float('intrst_rt', 6, 2)->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();

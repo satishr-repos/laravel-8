@@ -53,12 +53,44 @@
                     @break
                 
                 @case('Financial Assets')
-                    <financial-assets 
-                        v-bind:bank-route="{{ json_encode(route('customer.bank', $customer)) }}"
-                        v-bind:fixed-route="{{ json_encode(route('customer.fixedAsset', $customer)) }}"
-                        v-bind:invest-route="{{ json_encode(route('customer.investmentAsset', $customer)) }}"
-                        v-bind:retirement-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}" >
-                    </financial-assets>
+
+                    <div class="flex justify-between">
+
+                        <div class="flex-grow">
+                            <bank-asset class="mb-3" id="bank-asset" v-bind:base-route="{{ json_encode(route('customer.bank', $customer)) }}">
+                            </bank-asset>
+                            
+                            <fixed-asset class="mb-3" id="fixed-asset" v-bind:base-route="{{ json_encode(route('customer.fixedAsset', $customer)) }}">
+                            </fixed-asset>
+                            
+                            <investment-asset class="mb-3" id="investment-asset" v-bind:base-route="{{ json_encode(route('customer.investmentAsset', $customer)) }}">
+                            </investment-asset>
+                            
+                            <retirement-asset class="mb-3" id="retirement-asset" v-bind:base-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}">
+                            </retirement-asset>
+
+                        </div>
+
+                        <div class="h-screen bg-gray-50 px-4 mr-4">
+                            <ul class="flex flex-col">
+                                <li class="mb-3 mt-1">
+                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="#bank-asset">Bank</a>
+                                </li>
+                                <li class="mb-3">
+                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"  href="#fixed-asset">Fixed</a>
+                                </li>
+                                <li class="mb-3">
+                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"  href="#investment-asset">Investment</a>
+                                </li>
+                                <li class="mb-3">
+                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="#retirement-asset">Retirement</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
                 
                     @break
 
@@ -118,7 +150,7 @@ window.onload = function() {
 
     var sb = document.getElementById("sidebar");
     var sbproxy = document.getElementById("sbproxy");
-    var width = sb.offsetWidth + 10;
+    var width = sb.offsetWidth + 20;
     
     style = "display:block;" + "width:" + width + "px;";
     sbwrapper.setAttribute("style", style );

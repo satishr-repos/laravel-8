@@ -11,14 +11,14 @@
 
             <div class="grid grid-cols-3 gap-3">
 
-                <form-select label="type" 
+                <form-select label="Type" 
                     :selection.sync="fixed.acct_typ"
                     :options="[ 
-                        { value:'fixed', text:'Fixed Deposit'}, 
-                        { value:'nsc', text:'National Savings Certificate'}, 
-                        { value:'bond', text:'Government Bond'}, 
-                        { value:'other', text:'Other Deposits'}, 
-                        { value:'recurring', text:'Recurring Deposit'}]">
+                        { value:'Fixed', text:'Fixed Deposit'}, 
+                        { value:'NSC', text:'National Savings Certificate'}, 
+                        { value:'Bond', text:'Government Bond'}, 
+                        { value:'Other', text:'Other Deposits'}, 
+                        { value:'Recurring', text:'Recurring Deposit'}]">
                 </form-select>
 
                 <div>

@@ -1,6 +1,6 @@
 <template>
     <simple-card :title="title" v-if="visible"> 
-        <div slot="content">
+        <div slot="content" ref="content">
 
             <slot name="alerts"></slot>
 
@@ -44,6 +44,9 @@ export default {
 
         open() {
             this.visible = true;
+            this.$nextTick(() => { 
+                this.$refs.content.scrollIntoView({ behavior: 'smooth' });
+            });
         },
 
         close() {

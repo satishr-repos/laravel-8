@@ -22,7 +22,7 @@ class BankAssetFactory extends Factory
     public function definition()
     {
         return [
-            'acct_typ' => $this->faker->randomElement($array = array('savings', 'current')),
+            'acct_typ' => $this->faker->randomElement($array = array('Savings', 'Current')),
             'desc' => $this->faker->company(50),
             'acct_nbr' => $this->faker->swiftBicNumber(),
             'curr_bal' => $this->faker->randomNumber($nbDigits=8),

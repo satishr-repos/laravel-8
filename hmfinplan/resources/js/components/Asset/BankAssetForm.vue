@@ -11,11 +11,11 @@
 
             <div class="grid grid-cols-2 gap-3">
 
-                <form-select label="type" 
+                <form-select label="Type" 
                     :selection.sync="bank.acct_typ"
                     :options="[ 
-                        { value:'savings', text:'Savings'}, 
-                        { value:'current', text:'Current'}]">
+                        { value:'Savings', text:'Savings'}, 
+                        { value:'Current', text:'Current'}]">
                 </form-select>
 
                 <div>
