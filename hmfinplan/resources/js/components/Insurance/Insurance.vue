@@ -67,8 +67,9 @@ export default {
             data['Insuree Name'] = insurance.insuree_name;
             data['Policy Start Date'] = insurance.polcy_start_dt;
             data['Policy End Date'] = insurance.polcy_end_dt;
-            data['Sum Insured'] = insurance.sum_insurd;
-            data['Annual Premium'] = insurance.annul_prmium;
+            data['Sum Insured'] = currency.format(insurance.sum_insurd);
+            data['Annual Premium'] = currency.format(insurance.annul_prmium);
+            data['Maturity Value'] = currency.format(insurance.maturity_val);
             data['Premium Mode'] = insurance.prmium_mode;
 
             return data;
@@ -138,7 +139,7 @@ export default {
                 this.componentList.length > this.currentIndex)
             {
                 let insurance = this.componentList[this.currentIndex].db;
-                let data = _.pick(insurance, ['id', 'polcy_typ', 'insurnce_cmpny', 'polcy_name', 'polcy_nbr', 'insuree_name', 'polcy_start_dt', 'polcy_end_dt', 'sum_insurd', 'annul_prmium', 'prmium_mode']);
+                let data = _.pick(insurance, ['id', 'polcy_typ', 'insurnce_cmpny', 'polcy_name', 'polcy_nbr', 'insuree_name', 'polcy_start_dt', 'polcy_end_dt', 'sum_insurd', 'annul_prmium', 'maturity_val', 'prmium_mode']);
                 var comp = { name: 'insurance-form', 
                                 props: {baseRoute: this.route, formData: data, family: this.familyMembers},
                                 events: {'form-closed' : this.formClosed } };

@@ -87,10 +87,16 @@
             },
 
             loadDataTable() {
+                var assets = _.cloneDeep(this.assets);
 
-                console.log("iv-loaddt:", this.cols, this.assets);
+                assets.forEach(asset => {
+                    asset.purchse_cst = currency.format(asset.purchse_cst);
+                    asset.currnt_val = currency.format(asset.currnt_val);
+                });
+
+                console.log("iv-loaddt:", this.cols, assets);
                 this.compName = 'simple-data-table';
-                Object.assign(this.compProps, { cols: this.cols, rows: this.assets});
+                Object.assign(this.compProps, { cols: this.cols, rows: assets});
                 Object.assign(this.compEvents, { 
                                     'edit-row': this.onEditAsset, 
                                     'select-row': this.onEditAsset, 

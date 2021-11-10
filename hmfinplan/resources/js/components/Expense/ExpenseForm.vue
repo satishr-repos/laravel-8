@@ -31,6 +31,11 @@
                     <input class="input" id="currbal" type="number" step="0.05" v-model="expense.annul_exp">
                 </div>
 
+                <div>
+                    <label class="input-label" for="inflatn">Inflation</label>
+                    <input class="input" id="inflatn" type="numeric" step="0.05" v-model="expense.inflation">
+                </div>
+
                 <form-select label="Essential" 
                     :selection.sync="expense.is_essential"
                     :options="[ 
@@ -66,6 +71,7 @@ export default {
                 exp_typ:'', 
                 exp_typ_sub:'', 
                 annul_exp:0, 
+                inflation:6.0,
                 is_essential:1 },
             errors: {},
             subCategory: {

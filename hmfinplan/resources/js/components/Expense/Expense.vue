@@ -69,6 +69,7 @@
                             exp_typ_sub: 'Sub Category',
                             annul_exp : 'Annual Expenditure',
                             monthly_exp : 'Monthly Expenditure',
+                            inflation: 'Inflation',
                             is_essential: 'Essential?',
                         };
 

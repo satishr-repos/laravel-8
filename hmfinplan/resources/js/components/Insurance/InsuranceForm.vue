@@ -58,6 +58,11 @@
                 </div>
                 
                 <div>
+                    <label class="input-label" for="maturityval">Maturity Value</label>
+                    <input class="input" id="maturityval" type="number" v-model="insurance.maturity_val">
+                </div>
+                
+                <div>
                     <label class="input-label" for="annulpreum">Annual Premium</label>
                     <input class="input" id="annulpreum" type="number" v-model="insurance.annul_prmium">
                 </div>
@@ -93,7 +98,7 @@ export default {
 
     data() {
         return {
-            insurance: { polcy_typ:'', insurnce_cmpny:'', polcy_name:'', insuree_name:'', polcy_nbr:0, polcy_start_dt:'', polcy_end_dt:'', sum_insurd:0, annul_prmium:0, prmium_mode:'' },
+            insurance: { polcy_typ:'', insurnce_cmpny:'', polcy_name:'', insuree_name:'', polcy_nbr:0, polcy_start_dt:'', polcy_end_dt:'', sum_insurd:0, annul_prmium:0, maturity_val:0, prmium_mode:'' },
             errors: {},
             familyObj: {}
         };

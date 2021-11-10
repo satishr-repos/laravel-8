@@ -57,8 +57,8 @@ export default {
 
             data['Loan type'] = liability.loan_typ;
             data['Financial Institute'] = liability.fin_inst;
-            data['Outstanding Amount'] = liability.amt_outstanding;
-            data['Monthly Installments'] = liability.emi;
+            data['Outstanding Amount'] = currency.format(liability.amt_outstanding);
+            data['Monthly Installments'] = currency.format(liability.emi);
             data['Interest Rate'] = liability.inrst_rt;
             data['Start Year'] = liability.start_yr;
             data['Duration'] = liability.duration;

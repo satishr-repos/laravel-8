@@ -29,8 +29,9 @@ class InsuranceFactory extends Factory
             'insuree_name' => $this->faker->name(),
             'polcy_start_dt' => $this->faker->dateTimeBetween('-10 years'),
             'polcy_end_dt' => $this->faker->dateTimeBetween('+5 years', '+20 years'),
-            'sum_insurd' => $this->faker->randomFloat(2, 100000, 9000000),
+            'sum_insurd' => $this->faker->randomFloat(2, 100000, 1000000),
             'annul_prmium' => $this->faker->randomFloat(2, 10000, 100000),
+            'maturity_val' => $this->faker->randomFloat(2, 1000000, 9000000),
             'prmium_mode' => $this->faker->randomElement($array = array('Monthly', 'Quarterly', 'Half Yearly', 'Annual')),
         ];
     }

@@ -37,6 +37,7 @@ class ExpenseFactory extends Factory
             'exp_typ' => $category,
             'exp_typ_sub' => $subCategory,
             'annul_exp' => $this->faker->randomFloat(2, 1, 900000),
+            'inflation' => $this->faker->randomFloat(2, 2, 10),
             'is_essential' => $this->faker->randomElement($array = array(true, false)),
         ];
     }

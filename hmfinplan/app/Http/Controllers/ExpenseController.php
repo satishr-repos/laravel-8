@@ -21,6 +21,7 @@ class ExpenseController extends Controller
                 'exp_typ' => 'string|nullable',
                 'exp_typ_sub' => 'string|nullable',
                 'annul_exp' => 'numeric|nullable',
+                'inflation' => 'numeric|nullable',
                 'is_essential' => 'numeric|nullable',
             ]);
 

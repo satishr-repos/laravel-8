@@ -23,6 +23,7 @@ class CreateGoalsTable extends Migration
             $table->date('goal_start_dt')->nullable();
             $table->date('goal_target_dt')->nullable();
             $table->string('goal_pri', 50)->nullable();
+            $table->decimal('inflation', 8, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -60,9 +60,10 @@ export default {
 
             data['Goal Type'] = goal.goal_typ;
             data['Goal Description'] = goal.goal_desc;
-            data['Current Savings'] = goal.current_saving;
+            data['Current Savings'] = currency.format(goal.current_saving);
             data['Goal Start Date'] = goal.goal_start_dt;
             data['Goal Target Date'] = goal.goal_target_dt;
+            data['Inflation'] = goal.inflation;
             data['Goal Priority'] = goal.goal_pri;
 
             return data;
@@ -129,7 +130,7 @@ export default {
                 this.componentList.length > this.currentIndex)
             {
                 let goal = this.componentList[this.currentIndex].db;
-                let data = _.pick(goal, ['id', 'goal_typ', 'goal_desc', 'current_saving', 'goal_start_dt','goal_target_dt', 'goal_pri']);
+                let data = _.pick(goal, ['id', 'goal_typ', 'goal_desc', 'current_saving', 'goal_start_dt','goal_target_dt', 'inflation', 'goal_pri']);
                 var comp = { name: 'goal-form', 
                                 props: {baseRoute: this.route, formData: data},
                                 events: {'form-closed' : this.formClosed } };

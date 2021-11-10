@@ -61,7 +61,7 @@ export default {
             data['Account Type'] = bank.acct_typ;
             data['Bank Details'] = bank.desc;
             data['Account Number'] = bank.acct_nbr;
-            data['Current Balance'] = bank.curr_bal;
+            data['Current Balance'] = currency.format(bank.curr_bal);
             data['Interest Rate'] = bank.intrst_rt;
             data['Status'] = bank.status;
 

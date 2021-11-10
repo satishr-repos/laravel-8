@@ -26,6 +26,7 @@ class CreateInsurancesTable extends Migration
             $table->date('polcy_end_dt')->nullable();
             $table->decimal('sum_insurd', 18, 2)->nullable();
             $table->decimal('annul_prmium', 18, 2)->nullable();
+            $table->decimal('maturity_val', 18, 2)->nullable();
             $table->string('prmium_mode', 50)->nullable();
             $table->timestamps();
         });

@@ -45,7 +45,7 @@ export default {
         open() {
             this.visible = true;
             this.$nextTick(() => { 
-                this.$refs.content.scrollIntoView({ behavior: 'smooth' });
+                this.$refs.content.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
             });
         },
 

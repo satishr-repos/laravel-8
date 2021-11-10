@@ -56,9 +56,9 @@ export default {
             var data = {};
 
             data['Account Type'] = retirement.acct_typ;
-            data['Accumulated Amt'] = retirement.accmultd_value;
-            data['Employee Contrib'] = retirement.employe_contrb;
-            data['Employer Contrib'] = retirement.employr_contrb;
+            data['Accumulated Amt'] = currency.format(retirement.accmultd_value);
+            data['Employee Contrib'] = currency.format(retirement.employe_contrb);
+            data['Employer Contrib'] = currency.format(retirement.employr_contrb);
             data['Start Year'] = retirement.strt_yr;
             data['End Year'] = retirement.end_yr;
 

@@ -28,6 +28,7 @@ class GoalFactory extends Factory
             'goal_target_dt' => $this->faker->dateTimeBetween('+5 years', '+20 years'),
             'current_saving' => $this->faker->randomFloat(2, 100000, 500000),
             'goal_pri' => $this->faker->randomElement($array = array('Low', 'Medium', 'High')),
+            'inflation' => $this->faker->randomFloat(2, 2, 10),
         ];
     }
 }

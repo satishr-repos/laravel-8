@@ -20,6 +20,7 @@ class CreateExpensesTable extends Migration
             $table->string('exp_typ', 50)->nullable();
             $table->string('exp_typ_sub', 100)->nullable();
             $table->decimal('annul_exp', 18, 2)->nullable();
+            $table->decimal('inflation', 8, 2)->nullable();
             $table->tinyInteger('is_essential')->nullable();
             $table->timestamps();
         });

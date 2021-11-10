@@ -64,9 +64,9 @@ export default {
             data['Asset Details'] = fixed.acct_desc;
             data['Interest Rate'] = fixed.intrst_rt;
             data['Compound Interest'] = fixed.compound;
-            data['Invested Amount'] = fixed.invest_amt;
+            data['Invested Amount'] = currency.format(fixed.invest_amt);
             data['Invested Date'] = fixed.invest_yr;
-            data['Maturity Amount'] = fixed.maturity_amt;
+            data['Maturity Amount'] = currency.format(fixed.maturity_amt);
             data['Maturity Date'] = fixed.maturity_yr;
             data['Status'] = fixed.status;
 

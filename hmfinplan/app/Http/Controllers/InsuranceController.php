@@ -26,6 +26,7 @@ class InsuranceController extends Controller
                 'polcy_end_dt' => 'date|nullable',
                 'sum_insurd' => 'numeric|nullable',
                 'annul_prmium' => 'numeric|nullable',
+                'maturity_val' => 'numeric|nullable',
                 'prmium_mode' => 'string|nullable',
             ]);
 

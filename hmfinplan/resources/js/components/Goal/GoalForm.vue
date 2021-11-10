@@ -28,7 +28,7 @@
 
                 <div>
                     <label class="input-label" for="currsvng">Current Savings</label>
-                    <input class="input" id="currsvng" type="numeric" v-model="goal.current_saving">
+                    <input class="input" id="currsvng" type="number" v-model="goal.current_saving">
                 </div>
             
                 <div>
@@ -39,6 +39,11 @@
                 <div>
                     <label class="input-label" for="goaltgtdt">Goal Target Date</label>
                     <input class="input" id="goaltgtdt" type="date" v-model="goal.goal_target_dt">
+                </div>
+
+                <div>
+                    <label class="input-label" for="inflatn">Inflation</label>
+                    <input class="input" id="inflatn" type="number" step="0.05" v-model="goal.inflation">
                 </div>
 
                 <form-select label="Goal Priority" 
@@ -69,7 +74,7 @@ export default {
 
     data() {
         return {
-            goal: { goal_typ:'', goal_desc:'', current_saving:0, goal_start_dt:'', goal_target_dt:'', goal_pri:''},
+            goal: { goal_typ:'', goal_desc:'', current_saving:0, goal_start_dt:'', goal_target_dt:'', inflation:6.0, goal_pri:''},
             errors: {},
         };
     },
