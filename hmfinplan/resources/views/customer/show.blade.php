@@ -71,21 +71,21 @@
 
                         </div>
 
-                        <div class="h-screen bg-gray-50 px-4 mr-4">
-                            <ul class="flex flex-col">
-                                <li class="mb-3 mt-1">
-                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="#bank-asset">Bank</a>
+                        <div class="h-screen bg-gray-50 px-4 mr-4 text-gray-500 font-merriweather text-base">
+                            <p class="mb-3 mt-1 font-semibold uppercase">On This Page</p>
+                            <ul>
+                                <li class="mb-3">
+                                    <a class="hover:cursor-pointer hover:underline" href="#bank-asset">Bank</a>
                                 </li>
                                 <li class="mb-3">
-                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"  href="#fixed-asset">Fixed</a>
+                                    <a class="hover:cursor-pointer hover:underline"  href="#fixed-asset">Fixed</a>
                                 </li>
                                 <li class="mb-3">
-                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"  href="#investment-asset">Investment</a>
+                                    <a class="hover:cursor-pointer hover:underline"  href="#investment-asset">Investment</a>
                                 </li>
                                 <li class="mb-3">
-                                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="#retirement-asset">Retirement</a>
+                                    <a class="hover:cursor-pointer hover:underline" href="#retirement-asset">Retirement</a>
                                 </li>
-
                             </ul>
                         </div>
 
