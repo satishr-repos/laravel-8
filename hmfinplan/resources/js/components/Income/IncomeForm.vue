@@ -36,9 +36,24 @@
                 </div>
                 
                 <div>
-                    <label class="input-label" for="grwthrt">Expected Growth Rate</label>
-                    <input class="input" id="grwthrt" type="number" step="0.05"  v-model="salary.grwth_rt">
+                    <label class="input-label" for="basics">Basic Salary (Annual)</label>
+                    <input class="input" id="basics" type="number" step="100"  v-model="salary.basic_salry">
                 </div>
+                
+                <div>
+                    <label class="input-label" for="basicmonthly">Basic Salary (Monthly)</label>
+                    <input class="input" id="basicmonthly" type="number" step="100"  v-model="computeMonthlyBasic">
+                </div>
+                
+                <div>
+                    <label class="input-label" for="grwthrt">Expected Growth Rate</label>
+                    <input class="input" id="grwthrt" type="number" value="5.0" step="0.5"  v-model="salary.grwth_rt">
+                </div>
+            
+                <form-select class="mb-3" label="EPF Asset" 
+                :selection.sync="salary.retirement_asset_id"
+                :options="formData.epf">
+                </form-select>
             </div>
 
             <div v-if="incomeType == 'Pension'" class="grid grid-cols-2 gap-2">
@@ -130,7 +145,7 @@ export default {
 
     data() {
         return {
-            salary: { id:0, gross_salry:0, net_salry:0, grwth_rt:0 },
+            salary: { id:0, gross_salry:0, net_salry:0, basic_salry:0, grwth_rt:0, retirement_asset_id:null },
             pension: { id:0, pension_plan:'', annul_inc:0, strt_yr:'', end_yr:'',grwth_rt:0 },
             rental: { id:0, annul_inc:0, grwth_rt:0},
             other: { id:0, inc_typ:'', inc_desc:'', annul_inc:0, inc_tx_rt:0, grwth_rt:0},
@@ -148,6 +163,15 @@ export default {
           },
           set: function (newValue) {
               this.salary.net_salry = this.salary.gross_salry - newValue;
+          }
+        },
+      
+      computeMonthlyBasic: {
+          get: function () {
+              return this.salary.basic_salry / 12;
+          },
+          set: function (newValue) {
+              this.salary.basic_salry = newValue * 12;
           }
         },
     },

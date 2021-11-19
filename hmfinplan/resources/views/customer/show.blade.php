@@ -49,7 +49,7 @@
                     
                     <personal-asset class="mb-3" v-bind:base-route="{{ json_encode(route('customer.personalitem', $customer)) }}">
                     </personal-asset>
-
+                   
                     @break
                 
                 @case('Financial Assets')
@@ -104,7 +104,8 @@
                         v-bind:salary-route="{{ json_encode(route('customer.salary', $customer)) }}"
                         v-bind:rental-route="{{ json_encode(route('customer.rental', $customer)) }}"
                         v-bind:pension-route="{{ json_encode(route('customer.pension', $customer)) }}"
-                        v-bind:other-route="{{ json_encode(route('customer.other', $customer)) }}">
+                        v-bind:other-route="{{ json_encode(route('customer.other', $customer)) }}"
+                        v-bind:retirement-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}">
                     </income>
 
                     @break
@@ -129,8 +130,24 @@
                     </risk-tolerance>
                     @break
 
+                @case('Financial Plan')
+                    <income-expense-report class="mb-3" id="ie-report" v-bind:route="{{json_encode(route('customer.iereport', $customer)) }}">
+                    </income-expense-report>
+                    <balance-sheet class="mb-3" id="balance-sheet" v-bind:route="{{json_encode(route('customer.balancesheet', $customer)) }}">
+                    </balance-sheet>
+                    <goals-report class="mb-3" id="goals-report" v-bind:route="{{ json_encode(route('customer.goalsreport', $customer)) }}">
+                    </goals-report>
+                    <risk-management class="mb-3" id="risk-mgmt" v-bind:route="{{ json_encode(route('customer.riskmgmt', $customer)) }}">
+                    </risk-management>
+                    <living-expense class="mb-3" id="living-expense" v-bind:route="{{ json_encode(route('customer.livingexpenses', $customer)) }}">
+                    </living-expense>
+
+                    @break;
+
                 @default
-                    
+
+                    @break
+
             @endswitch
         </div>
     </section>
@@ -161,7 +178,7 @@ window.onload = function() {
 
     toggleAsset(open);
     
-    console.log(sbproxy.offsetWidth, sbproxy.clientWidth);
+    // console.log(sbproxy.offsetWidth, sbproxy.clientWidth);
 };
 
 window.onunload = function() {

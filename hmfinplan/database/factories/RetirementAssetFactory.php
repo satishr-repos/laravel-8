@@ -23,8 +23,8 @@ class RetirementAssetFactory extends Factory
     {
         return [
             'acct_typ' => $this->faker->randomElement($array = array('EPF', 'PPF')),
-            'employe_contrb' => $this->faker->randomFloat(4, 1, 100000),
-            'employr_contrb' => $this->faker->randomFloat(4, 1, 100000),
+            'employe_contrb' => 12.0, 
+            'employr_contrb' => 12.0,
             'accmultd_value' => $this->faker->randomFloat(4, 1, 9000000),
             'strt_yr' => $this->faker->dateTimeBetween($startDate = '-30 years', $endDate = '-10 years', $timezone = null),
             'end_yr' => $this->faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),

@@ -18,8 +18,8 @@ class CreateRetirementAssetsTable extends Migration
             $table->id();
             $table->foreignIdFor(customer::class)->constrained()->onDelete('cascade');
             $table->string('acct_typ', 25)->nullable();
-            $table->decimal('employe_contrb', 18, 2)->nullable();
-            $table->decimal('employr_contrb', 18, 2)->nullable();
+            $table->decimal('employe_contrb', 8, 2)->nullable();
+            $table->decimal('employr_contrb', 8, 2)->nullable();
             $table->decimal('accmultd_value', 18, 2)->nullable();
             $table->date('strt_yr')->nullable();
             $table->date('end_yr')->nullable();

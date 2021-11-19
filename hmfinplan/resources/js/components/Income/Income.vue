@@ -50,6 +50,7 @@ export default {
         pensionRoute: String,
         rentalRoute: String,
         otherRoute: String,
+        retirementRoute: String,
     },
 
     computed: {
@@ -69,6 +70,7 @@ export default {
     },
 
     created () {
+        this.epf = new Array();
     },
 
     mounted () {
@@ -84,14 +86,26 @@ export default {
                     axios.get(this.pensionRoute, {params: {json:true}}),
                     axios.get(this.rentalRoute, {params: {json:true}}),
                     axios.get(this.otherRoute, {params: {json:true}}),
+                    axios.get(this.retirementRoute, {params: {json:true}}),
                 ])
                 .then(response => {
                     const salary = response[0].data.salaryIncome;
                     const pension = response[1].data.pensionIncome;
                     const rental = response[2].data.rentalIncome;
                     const other = response[3].data.otherIncome;
+                    const retirement = response[4].data.retirementAsset;
 
                     console.log("getincomes:", response);
+
+                    retirement?.forEach(element => {
+                        if(element.acct_typ == 'EPF')
+                        {
+                            var data = {};
+                            data['value'] = element.id;
+                            data['text'] = 'epf_bal_' + element.accmultd_value;
+                            this.epf.push(data);
+                        }
+                    });
 
                     this.addSalary(salary);
                     this.addPension(pension);
@@ -109,11 +123,17 @@ export default {
         initSalaryData(salary){
 
             var data = {};
+            var epfAsset;
+
+            epfAsset = this.epf.find(o => o.value === salary.retirement_asset_id);
 
             data['Gross Salary(Annual)'] = currency.format(salary.gross_salry);
             data['Deductions'] = currency.format(salary.gross_salry - salary.net_salry);
             data['Net Salary(Annual)'] = currency.format(salary.net_salry);
             data['Net Salary(Monthly)'] = currency.format(salary.net_salry / 12);
+            data['Basic Salary(Annual)'] = currency.format(salary.basic_salry);
+            data['Basic Salary(Monthly)'] = currency.format(salary.basic_salry / 12);
+            data['EPF Asset'] = epfAsset?.text;
             data['Expected Growth Rate(%)'] = salary.grwth_rt;
 
             return data;
@@ -231,7 +251,7 @@ export default {
         },
 
         onAddIncome() {
-            this.formData = {id: -1};
+            this.formData = {id: -1, epf:this.epf};
             this.formType = 'Salary';
             this.showTabs = false;
         },
@@ -239,6 +259,7 @@ export default {
         onEditIncome() {
 
             var formData = this.componentList[this.currentIndex].db;
+            formData['epf'] = this.epf;
 
             Object.assign(this.formData, formData);
             this.formType = this.labelList[this.currentIndex];
@@ -322,6 +343,7 @@ export default {
                 if(this.formData.id === -1) { // add item
                     this.componentList.push(comp);
                     this.labelList.push(type);
+                    this.currentIndex = this.labelList.length - 1;
                 } else {
                     this.componentList.splice(this.currentIndex, 1, comp);
                 }

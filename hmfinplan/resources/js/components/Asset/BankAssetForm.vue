@@ -80,6 +80,7 @@ export default {
     },
 
     created() {
+        bank.intrst_rt = 3.5;
         Object.assign(this.bank, this.formData);
     },
 

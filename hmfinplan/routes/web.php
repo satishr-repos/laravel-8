@@ -138,3 +138,12 @@ Route::get('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceCon
 Route::post('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'store']);
 Route::patch('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'update']);
 Route::delete('/customers/{customer}/risks', [App\Http\Controllers\RiskToleranceController::class, 'destroy']);
+
+// Financial Plan Controller
+Route::get('/customers/{customer}/financialplan', [App\Http\Controllers\FinancialPlanController::class, 'index'])->name('customer.finplan');
+Route::get('/customers/{customer}/financialplan/iereport', [App\Http\Controllers\FinancialPlanController::class, 'IncomeAndExpense'])->name('customer.iereport');
+Route::get('/customers/{customer}/financialplan/goalsreport', [App\Http\Controllers\FinancialPlanController::class, 'Goals'])->name('customer.goalsreport');
+Route::get('/customers/{customer}/financialplan/balancesheet', [App\Http\Controllers\FinancialPlanController::class, 'BalanceSheet'])->name('customer.balancesheet');
+Route::get('/customers/{customer}/financialplan/riskmgmt', [App\Http\Controllers\FinancialPlanController::class, 'RiskManagement'])->name('customer.riskmgmt');
+Route::get('/customers/{customer}/financialplan/livingexpenses', [App\Http\Controllers\FinancialPlanController::class, 'LivingExpenses'])->name('customer.livingexpenses');
+Route::get('/customers/{customer}/financialplan/epfreport', [App\Http\Controllers\FinancialPlanController::class, 'EpfReport'])->name('customer.epfreport');

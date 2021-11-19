@@ -19,7 +19,7 @@ class RiskToleranceController extends Controller
     {
         $data = request()->validate([
                 'survey' => 'required|array|min:10',
-                'surevey.*' => 'required|numeric',
+                'survey.*' => 'required|numeric',
                 'response' => 'required|array|min:10',
                 'response.*' => 'required|numeric',
             ]);

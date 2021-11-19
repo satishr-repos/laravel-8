@@ -14,7 +14,7 @@
                 <form-select label="Type" 
                     :selection.sync="liability.loan_typ"
                     :options="[ 
-                        { value:'Housing', text:'Housing Loan'}, 
+                        { value:'House', text:'Housing Loan'}, 
                         { value:'Car', text:'Car Loan'}, 
                         { value:'Personal', text:'Personal Loan'}]">
                 </form-select>

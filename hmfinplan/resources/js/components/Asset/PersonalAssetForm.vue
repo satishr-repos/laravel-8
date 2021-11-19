@@ -11,7 +11,7 @@
 
             <div class="grid grid-cols-2 gap-3">
 
-                <form-select label="type" 
+                <form-select label="Type" 
                     :selection.sync="personalItem.type"
                     :options="[ 
                         { value:'Gold', text:'Gold'}, 

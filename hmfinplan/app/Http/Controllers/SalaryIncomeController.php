@@ -17,9 +17,11 @@ class SalaryIncomeController extends Controller
     private function verify(Request $request)
     {
         $data = request()->validate([
-                'gross_salry' => 'numeric|nullable',
-                'net_salry' => 'numeric|nullable',
+                'gross_salry' => 'numeric|required',
+                'net_salry' => 'numeric|required',
+                'basic_salry' => 'numeric|required',
                 'grwth_rt' => 'numeric|nullable',
+                'retirement_asset_id' => 'nullable|exists:retirement_assets,id'
             ]);
 
         return $data;

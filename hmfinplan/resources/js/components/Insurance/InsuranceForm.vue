@@ -57,7 +57,7 @@
                     <input class="input" id="suminsrd" type="number" v-model="insurance.sum_insurd">
                 </div>
                 
-                <div>
+                <div v-if="insurance.polcy_typ != 'Medical'">
                     <label class="input-label" for="maturityval">Maturity Value</label>
                     <input class="input" id="maturityval" type="number" v-model="insurance.maturity_val">
                 </div>

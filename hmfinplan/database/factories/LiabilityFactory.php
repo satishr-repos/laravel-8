@@ -22,7 +22,7 @@ class LiabilityFactory extends Factory
     public function definition()
     {
         return [
-            'loan_typ' => $this->faker->randomElement($array = array('house', 'car', 'personal')),
+            'loan_typ' => $this->faker->randomElement($array = array('House', 'Car', 'Personal')),
             'fin_inst' => $this->faker->company(50),
             'amt_outstanding' => $this->faker->randomFloat(2, 0, 99999999),
             'inrst_rt' => $this->faker->randomFloat(2, 0, 20),

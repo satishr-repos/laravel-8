@@ -22,8 +22,9 @@ class SalaryIncomeFactory extends Factory
     public function definition()
     {
         return [
-            'gross_salry' => $this->faker->randomFloat(2, 1, 10000000),
-            'net_salry' => $this->faker->randomFloat(2, 1, 9000000),
+            'gross_salry' => $this->faker->randomFloat(2, 3000000, 5000000),
+            'net_salry' => $this->faker->randomFloat(2, 2000000, 4000000),
+            'basic_salry' => $this->faker->randomFloat(2, 1000000, 2000000),
             'grwth_rt' => $this->faker->randomFloat(2, 1, 20),
         ];
     }

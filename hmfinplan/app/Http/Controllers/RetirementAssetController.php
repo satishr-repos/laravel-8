@@ -18,10 +18,10 @@ class RetirementAssetController extends Controller
     private function verify(Request $request)
     {
         $data = request()->validate([
-                'acct_typ'  => 'alpha|nullable',
-                'employe_contrb' => 'numeric|nullable',
-                'employr_contrb' => 'numeric|nullable',
-                'accmultd_value' => 'numeric|nullable',
+                'acct_typ'  => 'alpha|required',
+                'employe_contrb' => 'numeric|required',
+                'employr_contrb' => 'numeric|required',
+                'accmultd_value' => 'numeric|required',
                 'strt_yr' => 'date|nullable',
                 'end_yr' => 'date|nullable',
             ]);

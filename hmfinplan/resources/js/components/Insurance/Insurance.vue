@@ -69,8 +69,9 @@ export default {
             data['Policy End Date'] = insurance.polcy_end_dt;
             data['Sum Insured'] = currency.format(insurance.sum_insurd);
             data['Annual Premium'] = currency.format(insurance.annul_prmium);
-            data['Maturity Value'] = currency.format(insurance.maturity_val);
             data['Premium Mode'] = insurance.prmium_mode;
+            if(insurance.polcy_typ != 'Medical')
+                data['Maturity Value'] = currency.format(insurance.maturity_val);
 
             return data;
         },

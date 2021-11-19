@@ -27,8 +27,8 @@
                 </div>
 
                 <div>
-                    <label class="input-label" for="currsvng">Current Savings</label>
-                    <input class="input" id="currsvng" type="number" v-model="goal.current_saving">
+                    <label class="input-label" for="currsvng">Current Cost</label>
+                    <input class="input" id="currsvng" type="number" v-model="goal.current_cost">
                 </div>
             
                 <div>
@@ -74,12 +74,14 @@ export default {
 
     data() {
         return {
-            goal: { goal_typ:'', goal_desc:'', current_saving:0, goal_start_dt:'', goal_target_dt:'', inflation:6.0, goal_pri:''},
+            goal: { goal_typ:'', goal_desc:'', current_cost:0, goal_start_dt:'', goal_target_dt:'', inflation:0, goal_pri:''},
             errors: {},
         };
     },
 
     created() {
+        this.goal.goal_start_dt = new Date().toISOString().slice(0,10);
+        this.goal.inflation = 6.0;
         Object.assign(this.goal, this.formData);
     },
 

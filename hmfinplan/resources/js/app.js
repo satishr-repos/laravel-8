@@ -99,5 +99,10 @@ const app = new Vue({
         Insurance: () => import('./components/Insurance/Insurance.vue'),
         Goal: () => import('./components/Goal/Goal.vue'),
         RiskTolerance: () => import('./components/Risk/RiskTolerance.vue'),
+        IncomeExpenseReport: () => import('./components/FinPlan/IncomeExpenseReport.vue'),
+        BalanceSheet: () => import('./components/FinPlan/BalanceSheet.vue'),
+        GoalsReport: () => import('./components/FinPlan/GoalsReport.vue'),
+        RiskManagement: () => import('./components/FinPlan/RiskManagement.vue'),
+        LivingExpense: () => import('./components/FinPlan/LivingExpense.vue'),
     }
 });

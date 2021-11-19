@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExpenseFactory extends Factory
 {
+    private static $index = 0;
+
+    private static $expenses = array('House Hold', 'Monthly', 'Luxury', 'Annual', 'Savings');
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -21,7 +25,11 @@ class ExpenseFactory extends Factory
      */
     public function definition()
     {
-        $category = $this->faker->randomElement($array = array('House Hold', 'Monthly', 'Luxury', 'Annual', 'Savings'));
+        $category = self::$expenses[self::$index];
+
+        self::$index = (self::$index + 1) % count(self::$expenses);        
+
+        // $category = $this->faker->randomElement($array = array('House Hold', 'Monthly', 'Luxury', 'Annual', 'Savings'));
         if($category == 'House Hold')
             $subCategory = $this->faker->randomElement($array = array('Family Maintenance', 'Children Education', 'Parental Support', 'Transport'));
         elseif($category == 'Monthly')

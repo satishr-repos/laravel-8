@@ -21,7 +21,7 @@ class GoalController extends Controller
                 'goal_desc' => 'string|nullable',
                 'goal_start_dt' => 'date|nullable',
                 'goal_target_dt' => 'date|nullable',
-                'current_saving' => 'numeric|nullable',
+                'current_cost' => 'numeric|nullable',
                 'inflation' => 'numeric|nullable',
                 'goal_pri' => 'alpha|nullable',
             ]);

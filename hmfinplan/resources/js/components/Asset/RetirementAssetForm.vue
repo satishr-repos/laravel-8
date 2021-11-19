@@ -24,13 +24,13 @@
                 </div>
 
                 <div>
-                    <label class="input-label" for="emplyee">Employee Contribution</label>
-                    <input class="input" id="emplyee" type="number" placeholder="" v-model="retirement.employe_contrb">
+                    <label class="input-label" for="emplyee">Employee Contribution(%)</label>
+                    <input class="input" id="emplyee" type="number" step="0.05" v-model="retirement.employe_contrb">
                 </div>
                 
                 <div>
-                    <label class="input-label" for="emplyr">Employer Contribution</label>
-                    <input class="input" id="emplyr" type="text" placeholder="" v-model="retirement.employr_contrb">
+                    <label class="input-label" for="emplyr">Employer Contribution(%)</label>
+                    <input class="input" id="emplyr" type="number" step="0.05" v-model="retirement.employr_contrb">
                 </div>
 
                 <div>
@@ -78,6 +78,8 @@ export default {
     },
 
     created() {
+        this.retirement.employe_contrb = 12.0;
+        this.retirement.employr_contrb = 12.0;
         Object.assign(this.retirement, this.formData);
     },
 

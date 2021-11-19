@@ -71,7 +71,7 @@ export default {
                 exp_typ:'', 
                 exp_typ_sub:'', 
                 annul_exp:0, 
-                inflation:6.0,
+                inflation:0,
                 is_essential:1 },
             errors: {},
             subCategory: {
@@ -104,6 +104,7 @@ export default {
     },
 
     created() {
+        this.expense.inflation = 6.0;
         Object.assign(this.expense, this.formData);
     },
 

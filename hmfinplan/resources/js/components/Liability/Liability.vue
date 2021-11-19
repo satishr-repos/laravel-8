@@ -61,7 +61,7 @@ export default {
             data['Monthly Installments'] = currency.format(liability.emi);
             data['Interest Rate'] = liability.inrst_rt;
             data['Start Year'] = liability.start_yr;
-            data['Duration'] = liability.duration;
+            data['Duration (months)'] = liability.duration;
             data['Status'] = liability.status;
 
             return data;

@@ -18,4 +18,9 @@ class SalaryIncome extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function retirementAsset()
+    {
+        return $this->belongsTo(RetirementAsset::class);
+    }
 }
