@@ -84,8 +84,8 @@ class FinancialPlanController extends Controller
     {
         $epfHelper = new EpfHelper($customer);
 
-        $report = $epfHelper->report();
+        $epfreport = $epfHelper->report();
 
-        return compact('report');
+        return response()->json(compact('epfreport'), 200);
     }
 }

@@ -58,7 +58,8 @@ export default {
             data['Account Type'] = retirement.acct_typ;
             data['Accumulated Amt'] = currency.format(retirement.accmultd_value);
             data['Employee Contrib'] = retirement.employe_contrb + '%';
-            data['Employer Contrib'] = retirement.employr_contrb + '%';
+            if(retirement.acct_typ === 'EPF')
+                data['Employer Contrib'] = retirement.employr_contrb + '%';
             data['Start Year'] = retirement.strt_yr;
             data['End Year'] = retirement.end_yr;
 

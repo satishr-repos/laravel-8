@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card title="Balance Sheet">
+    <simple-card title="Balance Sheet" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">

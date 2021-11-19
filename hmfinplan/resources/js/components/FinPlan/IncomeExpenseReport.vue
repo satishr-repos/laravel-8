@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card title="Income Expense Report">
+    <simple-card title="Income Expense Report" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">

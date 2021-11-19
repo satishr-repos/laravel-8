@@ -98,13 +98,10 @@ export default {
                     console.log("getincomes:", response);
 
                     retirement?.forEach(element => {
-                        if(element.acct_typ == 'EPF')
-                        {
-                            var data = {};
-                            data['value'] = element.id;
-                            data['text'] = 'epf_bal_' + element.accmultd_value;
-                            this.epf.push(data);
-                        }
+                        var data = {};
+                        data['value'] = element.id;
+                        data['text'] = 'pf_bal_' + element.accmultd_value;
+                        this.epf.push(data);
                     });
 
                     this.addSalary(salary);

@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card v-if="!loading" title="Risk Management Report">
+    <simple-card v-if="!loading" title="Risk Management Report" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">

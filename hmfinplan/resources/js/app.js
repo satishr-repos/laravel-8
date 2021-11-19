@@ -104,5 +104,6 @@ const app = new Vue({
         GoalsReport: () => import('./components/FinPlan/GoalsReport.vue'),
         RiskManagement: () => import('./components/FinPlan/RiskManagement.vue'),
         LivingExpense: () => import('./components/FinPlan/LivingExpense.vue'),
+        EpfReport: () => import('./components/FinPlan/EpfReport.vue'),
     }
 });

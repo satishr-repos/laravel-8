@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card v-if="!loading" title="Cash Flow Needs for Customer">
+    <simple-card v-if="!loading" title="Cash Flow Needs for Customer" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">

@@ -28,7 +28,7 @@
                     <input class="input" id="emplyee" type="number" step="0.05" v-model="retirement.employe_contrb">
                 </div>
                 
-                <div>
+                <div v-if="retirement.acct_typ === 'EPF'">
                     <label class="input-label" for="emplyr">Employer Contribution(%)</label>
                     <input class="input" id="emplyr" type="number" step="0.05" v-model="retirement.employr_contrb">
                 </div>
@@ -91,7 +91,9 @@ export default {
     methods: {
 
         formSubmitted() {
-           
+            if(this.retirement.acct_typ !== 'EPF')
+                this.retirement.employr_contrb = 0;
+          
             this.$refs.spinner.show();
             if(this.formData.id < 1)
             {

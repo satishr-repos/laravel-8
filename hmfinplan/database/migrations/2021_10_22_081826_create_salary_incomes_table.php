@@ -22,7 +22,7 @@ class CreateSalaryIncomesTable extends Migration
             $table->decimal('net_salry',18,2)->nullable();
             $table->decimal('basic_salry',18,2)->nullable();
             $table->decimal('grwth_rt',10,2)->nullable();
-            $table->foreignIdFor(RetirementAsset::class)->nullable();
+            $table->foreignIdFor(RetirementAsset::class)->nullable()->constrained()->onDelete('set null');
             // $table->foreign('epf_id')->references('id')->on('retirement_assets')->nullable();
             $table->timestamps();
         });
