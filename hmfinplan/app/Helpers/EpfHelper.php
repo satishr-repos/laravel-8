@@ -18,7 +18,8 @@ class EpfHelper
     public function getEpfData()
     {
         $data = array();
-        $now = new DateTime(Carbon::now());
+        // $now = new DateTime(Carbon::now());
+        $now = new DateTime($this->customer->updated_at);
 
         $salaries = $this->customer->salaryIncomes;
         foreach($salaries as $salary)
@@ -30,10 +31,10 @@ class EpfHelper
             
                 $dob = new DateTime($this->customer->personalDetail->dob);
                 $age = $now->diff($dob)->y;
-                $item['Current Age'] = $age . 'yr';
+                $item['Record Age'] = (string)$age;
             
-                $item['Retirement Age'] = FinanceUtils::$retirement_age . 'yr';
-                $item['Monthly Basic'] = (float)$salary->basic_salry;
+                $item['Retirement Age'] = (string)FinanceUtils::$retirement_age;
+                $item['Monthly Basic'] = (float)($salary->basic_salry / 12);
                 $item['Growth'] = $salary->grwth_rt . '%';
 
                 $item['Employee Contribution'] = $epfAsset->employe_contrb . '%';
@@ -55,7 +56,7 @@ class EpfHelper
         $records = $this->getEpfData();
         foreach($records as $key=>$record)
         {
-            $curr_age = (int)$record['Current Age'];
+            $curr_age = (int)$record['Record Age'];
             $retire_age = (int)$record['Retirement Age'];
             $sal_growth = (float)$record['Growth'];
             $employe_contrib = (float)$record['Employee Contribution'];
@@ -67,8 +68,8 @@ class EpfHelper
 
             $growth_rate = 1 + $sal_growth / 100;
             $annual_salary = $record['Monthly Basic'] * 12;
-            $employee_contrib = ($employe_contrib > 0)? (1 + $employe_contrib / 100) : 0;
-            $employer_contrib = ($employr_contrib > 0)? (1 + $employr_contrib / 100) : 0;
+            $employee_contrib = ($employe_contrib > 0)? ($employe_contrib / 100) : 0;
+            $employer_contrib = ($employr_contrib > 0)? ($employr_contrib / 100) : 0;
             $epf_balance = $record['EPF Balance'];
             $epf_interest = 1 + $interest_rate / 100;
 
@@ -78,7 +79,7 @@ class EpfHelper
             for($i=1; $i <= ($end - $start); $i++)
             {
                 $item = array();
-                $item['Age'] = $start + $i . 'yrs';
+                $item['Age'] = (string)($start + $i);
                 $item['Annual Salary'] = $annual_salary * $growth_rate;
             
                 $annual_salary = $item['Annual Salary'];

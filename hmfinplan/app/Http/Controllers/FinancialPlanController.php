@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\BalanceSheetHelper;
+use App\Helpers\CashFlowHelper;
 use App\Helpers\EpfHelper;
 use App\Helpers\GoalsHelper;
 use Illuminate\Http\Request;
@@ -87,5 +88,14 @@ class FinancialPlanController extends Controller
         $epfreport = $epfHelper->report();
 
         return response()->json(compact('epfreport'), 200);
+    }
+    
+    public function CashFlowReport(Customer $customer)
+    {
+        $cashFlowHelper = new CashFlowHelper($customer);
+
+        $cashflow = $cashFlowHelper->report();
+
+        return response()->json(compact('cashflow'), 200);
     }
 }

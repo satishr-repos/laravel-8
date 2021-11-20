@@ -105,5 +105,6 @@ const app = new Vue({
         RiskManagement: () => import('./components/FinPlan/RiskManagement.vue'),
         LivingExpense: () => import('./components/FinPlan/LivingExpense.vue'),
         EpfReport: () => import('./components/FinPlan/EpfReport.vue'),
+        CashFlowReport: () => import('./components/FinPlan/CashFlowReport.vue'),
     }
 });

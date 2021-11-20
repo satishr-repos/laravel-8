@@ -141,6 +141,8 @@
                     </risk-management>
                     <living-expense class="mb-5" id="living-expense" v-bind:route="{{ json_encode(route('customer.livingexpenses', $customer)) }}">
                     </living-expense>
+                    <cash-flow-report class="mb-5" id="cash-flow-report" v-bind:route="{{ json_encode(route('customer.cashflow', $customer)) }}">
+                    </cash-flow-report>
                     <epf-report class="mb-5" id="epf-report" v-bind:route="{{ json_encode(route('customer.epfreport', $customer)) }}">
                     </epf-report>
 

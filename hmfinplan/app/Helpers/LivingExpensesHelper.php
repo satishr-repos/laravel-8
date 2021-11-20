@@ -20,12 +20,13 @@ class LivingExpensesHelper
         $ieHelper = new IncomeExpenseHelper($this->customer);
         $expenses = $ieHelper->getExpenses();
 
-        $now = new DateTime(Carbon::now());
+        // $now = new DateTime(Carbon::now());
+        $now = new DateTime($this->customer->updated_at);
         $dob = new DateTime($this->customer->personalDetail->dob);
-        $data['Current Date'] = $now->format('d-F-Y');
+        $data['Record Date'] = $now->format('d-F-Y');
         $data['Date Of Birth'] = $dob->format('d-F-Y');
         $age = $now->diff($dob)->y;
-        $data['Current Age'] = $age . ' years';
+        $data['Record Age'] = $age . ' years';
         
         $data['Retirement Age'] = FinanceUtils::$retirement_age . ' years';
         

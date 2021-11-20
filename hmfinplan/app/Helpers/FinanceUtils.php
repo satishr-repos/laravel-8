@@ -16,7 +16,7 @@ class FinanceUtils
     public static $post_freedom_returns = 7.0;
     public static $post_freedom_tax_rate = 0;
     public static $epf_interest_rate = 6.0;
-    public static $cash_flow_cagr = 12.0;
+    public static $cash_flow_cagr = 0.12;
 
     public function __construct()
     {
@@ -47,4 +47,5 @@ class FinanceUtils
         
         return round($fv, 2);
     }
+
 }

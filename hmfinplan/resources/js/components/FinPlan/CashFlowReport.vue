@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card v-if="!loading" title="EPF Report" bgColor="bg-gray-50">
+    <simple-card v-if="!loading" title="Cash Flow Report" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">
@@ -8,21 +8,21 @@
                 <table class="bg-white border border-gray-50 box-border" style="width:100%">
                     <thead class="">
                         <tr class="border">
-                            <th v-for="(item, key) in epfData" :key="key+'A'" class="border-r border-gray-100 text-center text-xs py-2 capitalize">
+                            <th v-for="(item, key) in cashFlow[0]" :key="key+'A'" class="border-r border-gray-100 text-center text-xs py-2 capitalize">
                                {{ key }} 
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border">
-                            <td v-for="(item, key) in epfData" :key="key+'B'" class="text-sm text-left px-5 py-1">
+                        <tr v-for="(report, key) in cashFlow" :key="key+'D'" :class="{'border-2 font-bold': (key == cashFlow.length - 1)}">
+                            <td v-for="(item, index) in report" :key="index+'E'" class="text-sm text-center px-5 py-1">
                                 <span v-if="typeof(item) === 'number'"> {{currency.format(item)}}</span>
                                 <span v-else> {{item}}</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <table class="mt-5 bg-white border border-gray-50 box-border" style="width:100%">
+                <!-- <table class="mt-5 bg-white border border-gray-50 box-border" style="width:100%">
                     <thead class="">
                         <tr class="border">
                             <th v-for="(item, key) in epfReport[0]" :key="key+'C'" class="border-r border-gray-100 text-center text-xs py-2 capitalize">
@@ -38,7 +38,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
             </div>
         </div>
     </simple-card>
@@ -48,7 +48,7 @@
 
 <script>
     export default {
-        name: "EpfReport",
+        name: "CashFlowReport",
 
         props: {
             route: String,
@@ -56,32 +56,28 @@
 
         data() {
             return {
-                epfData: {},
-                epfReport: [],
+                cashFlow: [],
                 currency: window.currency,
                 loading: true,
             }
         },
 
         created () {
-            this.getEpfReport();
+            this.getCashFlow();
         },
 
         methods: {
-            getEpfReport() {
+            getCashFlow() {
                axios.get(this.route, {
                 })
                 .then((response) => {
 
-                    let report = response.data.epfreport;
+                    let report = response.data.cashflow;
 
-                    console.log("epfreport", report);
+                    console.log("cashflow", report);
 
-                    if(report.length > 0)
-                    {
-                        Object.assign(this.epfData, report[0]['epf_data']);
-                        Object.assign(this.epfReport, report[0]['epf_report']);
-                    }
+                    Object.assign(this.cashFlow, report);
+
                     this.loading = false;
                 })
                 .catch((error) => {

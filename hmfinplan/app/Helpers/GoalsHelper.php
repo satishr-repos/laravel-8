@@ -41,7 +41,7 @@ class GoalsHelper
             
         $debt_maturity_value = 0;
 
-        $goals = $this->customer->goals;
+        $goals = $this->customer->goals->sortBy('goal_target_dt');
         foreach($goals as $goal)
         {
             $principal = $goal->current_cost;
