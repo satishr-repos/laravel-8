@@ -104,6 +104,9 @@ class CashFlowHelper
             $item['Subtotal2'] = $subtotal2;
 
             $cash_outflow = $goal_outflow[$year] ?? 0;
+            if($i == $end - 1)
+                $cash_outflow += $subtotal2;
+
             $item['Cash Outflow'] = $cash_outflow;
 
             $closing = $subtotal2 - $cash_outflow;
