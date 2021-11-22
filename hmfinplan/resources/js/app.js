@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+import VueRouter from 'vue-router'
+import Routes from './routes.js'
 
 window.Vue = require('vue').default;
 
@@ -22,11 +24,12 @@ window.Vue = require('vue').default;
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // Vue.component('customer-list', require('./components/Customers/CustomerListComponent.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    routes: Routes
+  });
+
 Vue.mixin({
     methods: {
         randomString(len, charSet) {
@@ -80,6 +83,7 @@ Vue.component('multi-data-list', () => import('./components/Utils/MultiDataList.
 
 const app = new Vue({
     el: '#app',
+    router,
     components: {
         CustomerList: () => import('./components/Customers/CustomerList.vue'),
         CustomerDashboard: () => import('./components/Customers/CustomerDashboard.vue'),
@@ -99,12 +103,6 @@ const app = new Vue({
         Insurance: () => import('./components/Insurance/Insurance.vue'),
         Goal: () => import('./components/Goal/Goal.vue'),
         RiskTolerance: () => import('./components/Risk/RiskTolerance.vue'),
-        IncomeExpenseReport: () => import('./components/FinPlan/IncomeExpenseReport.vue'),
-        BalanceSheet: () => import('./components/FinPlan/BalanceSheet.vue'),
-        GoalsReport: () => import('./components/FinPlan/GoalsReport.vue'),
-        RiskManagement: () => import('./components/FinPlan/RiskManagement.vue'),
-        LivingExpense: () => import('./components/FinPlan/LivingExpense.vue'),
-        EpfReport: () => import('./components/FinPlan/EpfReport.vue'),
-        CashFlowReport: () => import('./components/FinPlan/CashFlowReport.vue'),
+        FinSidebar: () => import('./components/FinPlan/FinSidebar.vue'), 
     }
 });

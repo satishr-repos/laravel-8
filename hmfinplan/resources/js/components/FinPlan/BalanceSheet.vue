@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card title="Balance Sheet" bgColor="bg-gray-50">
+    <simple-card v-if="!loading" title="Balance Sheet" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">
@@ -91,16 +91,18 @@
                 liabilities:{ 'Short Term':{}, 'Long Term': {}, 'Net Worth': '', 'Total':''},
                 assets:{'Tangible Assets': {}, 'Financial Assets': {}, 'Total':''},
                 currency: window.currency,
+                loading:true,
             }
         },
 
-        created () {
+        mounted() {
             this.getBalanceSheet();
         },
 
         methods: {
             getBalanceSheet() {
-               axios.get(this.route, {
+                this.$refs.spinner.show();
+                axios.get(this.route, {
                 })
                 .then((response) => {
 
@@ -109,8 +111,10 @@
                     Object.assign(this.liabilities, balancesheet['liabilities']);
                     Object.assign(this.assets, balancesheet['assets']);
 
+                    this.loading = false;
                     console.log("BalanceSheet: ", this.liabilities, this.assets);
 
+                    this.$refs.spinner.close();
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
@@ -118,6 +122,7 @@
                     }
 
                     console.log("ERROR:", error);
+                    this.$refs.spinner.close();
                 }); 
             }
         },

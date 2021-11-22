@@ -60,13 +60,14 @@
             }
         },
 
-        created () {
+        mounted() {
             this.getRiskManagement();
         },
 
         methods: {
             getRiskManagement() {
-               axios.get(this.route, {
+                this.$refs.spinner.show();
+                axios.get(this.route, {
                 })
                 .then((response) => {
 
@@ -78,10 +79,12 @@
                     this.loading = false;
                     console.log("RiskMgmtReport: ", this.riskmgmt, this.availRscs);
 
+                    this.$refs.spinner.close();
                 })
                 .catch((error) => {
 
                     console.log("ERROR:", error);
+                    this.$refs.spinner.close();
                 }); 
             }
         },

@@ -1,6 +1,6 @@
 <template>
 <div class="container h-auto">
-    <simple-card title="Income Expense Report" bgColor="bg-gray-50">
+    <simple-card v-if="!loading"  title="Income Expense Report" bgColor="bg-gray-50">
         <div slot="title">
         </div>
         <div slot="content">
@@ -133,16 +133,18 @@
                 inflow:{},
                 outflow:{},
                 currency: window.currency,
+                loading: true,
             }
         },
 
-        created () {
+        mounted() {
             this.getIEReport();
         },
 
         methods: {
             getIEReport() {
-               axios.get(this.route, {
+                this.$refs.spinner.show();
+                axios.get(this.route, {
                 })
                 .then((response) => {
 
@@ -151,7 +153,9 @@
                     Object.assign(this.inflow, iereport['inflow']);
                     Object.assign(this.outflow, iereport['outflow']);
 
+                    this.loading = false;
                     console.log("IEReport: ", this.inflow, this.outflow);
+                    this.$refs.spinner.close();
 
                 })
                 .catch((error) => {
@@ -160,6 +164,7 @@
                     }
 
                     console.log("ERROR:", error);
+                    this.$refs.spinner.close();
                 }); 
             }
         },

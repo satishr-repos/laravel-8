@@ -45,13 +45,14 @@
             }
         },
 
-        created () {
+        mounted() {
             this.getLivingExpenses();
         },
 
         methods: {
             getLivingExpenses() {
-               axios.get(this.route, {
+                this.$refs.spinner.show();
+                axios.get(this.route, {
                 })
                 .then((response) => {
 
@@ -62,10 +63,12 @@
                     this.loading = false;
                     console.log("LivingExpenses: ", this.livingexpns);
 
+                    this.$refs.spinner.close();
                 })
                 .catch((error) => {
 
                     console.log("ERROR:", error);
+                    this.$refs.spinner.close();
                 }); 
             }
         },

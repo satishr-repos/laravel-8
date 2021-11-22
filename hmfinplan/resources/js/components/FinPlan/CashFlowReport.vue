@@ -62,13 +62,14 @@
             }
         },
 
-        created () {
+        mounted() {
             this.getCashFlow();
         },
 
         methods: {
             getCashFlow() {
-               axios.get(this.route, {
+                this.$refs.spinner.show();
+                axios.get(this.route, {
                 })
                 .then((response) => {
 
@@ -79,10 +80,12 @@
                     Object.assign(this.cashFlow, report);
 
                     this.loading = false;
+                    this.$refs.spinner.close();
                 })
                 .catch((error) => {
 
                     console.log("ERROR:", error);
+                    this.$refs.spinner.close();
                 }); 
             }
         },

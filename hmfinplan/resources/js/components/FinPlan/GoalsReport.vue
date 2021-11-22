@@ -50,13 +50,14 @@
             }
         },
 
-        created () {
+        mounted() {
             this.getGoalsReport();
         },
 
         methods: {
             getGoalsReport() {
-               axios.get(this.route, {
+                this.$refs.spinner.show();
+                axios.get(this.route, {
                 })
                 .then((response) => {
 
@@ -67,11 +68,13 @@
                     this.loading = false;
 
                     console.log("GoalsReport: ", this.goals);
+                    this.$refs.spinner.close();
 
                 })
                 .catch((error) => {
 
                     console.log("ERROR:", error);
+                    this.$refs.spinner.close();
                 }); 
             }
         },

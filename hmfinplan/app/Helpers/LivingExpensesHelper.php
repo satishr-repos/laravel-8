@@ -22,7 +22,7 @@ class LivingExpensesHelper
 
         // $now = new DateTime(Carbon::now());
         $now = new DateTime($this->customer->updated_at);
-        $dob = new DateTime($this->customer->personalDetail->dob);
+        $dob = new DateTime($this->customer->personalDetail->dob ?? '');
         $data['Record Date'] = $now->format('d-F-Y');
         $data['Date Of Birth'] = $dob->format('d-F-Y');
         $age = $now->diff($dob)->y;

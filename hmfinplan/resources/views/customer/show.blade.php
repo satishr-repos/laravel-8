@@ -131,7 +131,16 @@
                     @break
 
                 @case('Financial Plan')
-                    <income-expense-report class="mb-5" id="ie-report" v-bind:route="{{json_encode(route('customer.iereport', $customer)) }}">
+                    <fin-sidebar
+                        v-bind:ie-route="{{json_encode(route('customer.iereport', $customer)) }}"
+                        v-bind:bs-route="{{json_encode(route('customer.balancesheet', $customer)) }}"
+                        v-bind:gl-route="{{json_encode(route('customer.goalsreport', $customer)) }}"
+                        v-bind:rk-route="{{json_encode(route('customer.riskmgmt', $customer)) }}"
+                        v-bind:le-route="{{json_encode(route('customer.livingexpenses', $customer)) }}"
+                        v-bind:cf-route="{{json_encode(route('customer.cashflow', $customer)) }}"
+                        v-bind:pf-route="{{json_encode(route('customer.epfreport', $customer)) }}">
+                    </fin-sidebar>
+                    {{-- <income-expense-report class="mb-5" id="ie-report" v-bind:route="{{json_encode(route('customer.iereport', $customer)) }}">
                     </income-expense-report>
                     <balance-sheet class="mb-5" id="balance-sheet" v-bind:route="{{json_encode(route('customer.balancesheet', $customer)) }}">
                     </balance-sheet>
@@ -144,7 +153,7 @@
                     <cash-flow-report class="mb-5" id="cash-flow-report" v-bind:route="{{ json_encode(route('customer.cashflow', $customer)) }}">
                     </cash-flow-report>
                     <epf-report class="mb-5" id="epf-report" v-bind:route="{{ json_encode(route('customer.epfreport', $customer)) }}">
-                    </epf-report>
+                    </epf-report> --}}
 
                     @break;
 

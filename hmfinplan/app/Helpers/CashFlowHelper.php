@@ -49,7 +49,7 @@ class CashFlowHelper
         $now = new DateTime($this->customer->updated_at);
         $year = $now->format('Y');
 
-        $dob = new DateTime($this->customer->personalDetail->dob);
+        $dob = new DateTime($this->customer->personalDetail->dob ?? '');
         $age = $now->diff($dob)->y;
 
         $data['Age'] = $age;

@@ -23,7 +23,7 @@ class RiskManagementHelper
         $liabilities = $bsHelper->getLiabilities();
 
         $data['Name'] = $this->customer->first_name . ' ' . $this->customer->last_name;
-        $data['Date Of Birth'] = $this->customer->personalDetail->dob;
+        $data['Date Of Birth'] = $this->customer->personalDetail->dob ?? '';
 
         $essential_expense = $expenses['Essential']['Annual'];
         $data['Annual Living Cost'] = $essential_expense;
