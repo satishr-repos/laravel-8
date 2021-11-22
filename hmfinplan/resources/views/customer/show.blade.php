@@ -134,5 +134,19 @@
 @endsection
 
 @section('script')
-
+window.onload = function() {
+    
+    var sb = document.getElementById("sidebar");
+    var sbproxy = document.getElementById("sbproxy");
+    var width = sb.offsetWidth + 20;
+    
+    style = "display:block;" + "width:" + width + "px;";
+    sbwrapper.setAttribute("style", style );
+    
+    // width += 10;
+    style = "display:block;" + "width:" + width + "px;";
+    sbproxy.setAttribute("style", style);
+    
+    // console.log(sbproxy.offsetWidth, sbproxy.clientWidth);
+};
 @endsection
