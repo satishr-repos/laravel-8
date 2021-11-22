@@ -43,55 +43,17 @@
                     <professional-detail v-bind:base-route="{{ json_encode(route('customer.profession', $customer)) }}"></professional-detail>
                     @break
            
-                @case('Tangible Assets')
-                    <real-estate class="mb-3" v-bind:base-route="{{ json_encode(route('customer.realestate', $customer)) }}">
-                    </real-estate>
-                    
-                    <personal-asset class="mb-3" v-bind:base-route="{{ json_encode(route('customer.personalitem', $customer)) }}">
-                    </personal-asset>
-                   
-                    @break
-                
-                @case('Financial Assets')
+                @case('Assets')
 
-                    <div class="flex justify-between">
+                    <asset-sidebar
+                        v-bind:re-route="{{json_encode(route('customer.realestate', $customer)) }}"
+                        v-bind:pa-route="{{json_encode(route('customer.personalitem', $customer)) }}"
+                        v-bind:ba-route="{{json_encode(route('customer.bank', $customer)) }}"
+                        v-bind:fi-route="{{json_encode(route('customer.fixedAsset', $customer)) }}"
+                        v-bind:ia-route="{{json_encode(route('customer.investmentAsset', $customer)) }}"
+                        v-bind:ra-route="{{json_encode(route('customer.retirementAsset', $customer)) }}">
+                    </asset-sidebar>
 
-                        <div class="flex-grow">
-                            <bank-asset class="mb-3" id="bank-asset" v-bind:base-route="{{ json_encode(route('customer.bank', $customer)) }}">
-                            </bank-asset>
-                            
-                            <fixed-asset class="mb-3" id="fixed-asset" v-bind:base-route="{{ json_encode(route('customer.fixedAsset', $customer)) }}">
-                            </fixed-asset>
-                            
-                            <investment-asset class="mb-3" id="investment-asset" v-bind:base-route="{{ json_encode(route('customer.investmentAsset', $customer)) }}">
-                            </investment-asset>
-                            
-                            <retirement-asset class="mb-3" id="retirement-asset" v-bind:base-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}">
-                            </retirement-asset>
-
-                        </div>
-
-                        <div class="h-screen bg-gray-50 px-4 mr-4 text-gray-500 font-merriweather text-base">
-                            <p class="mb-3 mt-1 font-semibold uppercase">On This Page</p>
-                            <ul>
-                                <li class="mb-3">
-                                    <a class="hover:cursor-pointer hover:underline" href="#bank-asset">Bank</a>
-                                </li>
-                                <li class="mb-3">
-                                    <a class="hover:cursor-pointer hover:underline"  href="#fixed-asset">Fixed</a>
-                                </li>
-                                <li class="mb-3">
-                                    <a class="hover:cursor-pointer hover:underline"  href="#investment-asset">Investment</a>
-                                </li>
-                                <li class="mb-3">
-                                    <a class="hover:cursor-pointer hover:underline" href="#retirement-asset">Retirement</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                
                     @break
 
                 @case('liabilities')
@@ -172,59 +134,5 @@
 @endsection
 
 @section('script')
-
-var value = localStorage.getItem('assetState');
-var open = JSON.parse(value) === true;
-
-window.onload = function() {
-
-    var sb = document.getElementById("sidebar");
-    var sbproxy = document.getElementById("sbproxy");
-    var width = sb.offsetWidth + 20;
-    
-    style = "display:block;" + "width:" + width + "px;";
-    sbwrapper.setAttribute("style", style );
-   
-    // width += 10;
-    style = "display:block;" + "width:" + width + "px;";
-    sbproxy.setAttribute("style", style);
-
-    toggleAsset(open);
-    
-    // console.log(sbproxy.offsetWidth, sbproxy.clientWidth);
-};
-
-window.onunload = function() {
-    
-    localStorage.setItem('assetState', open);
-
-};
-
-document.getElementById("assets").onclick = function () {
-
-    open = !open;
-
-    // console.log("onClickAssets: ", open);
-
-    toggleAsset(open);
-};
-
-function toggleAsset(val) {
-    var tangible = document.getElementById("tangible");
-    var financial = document.getElementById("financial");
-    var clickimg = document.getElementById("clickimg");
-
-    if (val == false){
-        tangible.setAttribute("style", "display:none;");
-        financial.setAttribute("style", "display:none;");
-        clickimg.classList.remove('rotate-180');
-        clickimg.classList.add('rotate-0');
-    } else {
-        tangible.setAttribute("style", "display:block;");
-        financial.setAttribute("style", "display:block;");
-        clickimg.classList.remove('rotate-0');
-        clickimg.classList.add('rotate-180');
-    }
-}
 
 @endsection

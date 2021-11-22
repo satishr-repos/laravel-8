@@ -38,7 +38,7 @@ class RetirementAssetController extends Controller
             return response()->json(compact('retirementAsset'), 200);
         }
 
-        $current = 'Financial Assets';
+        $current = 'Assets';
 
         return View('customer.show', compact('customer', 'current'));
     }
