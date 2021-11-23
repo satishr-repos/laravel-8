@@ -148,3 +148,4 @@ Route::get('/customers/{customer}/financialplan/riskmgmt', [App\Http\Controllers
 Route::get('/customers/{customer}/financialplan/livingexpenses', [App\Http\Controllers\FinancialPlanController::class, 'LivingExpenses'])->name('customer.livingexpenses');
 Route::get('/customers/{customer}/financialplan/epfreport', [App\Http\Controllers\FinancialPlanController::class, 'EpfReport'])->name('customer.epfreport');
 Route::get('/customers/{customer}/financialplan/cashflow', [App\Http\Controllers\FinancialPlanController::class, 'CashFlowReport'])->name('customer.cashflow');
+Route::get('/customers/{customer}/financialplan/xlsreport', [App\Http\Controllers\FinancialPlanController::class, 'GenerateReport'])->name('customer.xlsreport');

@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Helpers\IncomeExpenseHelper;
 use App\Helpers\LivingExpensesHelper;
+use App\Helpers\GenerateReportHelper;
 use App\Helpers\RiskManagementHelper;
+use Illuminate\Support\Facades\Storage;
 
 class FinancialPlanController extends Controller
 {
@@ -97,5 +99,15 @@ class FinancialPlanController extends Controller
         $cashflow = $cashFlowHelper->report();
 
         return response()->json(compact('cashflow'), 200);
+    }
+    
+    public function GenerateReport(Customer $customer)
+    {
+        $downloadHelper = new GenerateReportHelper($customer);
+        
+        $url = $downloadHelper->generateUrl();
+
+        // return response()->download($url);
+        return $url;
     }
 }
