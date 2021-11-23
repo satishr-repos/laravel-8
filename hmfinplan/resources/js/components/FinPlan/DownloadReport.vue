@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div v-if="visible">
-                    <h4 class="text-base mt-5">You can download the file <a :href="url" class="text-blue-500 underline">here</a></h4>
+                    <h4 class="text-base mt-5 italic font-semibold">You can download the file from <a :href="url" class="text-blue-500 italic underline font-semibold">here</a></h4>
                 </div>
             </form>
         </div>
