@@ -5,6 +5,7 @@ import RiskManagement from './components/FinPlan/RiskManagement.vue'
 import LivingExpense from './components/FinPlan/LivingExpense.vue'
 import EpfReport from './components/FinPlan/EpfReport.vue'
 import CashFlowReport from './components/FinPlan/CashFlowReport.vue'
+import DownloadReport from './components/FinPlan/DownloadReport.vue'
 
 import RealEstate from './components/Asset/RealEstate.vue'
 import PersonalAsset from './components/Asset/PersonalAsset.vue'
@@ -21,6 +22,7 @@ const routes = [
         { path: '/livingexpense/:route', name: 'LivingExpense', component: LivingExpense, props: true},
         { path: '/epfreport/:route', name: 'EpfReport', component: EpfReport, props: true},
         { path: '/cashflowreport/:route', name: 'CashFlowReport', component: CashFlowReport, props: true},
+        { path: '/downloadreport/:route', name: 'DownloadReport', component: DownloadReport, props: true},
 
         { path: '/realestate/:baseRoute', name: 'RealEstate', component: RealEstate, props: true},
         { path: '/personalasset/:baseRoute', name: 'PersonalAsset', component: PersonalAsset, props: true},

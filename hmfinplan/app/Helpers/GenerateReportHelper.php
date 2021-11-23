@@ -29,22 +29,18 @@ class GenerateReportHelper
             $items = $records;
 
             $row++;
-            echo $cell;
             foreach($items as $item)
             {
                 $cell = $col.$row;
                 $worksheet->setCellValue($cell, $item['Type']);
-                echo $cell .':' . $item['Type'] . ' ';
 
                 $col++;
                 $cell = $col.$row;
                 $worksheet->setCellValue($cell, $item['Monthly']);
-                echo $cell .':' . $item['Monthly'] . ' ';
                 
                 $col++;
                 $cell = $col.$row;
                 $worksheet->setCellValue($cell, $item['Annual']);
-                echo $cell .':' . $item['Annual'] . ' ';
 
                 $col = 'A';
                 $row++;
