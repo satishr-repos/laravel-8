@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Customer;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use Dompdf\Dompdf;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class GenerateReportHelper
 {
@@ -388,11 +390,10 @@ class GenerateReportHelper
         $worksheet->getColumnDimension('H')->setAutoSize(true);
     }
 
-    public function generateUrl()
+    public function generateUrl($fileType)
     {
         $inputFileName = Storage::path('private/PlanTemplate.xlsx');
-        $outputFileName = Str::random(10).'.xlsx';
-        $outputFilePath = storage_path('app/public/'.$outputFileName);
+        $outputFileName = '';
    
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $spreadsheet = $reader->load($inputFileName);
@@ -419,11 +420,41 @@ class GenerateReportHelper
             
             $worksheet = $spreadsheet->getSheet(7);
             $this->EpfWorksheet($worksheet);
-            
-            // Write an .xlsx file  
-            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); 
+           
+            $spreadsheet->setActiveSheetIndex(1);
+           
+            if($fileType === 'xlsx')
+            {
+                // Write an .xlsx file  
+                $outputFileName = Str::random(10).'.xlsx';
+                $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet); 
+            }
+            else
+            {
+                $outputFileName = Str::random(10).'.pdf';
+               
+                for($i=0; $i < $spreadsheet->getSheetCount(); $i++)
+                {
+                    $ws = $spreadsheet->getSheet($i); 
+                    $ws->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+                    // $ws->getPageSetup()->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
+                    $ws->getPageSetup()->setFitToWidth(1);
+                    $ws->getPageSetup()->setFitToHeight(0);
+                    // $ws->getPageSetup()->setFitToPage(true);
+                    // $ws->getPageSetup()->setScale(80);
+                    // $ws->getPageMargins()->setTop(1);
+                    // $ws->getPageMargins()->setRight(0.25);
+                    // $ws->getPageMargins()->setLeft(0.25);
+                    // $ws->getPageMargins()->setBottom(1);
+                    $ws->setShowGridlines(false);
+                }
+
+                $writer = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf($spreadsheet);
+
+                $writer->writeAllSheets();
+            }
   
-            // Save .xlsx file to the files directory 
+            $outputFilePath = storage_path('app/public/'.$outputFileName);
             $writer->save($outputFilePath); 
         }
 

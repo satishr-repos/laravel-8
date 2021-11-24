@@ -103,9 +103,11 @@ class FinancialPlanController extends Controller
     
     public function GenerateReport(Customer $customer)
     {
+        $type = request()->query('type', 'xlsx'); 
+
         $downloadHelper = new GenerateReportHelper($customer);
         
-        $url = $downloadHelper->generateUrl();
+        $url = $downloadHelper->generateUrl($type);
 
         // return response()->download($url);
         return $url;
