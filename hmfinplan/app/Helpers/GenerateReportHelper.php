@@ -338,8 +338,8 @@ class GenerateReportHelper
         $pfHelper = new EpfHelper($this->customer);
         $reports = $pfHelper->report();
 
-        $pfData = $reports[0]['epf_data'];
-        $pfReport = $reports[0]['epf_report'];
+        $pfData = $reports[0]['epf_data'] ?? null;
+        $pfReport = $reports[0]['epf_report'] ?? null;
 
         if(isset($pfData))
         {
