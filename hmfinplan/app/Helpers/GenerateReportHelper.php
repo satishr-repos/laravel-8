@@ -333,61 +333,77 @@ class GenerateReportHelper
         }
     }
 
-    public function EpfWorksheet(Worksheet $worksheet)
+    public function EpfWorksheet(Worksheet $templSheet, Spreadsheet $spreadsheet)
     {
         $pfHelper = new EpfHelper($this->customer);
         $reports = $pfHelper->report();
 
-        $pfData = $reports[0]['epf_data'] ?? null;
-        $pfReport = $reports[0]['epf_report'] ?? null;
-
-        if(isset($pfData))
+        $worksheets = array($templSheet);
+        for($i=1; $i < count($reports); $i++)
         {
-            $col = 'A';
-            foreach($pfData as $key=>$value)
-            {
-                if($key === 'Employer Contribution')
-                {
-                    $row = 5;
-                    $col = 'E';
-                }
-                else
-                {
-                    $row = 3;
-                }
-
-                $cell = $col.$row;
-                $worksheet->setCellValue($cell, $value);
-                $col++;
-            }
+            $clonedWorksheet = clone $templSheet; 
+            $clonedWorksheet->setTitle('PF Cal'.$i);
+            $spreadsheet->addSheet($clonedWorksheet);
+            array_push($worksheets, $clonedWorksheet);
         }
 
-        if(isset($pfReport))
+        for($i=0; $i < count($reports); $i++)
         {
-            $worksheet->insertNewRowBefore(10, count($pfReport) - 1);
-            $row = 9;
-            foreach($pfReport as $report)
+            $worksheet = $worksheets[$i];
+
+            $pfData = $reports[$i]['epf_data'] ?? null;
+            $pfReport = $reports[$i]['epf_report'] ?? null;
+
+            if(isset($pfData))
             {
                 $col = 'A';
-                foreach($report as $key=>$value)
+                foreach($pfData as $key=>$value)
                 {
+                    if($key === 'Employer Contribution')
+                    {
+                        $row = 5;
+                        $col = 'E';
+                    }
+                    else
+                    {
+                        $row = 3;
+                    }
+
                     $cell = $col.$row;
                     $worksheet->setCellValue($cell, $value);
                     $col++;
                 }
-
-                $row++;
             }
+
+            if(isset($pfReport))
+            {
+                $worksheet->insertNewRowBefore(10, count($pfReport) - 1);
+                $row = 9;
+                foreach($pfReport as $report)
+                {
+                    $col = 'A';
+                    foreach($report as $key=>$value)
+                    {
+                        $cell = $col.$row;
+                        $worksheet->setCellValue($cell, $value);
+                        $col++;
+                    }
+
+                    $row++;
+                }
+            }
+
+            $worksheet->getColumnDimension('A')->setAutoSize(true);
+            $worksheet->getColumnDimension('B')->setAutoSize(true);
+            $worksheet->getColumnDimension('C')->setAutoSize(true);
+            $worksheet->getColumnDimension('D')->setAutoSize(true);
+            $worksheet->getColumnDimension('E')->setAutoSize(true);
+            $worksheet->getColumnDimension('F')->setAutoSize(true);
+            $worksheet->getColumnDimension('G')->setAutoSize(true);
+            $worksheet->getColumnDimension('H')->setAutoSize(true);
+
         }
 
-        $worksheet->getColumnDimension('A')->setAutoSize(true);
-        $worksheet->getColumnDimension('B')->setAutoSize(true);
-        $worksheet->getColumnDimension('C')->setAutoSize(true);
-        $worksheet->getColumnDimension('D')->setAutoSize(true);
-        $worksheet->getColumnDimension('E')->setAutoSize(true);
-        $worksheet->getColumnDimension('F')->setAutoSize(true);
-        $worksheet->getColumnDimension('G')->setAutoSize(true);
-        $worksheet->getColumnDimension('H')->setAutoSize(true);
     }
 
     public function generateUrl($fileType)
@@ -419,8 +435,8 @@ class GenerateReportHelper
             $this->CashFlowWorksheet($worksheet);
             
             $worksheet = $spreadsheet->getSheet(7);
-            $this->EpfWorksheet($worksheet);
-           
+            $this->EpfWorksheet($worksheet, $spreadsheet);
+            
             $spreadsheet->setActiveSheetIndex(1);
            
             if($fileType === 'xlsx')

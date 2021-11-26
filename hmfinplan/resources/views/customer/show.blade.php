@@ -67,7 +67,8 @@
                         v-bind:rental-route="{{ json_encode(route('customer.rental', $customer)) }}"
                         v-bind:pension-route="{{ json_encode(route('customer.pension', $customer)) }}"
                         v-bind:other-route="{{ json_encode(route('customer.other', $customer)) }}"
-                        v-bind:retirement-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}">
+                        v-bind:retirement-route="{{ json_encode(route('customer.retirementAsset', $customer)) }}"
+                        v-bind:family-route="{{ json_encode(route('customer.family', $customer)) }}">
                     </income>
 
                     @break

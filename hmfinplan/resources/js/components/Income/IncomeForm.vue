@@ -20,6 +20,11 @@
             </form-select>
 
             <div v-if="incomeType == 'Salary'" class="grid grid-cols-2 gap-2">
+                <form-select class="mb-3" label="Earning Member Name" 
+                :selection.sync="salary.family_member_id"
+                :options="formData.earnerName">
+                </form-select>
+
                 <div>
                     <label class="input-label" for="gross">Annual Gross Salary</label>
                     <input class="input" id="gross" type="number" step="100" v-model="salary.gross_salry">
@@ -145,7 +150,7 @@ export default {
 
     data() {
         return {
-            salary: { id:0, gross_salry:0, net_salry:0, basic_salry:0, grwth_rt:0, retirement_asset_id:null },
+            salary: { id:0, gross_salry:0, net_salry:0, basic_salry:0, grwth_rt:0, retirement_asset_id:null, family_member_id:null },
             pension: { id:0, pension_plan:'', annul_inc:0, strt_yr:'', end_yr:'',grwth_rt:0 },
             rental: { id:0, annul_inc:0, grwth_rt:0},
             other: { id:0, inc_typ:'', inc_desc:'', annul_inc:0, inc_tx_rt:0, grwth_rt:0},

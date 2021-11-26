@@ -3,7 +3,7 @@ import BalanceSheet from './components/FinPlan/BalanceSheet.vue'
 import GoalsReport from './components/FinPlan/GoalsReport.vue'
 import RiskManagement from './components/FinPlan/RiskManagement.vue'
 import LivingExpense from './components/FinPlan/LivingExpense.vue'
-import EpfReport from './components/FinPlan/EpfReport.vue'
+import EpfReports from './components/FinPlan/EpfReports.vue'
 import CashFlowReport from './components/FinPlan/CashFlowReport.vue'
 import DownloadReport from './components/FinPlan/DownloadReport.vue'
 
@@ -20,7 +20,7 @@ const routes = [
         { path: '/goalsreport/:route', name: 'GoalsReport', component: GoalsReport, props: true},
         { path: '/riskmanagement/:route', name: 'RiskManagement', component: RiskManagement, props: true},
         { path: '/livingexpense/:route', name: 'LivingExpense', component: LivingExpense, props: true},
-        { path: '/epfreport/:route', name: 'EpfReport', component: EpfReport, props: true},
+        { path: '/epfreports/:route', name: 'EpfReports', component: EpfReports, props: true},
         { path: '/cashflowreport/:route', name: 'CashFlowReport', component: CashFlowReport, props: true},
         { path: '/downloadreport/:route', name: 'DownloadReport', component: DownloadReport, props: true},
 

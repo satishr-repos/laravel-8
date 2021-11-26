@@ -21,7 +21,8 @@ class SalaryIncomeController extends Controller
                 'net_salry' => 'numeric|required',
                 'basic_salry' => 'numeric|required',
                 'grwth_rt' => 'numeric|nullable',
-                'retirement_asset_id' => 'nullable|exists:retirement_assets,id'
+                'retirement_asset_id' => 'nullable|exists:retirement_assets,id',
+                'family_member_id' => 'nullable|exists:family_members,id'
             ]);
 
         return $data;
@@ -33,7 +34,7 @@ class SalaryIncomeController extends Controller
         $salaryIncome = $customer->salaryIncomes;
 
         if(request()->query('json')){
-            return response()->json(compact('salaryIncome'), 200);
+            return response()->json(compact('customer', 'salaryIncome'), 200);
         }
 
         $current = 'incomes';

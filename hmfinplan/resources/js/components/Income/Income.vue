@@ -50,6 +50,7 @@ export default {
         pensionRoute: String,
         rentalRoute: String,
         otherRoute: String,
+        familyRoute: String,
         retirementRoute: String,
     },
 
@@ -71,6 +72,7 @@ export default {
 
     created () {
         this.epf = new Array();
+        this.earner = new Array();
     },
 
     mounted () {
@@ -86,16 +88,33 @@ export default {
                     axios.get(this.pensionRoute, {params: {json:true}}),
                     axios.get(this.rentalRoute, {params: {json:true}}),
                     axios.get(this.otherRoute, {params: {json:true}}),
+                    axios.get(this.familyRoute, {params: {json:true}}),
                     axios.get(this.retirementRoute, {params: {json:true}}),
                 ])
                 .then(response => {
                     const salary = response[0].data.salaryIncome;
+                    const customer = response[0].data.customer;
                     const pension = response[1].data.pensionIncome;
                     const rental = response[2].data.rentalIncome;
                     const other = response[3].data.otherIncome;
-                    const retirement = response[4].data.retirementAsset;
+                    const family = response[4].data.familyMembers;
+                    const retirement = response[5].data.retirementAsset;
 
                     console.log("getincomes:", response);
+
+                    {
+                        var data = {};
+                        data['value'] = null;
+                        data['text'] = customer.first_name + ' ' + customer.last_name;
+                        this.earner.push(data);
+                    }
+
+                    family?.forEach(element => {
+                        var data = {};
+                        data['value'] = element.id;
+                        data['text'] = element.first_name + ' ' + element.last_name;
+                        this.earner.push(data);
+                    });
 
                     retirement?.forEach(element => {
                         var data = {};
@@ -121,9 +140,12 @@ export default {
 
             var data = {};
             var epfAsset;
+            var earnerName;
 
             epfAsset = this.epf.find(o => o.value === salary.retirement_asset_id);
+            earnerName = this.earner.find(o => o.value === salary.family_member_id);
 
+            data['Earning Member Name'] = earnerName?.text;
             data['Gross Salary(Annual)'] = currency.format(salary.gross_salry);
             data['Deductions'] = currency.format(salary.gross_salry - salary.net_salry);
             data['Net Salary(Annual)'] = currency.format(salary.net_salry);
@@ -248,7 +270,7 @@ export default {
         },
 
         onAddIncome() {
-            this.formData = {id: -1, epf:this.epf};
+            this.formData = {id: -1, epf:this.epf, earnerName: this.earner};
             this.formType = 'Salary';
             this.showTabs = false;
         },
@@ -257,6 +279,7 @@ export default {
 
             var formData = this.componentList[this.currentIndex].db;
             formData['epf'] = this.epf;
+            formData['earnerName'] = this.earner;
 
             Object.assign(this.formData, formData);
             this.formType = this.labelList[this.currentIndex];

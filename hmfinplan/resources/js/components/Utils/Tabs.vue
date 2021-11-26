@@ -44,6 +44,7 @@ export default {
         LiabilityForm: () => import('../Liability/LiabilityForm.vue'),
         InsuranceForm: () => import('../Insurance/InsuranceForm.vue'),
         GoalForm: () => import('../Goal/GoalForm'),
+        EpfReport: () => import('../FinPlan/EpfReport'),
     },
 
     props: {

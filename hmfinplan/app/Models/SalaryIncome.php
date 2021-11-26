@@ -23,4 +23,9 @@ class SalaryIncome extends Model
     {
         return $this->belongsTo(RetirementAsset::class);
     }
+    
+    public function familyMember()
+    {
+        return $this->belongsTo(FamilyMember::class);
+    }
 }

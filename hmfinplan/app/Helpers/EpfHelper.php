@@ -25,11 +25,14 @@ class EpfHelper
         foreach($salaries as $salary)
         {
             $epfAsset = $salary->retirementAsset;
+
+            $earnerDob = $salary->familyMember->dob ?? $this->customer->personalDetail->dob;
+
             if($epfAsset)
             {
                 $item = array();
             
-                $dob = new DateTime($this->customer->personalDetail->dob);
+                $dob = new DateTime($earnerDob);
                 $age = $now->diff($dob)->y;
                 $item['Record Age'] = (string)$age;
             
