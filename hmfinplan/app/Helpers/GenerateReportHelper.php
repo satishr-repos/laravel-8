@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Customer;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use DateTime;
 use Dompdf\Dompdf;
+use Illuminate\Support\Facades\Date;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class GenerateReportHelper
@@ -20,6 +22,145 @@ class GenerateReportHelper
     public function __construct(Customer $customer)
     {
         $this->customer = $customer;
+    }
+
+    private function fullName($model)
+    {
+        if(isset($model))
+            return $model->first_name . ' ' . $model->last_name;
+        else
+            return '';
+    }
+
+    public function PersonalReviewWorksheet(Worksheet $worksheet)
+    {
+        $customer = $this->customer;
+        $personal = $this->customer->personalDetail;
+        $family = $this->customer->familyMembers;
+        $profession = $this->customer->professionalDetails;
+
+        $date = new DateTime();
+
+        $col = 'B';
+        $row = 7;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, "Mr/Ms ".$this->fullName($customer));
+
+        $row += 2;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, "By ".$date->format('d-M-Y'));
+
+        $col = 'C';
+        $row = 14;
+        
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, $this->fullName($customer));
+       
+        $date = new DateTime($personal->dob);
+        $row += 2;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, $date->format('d-M-Y'));
+
+        $spouse = null;
+        foreach($family as $member)
+        {
+            if($member->relation === 'Spouse')
+            {
+                $spouse = $member;
+                break;
+            }
+        }
+
+        $row += 2;
+        $cell = $col.$row;
+        if(isset($spouse->wedding_date))
+        {
+            $date = new DateTime($spouse->wedding_date);
+            $worksheet->setCellValue($cell, $date->format('d-M-Y'));
+        }
+
+        $occupation = null;
+        $spouseOccupation = null;
+        foreach($profession as $detail)
+        {
+            if($detail->name === $this->fullName($customer))
+            {
+                $occupation = $detail;
+            }
+            elseif($detail->name === $this->fullName($spouse))
+            {
+                $spouseOccupation = $detail;
+            }
+        }
+
+        $row += 2;
+        $cell = $col.$row;
+        if(isset($occupation->title))
+        {
+            $worksheet->setCellValue($cell, $occupation->title.' @ '. $occupation->employer);
+        }
+        
+        $row += 2;
+        $cell = $col.$row;
+        if(isset($occupation->title))
+        {
+            $worksheet->setCellValue($cell, $occupation->education);
+        }
+
+        $row += 2;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, $personal->pan);
+        
+        $row += 2;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, $personal->secondary_nos);
+
+        $row += 2;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, $personal->primary_nos);
+
+        $row += 2;
+        $cell = $col.$row;
+        if(isset($occupation->preferred_time))
+        {
+            $worksheet->setCellValue($cell, $occupation->preferred_time);
+        }
+        
+        $row += 2;
+        $cell = $col.$row;
+        $worksheet->setCellValue($cell, $personal->primary_email);
+
+        $row += 4;
+        $cell = $col.$row;
+        if(isset($spouseOccupation->title))
+        {
+            $worksheet->setCellValue($cell, $spouseOccupation->title.' @ '. $spouseOccupation->employer);
+        }
+
+        $row = 41;
+        foreach($family as $member)
+        {
+            $col = 'B';
+
+            $cell = $col.$row;
+            $worksheet->setCellValue($cell, $this->fullName($member));
+
+            $col++;
+            $cell = $col.$row;
+            $worksheet->setCellValue($cell, $member->relation);
+            
+            $col++;
+            $cell = $col.$row;
+            $date = new DateTime($member->dob);
+            $worksheet->setCellValue($cell, $date->format('d-M-Y'));
+            
+            $col++;
+            $cell = $col.$row;
+            $worksheet->setCellValue($cell, $member->pan);
+
+            $row++;
+        }
+
     }
 
     public function fillIncome(Worksheet $worksheet, Array $records, $row, $end)
@@ -306,7 +447,7 @@ class GenerateReportHelper
             $row = 8;
             foreach($reports as $report)
             {
-                $col = 'C';
+                $col = 'A';
                 foreach($report as $key=>$value)
                 {
                     $cell = $col.$row;
@@ -323,13 +464,15 @@ class GenerateReportHelper
                 $i++;
             }
             
+            $worksheet->getColumnDimension('A')->setAutoSize(true);
+            $worksheet->getColumnDimension('B')->setAutoSize(true);
+            $worksheet->getColumnDimension('C')->setAutoSize(true);
+            $worksheet->getColumnDimension('D')->setAutoSize(true);
             $worksheet->getColumnDimension('E')->setAutoSize(true);
             $worksheet->getColumnDimension('F')->setAutoSize(true);
             $worksheet->getColumnDimension('G')->setAutoSize(true);
             $worksheet->getColumnDimension('H')->setAutoSize(true);
             $worksheet->getColumnDimension('I')->setAutoSize(true);
-            $worksheet->getColumnDimension('J')->setAutoSize(true);
-            $worksheet->getColumnDimension('K')->setAutoSize(true);
         }
     }
 
@@ -342,7 +485,7 @@ class GenerateReportHelper
         for($i=1; $i < count($reports); $i++)
         {
             $clonedWorksheet = clone $templSheet; 
-            $clonedWorksheet->setTitle('PF Cal'.$i);
+            $clonedWorksheet->setTitle('PF CAL'.$i);
             $spreadsheet->addSheet($clonedWorksheet);
             array_push($worksheets, $clonedWorksheet);
         }
@@ -416,6 +559,9 @@ class GenerateReportHelper
 
         if($spreadsheet->getSheetCount() === 8)
         {
+            $worksheet = $spreadsheet->getSheet(0);
+            $this->PersonalReviewWorksheet($worksheet);
+
             $worksheet = $spreadsheet->getSheet(1);
             $this->incomeExpenseWorksheet($worksheet);
             
@@ -466,6 +612,7 @@ class GenerateReportHelper
                 }
 
                 $writer = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf($spreadsheet);
+                $writer->setFont('freeserif');
 
                 $writer->writeAllSheets();
             }
