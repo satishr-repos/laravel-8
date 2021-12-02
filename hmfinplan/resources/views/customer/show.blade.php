@@ -102,7 +102,8 @@
                         v-bind:le-route="{{json_encode(route('customer.livingexpenses', $customer)) }}"
                         v-bind:cf-route="{{json_encode(route('customer.cashflow', $customer)) }}"
                         v-bind:pf-route="{{json_encode(route('customer.epfreport', $customer)) }}"
-                        v-bind:dl-route="{{json_encode(route('customer.xlsreport', $customer)) }}">
+                        v-bind:dl-route="{{json_encode(route('customer.xlsreport', $customer)) }}"
+                        v-bind:rn-route="{{json_encode(route('customer.recommendation', $customer)) }}">
                     </fin-sidebar>
 
                     @break;

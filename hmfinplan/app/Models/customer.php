@@ -129,4 +129,9 @@ class Customer extends Model
     {
         return $this->hasMany(RiskTolerance::class);
     }
+    
+    public function recommendation()
+    {
+        return $this->hasOne(Recommendation::class);
+    }
 }

@@ -149,3 +149,8 @@ Route::get('/customers/{customer}/financialplan/livingexpenses', [App\Http\Contr
 Route::get('/customers/{customer}/financialplan/epfreport', [App\Http\Controllers\FinancialPlanController::class, 'EpfReport'])->name('customer.epfreport');
 Route::get('/customers/{customer}/financialplan/cashflow', [App\Http\Controllers\FinancialPlanController::class, 'CashFlowReport'])->name('customer.cashflow');
 Route::get('/customers/{customer}/financialplan/xlsreport', [App\Http\Controllers\FinancialPlanController::class, 'GenerateReport'])->name('customer.xlsreport');
+
+Route::get('/customers/{customer}/recommendations', [App\Http\Controllers\RecommendationController::class, 'index'])->name('customer.recommendation');
+Route::post('/customers/{customer}/recommendations', [App\Http\Controllers\RecommendationController::class, 'store']);
+Route::patch('/customers/{customer}/recommendations/{recommendation}', [App\Http\Controllers\RecommendationController::class, 'update']);
+Route::delete('/customers/{customer}/recommendations/{recommendation}', [App\Http\Controllers\RecommendationController::class, 'destroy']);
