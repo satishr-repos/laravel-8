@@ -14,7 +14,8 @@ const mix = require('laravel-mix');
  mix.webpackConfig({
     watchOptions: {
       ignored: ['**/node_modules/'],
-    }
+    },
+    devtool: 'source-map'
   });
 
 mix.js('resources/js/app.js', 'public/js')
