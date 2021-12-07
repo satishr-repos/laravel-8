@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Barryvdh\Debugbar\Facade as Debugbar;
+// use Barryvdh\Debugbar\Facade as Debugbar;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        Debugbar::disable();
+        // Debugbar::disable();
     }
 
     /**
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        Log::info("this message is from the home page");
         return view('home');
     }
     

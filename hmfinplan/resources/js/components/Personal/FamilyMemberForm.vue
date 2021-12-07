@@ -14,12 +14,28 @@
                     <label class="input-label" for="firstname">First Name</label>
                     <input class="input" id="firstname" type="text" placeholder="FirstName" v-model="family.first_name">
                 </div>
+                
+                <div>
+                    <label class="input-label" for="middlename">Middle Name</label>
+                    <input class="input" id="middlename" type="text" placeholder="MiddleName" v-model="family.middle_name">
+                </div>
 
                 <div class="">
                     <label class="input-label" for="lastname">Last Name</label>
                     <input class="input" id="lastname" type="text" placeholder="LastName" v-model="family.last_name">
                 </div>
             
+                <form-select label="Title" 
+                    :selection.sync="family.salutation"
+                    :options="[ 
+                        { value:'Mr.', text:'Mr.'}, 
+                        { value:'Mrs.', text:'Mrs.'}, 
+                        { value:'Dr.', text:'Dr.'}, 
+                        { value:'Prof.', text:'Prof.'}, 
+                        { value:'Ms.', text:'Ms.'}, 
+                        { value:'Miss.', text:'Miss.'}]">
+                </form-select>
+
                 <form-select label="Relation" 
                     :selection.sync="family.relation"
                     :options="[ 
@@ -65,7 +81,7 @@ export default {
 
     data() {
         return {
-            family: { first_name:'', last_name:'', relation:'', dob:'', pan:'', wedding_date:''},
+            family: { first_name:'', middle_name:'', last_name:'', salutation:'', relation:'', dob:'', pan:'', wedding_date:''},
             errors: {},
         };
     },

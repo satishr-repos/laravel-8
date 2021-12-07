@@ -25,6 +25,7 @@ class PersonalDetailFactory extends Factory
         return [
             // 'customer_id' => Customer::pluck('id')[$this->faker->numberBetween(1,Customer::count()-1)],
             'dob' => $this->faker->date($format = 'Y-m-d', $max = '2000-01-01'),
+            'salutation' => $this->faker->title(),
             'marital_status' => $this->faker->randomElement($array = array('Single', 'Married')),
             'gender' => $this->faker->randomElement($array = array('Male', 'Female')),
             'address_1' => $this->faker->streetAddress(),
@@ -32,7 +33,7 @@ class PersonalDetailFactory extends Factory
             'city' => $this->faker->city(),
             'state' => $this->faker->state(),
             'pincode' => $this->faker->postcode(),
-            'country' => $this->faker->country(),
+            'country' => substr($this->faker->country(), 0, 47),
             'place_of_birth' => $this->faker->city(),
             'residential_status' => $this->faker->randomElement($array = array('Indian', 'Non Resident Indian', 'Foreign')),
             'father_name' => $this->faker->name($gender = 'male'),

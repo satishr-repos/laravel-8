@@ -29,20 +29,21 @@
             </div>
         </a>
         
-        <div class="pt-1 px-2 bg-gradient-to-b from-indigo-300 to-indigo-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-indigo-500 hover:to-indigo-900 w-48 h-72 flex flex-col justify-center">
-            <div class="self-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M12 22c3.976 0 8-1.374 8-4V6c0-2.626-4.024-4-8-4S4 3.374 4 6v12c0 2.626 4.024 4 8 4zm0-2c-3.722 0-6-1.295-6-2v-1.268C7.541 17.57 9.777 18 12 18s4.459-.43 6-1.268V18c0 .705-2.278 2-6 2zm0-16c3.722 0 6 1.295 6 2s-2.278 2-6 2-6-1.295-6-2 2.278-2 6-2zM6 8.732C7.541 9.57 9.777 10 12 10s4.459-.43 6-1.268V10c0 .705-2.278 2-6 2s-6-1.295-6-2V8.732zm0 4C7.541 13.57 9.777 14 12 14s4.459-.43 6-1.268V14c0 .705-2.278 2-6 2s-6-1.295-6-2v-1.268z"></path>
-                </svg>
+        <a class="block" href="{{ route('tools') }}">
+            <div class="pt-1 px-2 bg-gradient-to-b from-green-300 to-green-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-green-600 hover:to-green-900 w-48 h-72 flex flex-col justify-center">
+                <div class="self-center mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M5.122 21c.378.378.88.586 1.414.586S7.572 21.378 7.95 21l4.336-4.336a7.495 7.495 0 0 0 2.217.333 7.446 7.446 0 0 0 5.302-2.195 7.484 7.484 0 0 0 1.632-8.158l-.57-1.388-4.244 4.243-2.121-2.122 4.243-4.243-1.389-.571A7.478 7.478 0 0 0 14.499 2c-2.003 0-3.886.78-5.301 2.196a7.479 7.479 0 0 0-1.862 7.518L3 16.05a2.001 2.001 0 0 0 0 2.828L5.122 21zm4.548-8.791-.254-.616a5.486 5.486 0 0 1 1.196-5.983 5.46 5.46 0 0 1 4.413-1.585l-3.353 3.353 4.949 4.95 3.355-3.355a5.49 5.49 0 0 1-1.587 4.416c-1.55 1.55-3.964 2.027-5.984 1.196l-.615-.255-5.254 5.256h.001l-.001 1v-1l-2.122-2.122 5.256-5.255z"></path></svg>
+                </div>
+                <div class="self-center">
+                    <p>{{ __('Financial Tools')}}</p>
+                </div>
+                <div class="self-center">
+                    <p>{{ __('And Utilities')}}</p>
+                </div>
             </div>
-            <div class="self-center">
-                <p>{{ __('FIFO Capital Gain')}}</p>
-            </div>
-            <div class="self-center">
-                <p>{{ __('Report')}}</p>
-            </div>
-        </div>
+        </a>
         
-        <div class="pt-1 px-2 bg-gradient-to-b from-green-300 to-green-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-green-600 hover:to-green-900 w-48 h-72 flex flex-col justify-center">
+        <!-- <div class="pt-1 px-2 bg-gradient-to-b from-green-300 to-green-500 rounded-xl shadow-lg cursor-pointer hover:shadow-xl hover:from-green-600 hover:to-green-900 w-48 h-72 flex flex-col justify-center">
             <div class="self-center mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z"></path><path d="M6 7h12v2H6zm0 4h12v2H6zm0 4h6v2H6z"></path>
                 </svg>
@@ -53,7 +54,7 @@
             <div class="self-center">
                 <p>{{ __('Computation Report')}}</p>
             </div>
-        </div>
+        </div> -->
 
     </section>
 

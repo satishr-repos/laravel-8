@@ -85,7 +85,7 @@ export default {
 
             var data = {};
 
-            data['Full Name'] = customer.first_name + ' ' + customer.middle_name + ' ' + customer.last_name;
+            data['Full Name'] = `${personal?.salutation} ${customer.first_name} ${customer.middle_name} ${customer.last_name}`;
             if (!personal)
                 return data;
             data['Date of Birth'] = personal.dob;

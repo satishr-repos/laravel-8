@@ -24,12 +24,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'User1',
             'email' => 'user1@email.com',
             'password' => Hash::make('password'),
+            'role' => 'staff',
         ]);
 
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123'),
+            'role' => 'supervisor',
         ]);
 
         /* or you can add also another table that is dependent on user_id:*/

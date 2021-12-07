@@ -31,8 +31,9 @@ class PersonalDetailRequest extends FormRequest
         $date = Carbon::now()->subYears(18)->toDateString();
 
         return [
-            'address_1' => ['regex:/^[a-z\d\-_\s]+$/i', 'required_with:address_2', 'nullable'],
-            'address_2' => ['regex:/^[a-z\d\-_\s]+$/i', 'nullable'],
+            'salutation' => ['string', 'nullable'],
+            'address_1' => ['regex:/^[a-z\d\-_,\s]+$/i', 'required_with:address_2', 'nullable'],
+            'address_2' => ['regex:/^[a-z\d\-_,\s]+$/i', 'nullable'],
             'pincode' => ['regex:/^[0-9-]+$/i', 'nullable'],
             'pan' => ['regex:/[A-Za-z]{5}[0-9]{4}[A-Za-z]/u', 'nullable'],
             'primary_email' => ['email', 'required_with:secondary_email', 'nullable'],

@@ -38,11 +38,11 @@ class InsuranceController extends Controller
     {
         $insurance = $customer->insurances;
 
-        $familyMembers = array($customer->first_name . ' ' . $customer->last_name);
+        $familyMembers = array("$customer->first_name $customer->middle_name $customer->last_name");
 
         foreach($customer->familyMembers as $family)
         {
-            array_push($familyMembers, $family->first_name . ' ' . $family->last_name);
+            array_push($familyMembers, "$family->first_name $family->middle_name $family->last_name");
         }
 
         if(request()->query('json')){

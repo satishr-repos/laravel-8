@@ -17,7 +17,9 @@ class CreateFamilyMembersTable extends Migration
         Schema::create('family_members', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(customer::class)->constrained()->onDelete('cascade');
+            $table->string('salutation', 20)->nullable();
             $table->string('first_name')->nullable(); 
+            $table->string('middle_name')->nullable(); 
             $table->string('last_name')->nullable(); 
             $table->date('dob')->nullable();
             $table->string('pan', 20)->nullable();

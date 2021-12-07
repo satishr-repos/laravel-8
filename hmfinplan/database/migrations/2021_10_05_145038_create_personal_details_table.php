@@ -17,6 +17,7 @@ class CreatePersonalDetailsTable extends Migration
         Schema::create('personal_details', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(customer::class)->constrained()->onDelete('cascade');
+            $table->string('salutation', 20)->nullable();
             $table->string('marital_status', 20)->nullable();
             $table->string('gender', 20)->nullable();
             $table->string('address_1', 75)->nullable();

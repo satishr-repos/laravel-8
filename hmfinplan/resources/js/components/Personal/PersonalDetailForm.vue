@@ -25,6 +25,27 @@
                     <input class="input" id="lastname" type="text" placeholder="LastName" v-model="customer.last_name">
                 </div>
             
+                <form-select label="Title" 
+                    :selection.sync="personalDetail.salutation"
+                    :options="[ 
+                        { value:'Mr.', text:'Mr.'}, 
+                        { value:'Mrs.', text:'Mrs.'}, 
+                        { value:'Dr.', text:'Dr.'}, 
+                        { value:'Prof.', text:'Prof.'}, 
+                        { value:'Ms.', text:'Ms.'}, 
+                        { value:'Miss.', text:'Miss.'}]">
+                </form-select>
+                
+                <div class="">
+                    <label class="input-label" for="dad">Father's Name</label>
+                    <input class="input" id="dad" type="text" placeholder="" v-model="personalDetail.father_name">
+                </div>
+
+                <div class="">
+                    <label class="input-label" for="mom">Mother's Name</label>
+                    <input class="input" id="mom" type="text" placeholder="" v-model="personalDetail.mother_name">
+                </div>
+
                 <form-select label="Gender" 
                     name="gender"
                     :selection.sync="personalDetail.gender"
@@ -107,15 +128,6 @@
                     <input class="input" id="sece" type="text" placeholder="" v-model="personalDetail.secondary_email">
                 </div>
             
-                <div class="">
-                    <label class="input-label" for="dad">Father's Name</label>
-                    <input class="input" id="dad" type="text" placeholder="" v-model="personalDetail.father_name">
-                </div>
-
-                <div class="">
-                    <label class="input-label" for="mom">Mother's Name</label>
-                    <input class="input" id="mom" type="text" placeholder="" v-model="personalDetail.mother_name">
-                </div>
             </div>       
         </div>
     </inline-form>

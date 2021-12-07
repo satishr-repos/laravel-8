@@ -27,7 +27,7 @@ class GenerateReportHelper
     private function fullName($model)
     {
         if(isset($model))
-            return $model->first_name . ' ' . $model->last_name;
+            return "$model->first_name $model->middle_name $model->last_name";
         else
             return '';
     }
@@ -44,7 +44,7 @@ class GenerateReportHelper
         $col = 'B';
         $row = 7;
         $cell = $col.$row;
-        $worksheet->setCellValue($cell, "Mr/Ms ".$this->fullName($customer));
+        $worksheet->setCellValue($cell, $personal->salutation.' '.$this->fullName($customer));
 
         $row += 2;
         $cell = $col.$row;
@@ -54,7 +54,7 @@ class GenerateReportHelper
         $row = 14;
         
         $cell = $col.$row;
-        $worksheet->setCellValue($cell, $this->fullName($customer));
+        $worksheet->setCellValue($cell, $personal->salutation.' '.$this->fullName($customer));
        
         $date = new DateTime($personal->dob);
         $row += 2;
@@ -143,7 +143,7 @@ class GenerateReportHelper
             $col = 'B';
 
             $cell = $col.$row;
-            $worksheet->setCellValue($cell, $this->fullName($member));
+            $worksheet->setCellValue($cell, $member->salutation.' '.$this->fullName($member));
 
             $col++;
             $cell = $col.$row;

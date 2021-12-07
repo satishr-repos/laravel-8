@@ -53,7 +53,9 @@ export default {
 
             var data = {};
 
+            data['Title'] = family.salutation;
             data['First Name'] = family.first_name;
+            data['Middle Name'] = family.middle_name;
             data['Last Name'] = family.last_name;
             data['Relation'] = family.relation;
             data['Date of Birth'] = family.dob;
@@ -122,7 +124,7 @@ export default {
                 this.componentList.length > this.currentIndex)
             {
                 let family = this.componentList[this.currentIndex].db;
-                let data = _.pick(family, ['id', 'first_name', 'last_name', 'relation', 'dob', 'pan', 'wedding_date']);
+                let data = _.pick(family, ['id', 'first_name', 'middle_name', 'last_name', 'relation', 'salutation', 'dob', 'pan', 'wedding_date']);
                 var comp = { name: 'family-member-form', 
                                 props: {baseRoute: this.baseRoute, formData: data},
                                 events: {'form-closed' : this.formClosed } };

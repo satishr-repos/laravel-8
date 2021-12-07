@@ -105,14 +105,14 @@ export default {
                     {
                         var data = {};
                         data['value'] = null;
-                        data['text'] = customer.first_name + ' ' + customer.last_name;
+                        data['text'] = `${customer.first_name} ${customer.middle_name} ${customer.last_name}`;
                         this.earner.push(data);
                     }
 
                     family?.forEach(element => {
                         var data = {};
                         data['value'] = element.id;
-                        data['text'] = element.first_name + ' ' + element.last_name;
+                        data['text'] = `${element.first_name} ${element.middle_name} ${element.last_name}`;
                         this.earner.push(data);
                     });
 

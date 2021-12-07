@@ -23,7 +23,9 @@ class FamilyMemberFactory extends Factory
     {
         return [
             'first_name' => $this->faker->firstName(),
+            'middle_name' => $this->faker->word(),
             'last_name' => $this->faker->lastName(),
+            'salutation' => $this->faker->title(),
             'pan' => $this->faker->regexify('[A-Z]{5}[1-9]{4}[A-Z]'),
             'dob' => $this->faker->date($format = 'Y-m-d'),
             'relation' => $this->faker->randomElement($array = array('Spouse', 'Son', 'Daughter', 'Others')),

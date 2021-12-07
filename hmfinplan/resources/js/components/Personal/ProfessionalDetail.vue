@@ -83,10 +83,10 @@ export default {
                 let profession = response.data.profession;
                 console.log('getProfessionalDetails:', customer, family, profession);
 
-                let name = customer.first_name + ' ' + customer.last_name;
+                let name = `${customer.first_name} ${customer.middle_name} ${customer.last_name}`;
                 this.names.push(name);
                 for(let index in family) {
-                    name = family[index].first_name + ' ' + family[index].last_name;
+                    name = `${family[index].first_name} ${family[index].middle_name} ${family[index].last_name}`;
                     this.names.push(name);
                 }
 

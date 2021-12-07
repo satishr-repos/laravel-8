@@ -154,3 +154,6 @@ Route::get('/customers/{customer}/recommendations', [App\Http\Controllers\Recomm
 Route::post('/customers/{customer}/recommendations', [App\Http\Controllers\RecommendationController::class, 'store']);
 Route::patch('/customers/{customer}/recommendations/{recommendation}', [App\Http\Controllers\RecommendationController::class, 'update']);
 Route::delete('/customers/{customer}/recommendations/{recommendation}', [App\Http\Controllers\RecommendationController::class, 'destroy']);
+
+Route::get('/tools',[App\Http\Controllers\Tools\ToolsController::class, 'index'])->name('tools');
+Route::get('/tools/custodianledger', [App\Http\Controllers\Tools\CustodianLedgerController::class, 'index'])->name('custodianledger');
