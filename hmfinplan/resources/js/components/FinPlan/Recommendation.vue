@@ -97,7 +97,7 @@ export default {
             axios.post(this.route, this.recommendation)
                 .then((response) => {
 
-                    this.recommendation = response.data.recommendation;
+                    this.recommendation = response.data;
                 })
                 .catch((error) => {
 
@@ -110,7 +110,7 @@ export default {
             axios.patch(route, this.recommendation)
                 .then((response) => {
 
-                    this.recommendation = response.data.recommendation;
+                    this.recommendation = response.data;
                 })
                 .catch((error) => {
 
@@ -119,7 +119,6 @@ export default {
         }
 
         this.editor.setEditable(false);
-        // console.log("Save:", this.recommendation.content);
     },
 
     async onDelete() {
