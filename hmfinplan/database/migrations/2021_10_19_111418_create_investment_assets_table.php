@@ -22,6 +22,7 @@ class CreateInvestmentAssetsTable extends Migration
             $table->string('stk_dtl', 100)->nullable();
             $table->decimal('units_held', 18, 4)->nullable();
             $table->decimal('purchse_cst', 18, 4)->nullable();
+            $table->decimal('stamp_duty', 18, 4)->nullable();
             $table->decimal('currnt_val', 18, 4)->nullable();
             $table->tinyInteger('status')->nullable();
             $table->timestamps();

@@ -22,6 +22,7 @@ class InvestmentAssetController extends Controller
                 'isin_nbr' => ['regex:/[A-Z]{2}[0-9A-Z]{10}/u', 'nullable'],
                 'units_held' => 'numeric|nullable',
                 'purchse_cst' => 'numeric|nullable',
+                'stamp_duty' => 'numeric|nullable',
                 'currnt_val' => 'numeric|nullable',
                 'status' => 'numeric|nullable',
             ]);

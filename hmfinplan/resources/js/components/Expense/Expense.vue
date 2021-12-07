@@ -142,6 +142,8 @@
                     .then((response) => {
                         
                         this.$delete(this.assets, index);
+                        this.compName = ""; // reset compname so that it gets refreshed in loadDataTable
+                        this.loadDataTable();
                         // console.log('delete response:', response);
                     })
                     .catch((error) => {

@@ -66,6 +66,7 @@
                             stk_dtl : 'Stock Description',
                             units_held: 'Units held',
                             purchse_cst: 'Purchase Cost',
+                            stamp_duty: 'Stamp Duty',
                             currnt_val: 'Current Value',
                             status : 'Status',
                         };
@@ -77,9 +78,6 @@
                         this.loadDataTable();
                     })
                     .catch((error) => {
-                        if (error.response.status == 422) {
-                            this.errors = error.response.data.errors;
-                        }
 
                         this.$refs.spinner.close();
                         console.log("ERROR:", error);
@@ -91,6 +89,7 @@
 
                 assets.forEach(asset => {
                     asset.purchse_cst = currency.format(asset.purchse_cst);
+                    asset.stamp_duty = currency.format(asset.stamp_duty);
                     asset.currnt_val = currency.format(asset.currnt_val);
                 });
 
@@ -138,6 +137,8 @@
                     .then((response) => {
                         
                         this.$delete(this.assets, index);
+                        this.compName = "";
+                        this.loadDataTable();
                         // console.log('delete response:', response);
                     })
                     .catch((error) => {

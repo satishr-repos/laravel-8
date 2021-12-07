@@ -37,6 +37,11 @@
                     <label class="input-label" for="prchsecst">Purchase Cost</label>
                     <input class="input" id="prchsecst" type="number" step="0.05" v-model="investment.purchse_cst">
                 </div>
+                
+                <div>
+                    <label class="input-label" for="stampduty">Stamp Duty</label>
+                    <input class="input" id="stampduty" type="number" step="0.05" v-model="investment.stamp_duty">
+                </div>
 
                 <div>
                     <label class="input-label" for="currntval">Current Value</label>
@@ -79,6 +84,7 @@ export default {
                 stk_dtl:'', 
                 units_held:0,
                 purchse_cst:0,
+                stamp_duty:0,
                 currnt_val:0,
                 status:1 },
             errors: {},
