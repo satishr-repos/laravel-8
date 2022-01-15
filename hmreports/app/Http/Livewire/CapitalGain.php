@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Helpers\CapitalGainHelper;
 use DateTime;
 use Exception;
 
@@ -14,7 +15,7 @@ class CapitalGain extends Component
     public $start_date;
     public $end_date;
     public $exception;
-    private $capital_gains;
+    public $url;
     
     protected $rules = [
         'name' => 'required',
@@ -25,16 +26,18 @@ class CapitalGain extends Component
     public function mount()
     {
         $this->name = "";
-        $this->start_date = '2020-04-01';
-        $this->end_date = '2021-03-31';
-        $this->capital_gains = '';
+        $year = (int)date('Y');
+        $this->start_date = ($year-1).'-04-01';
+        $this->end_date = "$year-03-31";
     }
 
     public function submit()
     {
         $this->validate();
 
-        $this->capital_gains = [];
+        $shortTerm = [];
+        $longTerm = [];
+        $capitalGains = [];
         $this->exception = '';
 
         try
@@ -43,30 +46,49 @@ class CapitalGain extends Component
             // $query = $pdo->prepare("set nocount on;exec dbo.procFIFOCapitalGain @Investor_Name='$this->name'");
             // $query->execute();
             // $capital_gains = $query->fetchAll(\PDO::FETCH_OBJ);
-            $capital_gains = DB::connection("sqlsrv")->select("set nocount on;exec dbo.procFIFOCapitalGain @Investor_Name='$this->name'");
+            $capitalGains = DB::connection("sqlsrv")->select("set nocount on;exec dbo.procFIFOCapitalGain @Investor_Name='$this->name'");
 
-            if(empty($capital_gains))
+            if(empty($capitalGains))
                 throw new Exception('No data received from the server for this query');
 
-            foreach($capital_gains as $capital_gain)
+            foreach($capitalGains as $capitalGain)
             {
                 $start = new DateTime($this->start_date);
                 $end = new DateTime($this->end_date);
-                $trdt = new DateTime($capital_gain->S_Trdt);
+                $trdt = new DateTime($capitalGain->S_Trdt);
 
+                unset($capitalGain->Pan_No);
+                unset($capitalGain->Investor_Name);
                 if($trdt >= $start && $trdt <= $end)
                 {
-                    array_push($this->capital_gains, $capital_gain);
+                    array_push($capitalGains, $capitalGain);
+                }
+
+                if($capitalGain->Gain_Type === 'LongTerm')
+                {
+                    array_push($longTerm, $capitalGain);
+                }
+                else
+                {
+                    array_push($shortTerm, $capitalGain);
                 }
 
             }
+
+            $helper = new CapitalGainHelper($capitalGains, $shortTerm, $longTerm);
+            $this->url = $helper->GenerateExcel();
         }
         catch(Exception $e)
         {
             $this->exception = $e->getMessage();
         }
 
-        // Log::info($this->capital_gains);
+        Log::info($capitalGains);
+    }
+
+    public function CGDownload()
+    {
+        return response()->download($this->url);
     }
 
     public function render()
