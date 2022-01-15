@@ -46,19 +46,19 @@ class CapitalGainHelper
             $i++;
         }
 
-        $sumRange = 'P2:P'.($i-1);
-        $worksheet->setCellValue('P'.$i , "=SUM($sumRange)");
-        
-        $sumRange = 'Q2:Q'.($i-1);
-        $worksheet->setCellValue('Q'.$i , "=SUM($sumRange)");
-        
         $sumRange = 'R2:R'.($i-1);
         $worksheet->setCellValue('R'.$i , "=SUM($sumRange)");
         
         $sumRange = 'S2:S'.($i-1);
         $worksheet->setCellValue('S'.$i , "=SUM($sumRange)");
+        
+        $sumRange = 'T2:T'.($i-1);
+        $worksheet->setCellValue('T'.$i , "=SUM($sumRange)");
+        
+        $sumRange = 'U2:U'.($i-1);
+        $worksheet->setCellValue('U'.$i , "=SUM($sumRange)");
 
-        foreach(range('A', 'T') as $col)
+        foreach(range('A', 'U') as $col)
             $worksheet->getColumnDimension($col)->setAutoSize(true);
     }
 

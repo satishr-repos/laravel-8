@@ -57,8 +57,8 @@ class CapitalGain extends Component
                 $end = new DateTime($this->end_date);
                 $trdt = new DateTime($capitalGain->S_Trdt);
 
-                unset($capitalGain->Pan_No);
-                unset($capitalGain->Investor_Name);
+                // unset($capitalGain->Pan_No);
+                // unset($capitalGain->Investor_Name);
                 if($trdt >= $start && $trdt <= $end)
                 {
                     array_push($capitalGains, $capitalGain);
