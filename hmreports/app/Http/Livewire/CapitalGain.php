@@ -40,42 +40,47 @@ class CapitalGain extends Component
         $capitalGains = [];
         $this->exception = '';
 
+        $name = '';
+
         try
         {
             // $pdo = DB::connection("sqlsrv")->getPdo();
             // $query = $pdo->prepare("set nocount on;exec dbo.procFIFOCapitalGain @Investor_Name='$this->name'");
             // $query->execute();
             // $capital_gains = $query->fetchAll(\PDO::FETCH_OBJ);
-            $capitalGains = DB::connection("sqlsrv")->select("set nocount on;exec dbo.procFIFOCapitalGain @Investor_Name='$this->name'");
+            $output = DB::connection("sqlsrv")->select("set nocount on;exec dbo.procFIFOCapitalGain @Investor_Name='$this->name'");
 
-            if(empty($capitalGains))
+            if(empty($output))
                 throw new Exception('No data received from the server for this query');
 
-            foreach($capitalGains as $capitalGain)
+            foreach($output as $capitalGain)
             {
                 $start = new DateTime($this->start_date);
                 $end = new DateTime($this->end_date);
                 $trdt = new DateTime($capitalGain->S_Trdt);
+
+                $name = $capitalGain->Investor_Name;
 
                 // unset($capitalGain->Pan_No);
                 // unset($capitalGain->Investor_Name);
                 if($trdt >= $start && $trdt <= $end)
                 {
                     array_push($capitalGains, $capitalGain);
-                }
 
-                if($capitalGain->Gain_Type === 'LongTerm')
-                {
-                    array_push($longTerm, $capitalGain);
-                }
-                else
-                {
-                    array_push($shortTerm, $capitalGain);
+                    if($capitalGain->Gain_Type === 'LongTerm')
+                    {
+                        array_push($longTerm, $capitalGain);
+                    }
+                    else
+                    {
+                        array_push($shortTerm, $capitalGain);
+                    }
+
                 }
 
             }
 
-            $helper = new CapitalGainHelper($capitalGains, $shortTerm, $longTerm);
+            $helper = new CapitalGainHelper($capitalGains, $shortTerm, $longTerm, $name);
             $this->url = $helper->GenerateExcel();
         }
         catch(Exception $e)

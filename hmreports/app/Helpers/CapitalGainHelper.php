@@ -9,13 +9,15 @@ class CapitalGainHelper
     private $longTerm;
     private $shortTerm;
     private $spreadsheet;
+    private $name;
 
-    public function __construct($capitalGains, $shortTerm, $longTerm)
+    public function __construct($capitalGains, $shortTerm, $longTerm, $name="")
     {
         $template = Storage::path('private/CapitalGainTemplate.xlsx');
         $this->capitalGains = $capitalGains;
         $this->shortTerm = $shortTerm;
         $this->longTerm = $longTerm;
+        $this->name = $name;
         $this->spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($template);
     }
 
@@ -79,7 +81,10 @@ class CapitalGainHelper
 
     public function GenerateExcel()
     {
-        $fileName = uniqid('cg') . '.xlsx';
+        if(empty($this->name))
+            $fileName = uniqid('cg') . '.xlsx';
+        else
+            $fileName = $this->name . '.xlsx';
 
         $this->StoreResults();
 
