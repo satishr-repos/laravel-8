@@ -29,7 +29,7 @@ class PmsBillLedger extends Component
 
     public function submit()
     {
-        // $this->validate();
+        $this->validate();
 
         $this->exception = '';
         $startDate = str_replace('-', '/', $this->start_date);

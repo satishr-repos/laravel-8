@@ -102,6 +102,17 @@
           </div>
         </a>
       </li>
+      <li>
+        <a href="{{ route('highvaluetrans') }}" class="relative flex flex-row items-center h-11 focus:outline-none text-gray-600 hover:text-gray-800 pr-6 ml-4">
+          <div class="inline-flex items-end border-b-2 pb-1 transform ease-in-out duration-300 hover:border-green-500 {{ $selection == 'high-value-trans'? 'border-red-500' : 'border-transparent'}}">
+            <span class="">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            </span>
+            <span class="ml-2 text-sm tracking-wide truncate font-semibold">High Value Transations</span>
+          </div>
+        </a>
+      </li>
     </ul>
   </div>
 

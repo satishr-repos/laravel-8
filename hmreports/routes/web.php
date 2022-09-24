@@ -25,3 +25,4 @@ Route::view('/reports/pms-fees-recon', 'pmsfeesrecon')->name('pmsfeesrecon');
 Route::view('/reports/pms-bill-ledger', 'pmsbillledger')->name('pmsbillledger');
 Route::view('/reports/tradejini-brokerage', 'tradejinibrokerage')->name('tradejinibrokerage');
 Route::view('/reports/orbis-custody-file', 'orbiscustodyfile')->name('orbiscustodyfile');
+Route::view('/reports/high-value-trans', 'highvaluetrans')->name('highvaluetrans');
